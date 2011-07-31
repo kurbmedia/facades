@@ -66,3 +66,40 @@ Below is a list of available mixins
 	----------------------
 	position (shorthand position relative/fixed/absolute)
 	
+##Helpers
+
+###Layout Helpers
+
+**Variables**
+Setup variables via templates to be used within your layout. 
+
+* `page_id` The id of the current page, useful for targeting with CSS. Defaults to "controller_action" in Rails
+* `page_title` Used to populate the title of the page
+* `keywords` Used to populate the keywords meta tag
+* `description` Used to populate the description meta tag
+
+To assign variables, pass their value to the method. To display, use the method without any arguments
+	
+	# index.html.erb
+	<%= page_id('home') %>
+	
+	# In your layout
+	body id="<%= page_id %>"
+	
+**Misc**
+`meta_tag` A shortcut for creating HTML meta tags. 
+
+	<%= meta_tag('name', 'content') %> #=> <meta name="name" content="content" />
+	
+`robot_meta_tag` A shortcut for defining a robot meta tag based on the Rails.env. Useful to keep spiders out of your staging environments
+
+	# In any environment but production
+	<%= robot_meta_tag %> #=> <meta name="robots" content="noindex, nofollow" />
+	
+	# In production
+	<%= robot_meta_tag %> #=> <meta name="robots" content="index, follow" />
+	
+`button_link` Shortcut for creating a link class="button" with an optional icon
+
+	<%= button_link 'Link Text', some_path, icon: 'image.png' %>  #=> <a href='#' class='button'><img src='image.png' /></a>
+	
