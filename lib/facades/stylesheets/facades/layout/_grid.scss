@@ -1,0 +1,62 @@
+// Fixed grid system based on a merge of Blueprint and 960gs.
+$grid-gutter-width:  10px !default;
+$grid-width: 	960px !default;
+$grid-columns:  24 !default;
+$grid-column-width: $grid-width / $grid-columns * 1 - $grid-gutter-width;
+
+@mixin container{
+	margin-left: auto;
+	margin-right: auto;
+	width: $grid-width;
+	@include pie-clearfix;
+}
+
+@function span($n){
+  @return $grid-width / $grid-columns * $n - $grid-gutter-width;
+}
+
+@mixin column-base($gutter: $gutter-width){
+	display: inline; float: left;
+	margin-left: $gutter / 2;
+	margin-right: $gutter / 2;
+}
+
+@mixin column($n, $cols: $grid-columns, $gutter: $grid-gutter-width){
+	@include column-base($gutter);
+	width:span($n);
+}
+
+@mixin first{ margin-left:0; }
+@mixin last{ margin-right:0; }
+
+@mixin prefix($n, $cols: $grid-columns){
+	padding-left: $grid-width / $cols * $n;
+}
+
+@mixin suffix($n, $cols: $grid-columns){
+	padding-right: $grid-width / $cols * $n;
+}
+
+@mixin push($n){
+	position:relative;
+	left: ($grid-width / $cols) * $n;
+}
+
+@mixin pull($n){
+	position:relative;
+	right: -($grid-width / $cols) * $n;
+}
+
+@import 'compass/layout/grid-background';
+$grid-background-column-color: #eef2f9;
+$grid-background-baseline-color: rgba(0,0,0,0.15);
+$grid-background-gutter-color: #fff;
+$grid-background-total-columns: $grid-columns;
+$grid-background-column-width: $grid-column-width;
+$grid-background-gutter-width: $grid-gutter-width;
+$grid-background-baseline-height: #{($line-height / $font-size)}em;
+
+
+@mixin debug-grid{
+	@include grid-background;
+}

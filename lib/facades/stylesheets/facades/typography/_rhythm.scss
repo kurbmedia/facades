@@ -1,0 +1,15 @@
+@import "compass/typography/vertical_rhythm";
+@import "compass/utilities/general/clearfix";
+
+@mixin normal-text      { font-family: $font-family; color: $font-color; }
+@mixin fixed-width-text { font: 1em $fixed-font-family; line-height: 1.5; }
+
+// Shorthand overrides for Compass' adjust-font-size/leading-to
+// because well.. they are freakin long.
+//
+@mixin font-size($size, $lines){
+	@include adjust-font-size-to($size, $lines);
+}
+@mixin leading($size, $lines){
+	@include adjust-leading-to($size, $lines);
+}
