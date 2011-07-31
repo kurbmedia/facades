@@ -1,5 +1,5 @@
 @import 'facades/typography/rhythm';
-
+@import "compass/typography/lists/inline-block-list";
 // 
 // Establishes a default baseline for vertical rhythm
 // CSS Reset from html5doctor.com
@@ -42,14 +42,14 @@ img{ margin:0; }
 
 // Establish reasonable heading and font sizes, with line-heights based on vertical rhythm.
 
-h1,h2,h3,h4,h5,h6{ font-weight:normal; }
-h1{ @include font-size(32px, 2); }
-h2{ @include font-size(28px, 2); }
-h3{ @include font-size(26px, 2); }
-h4{ @include font-size(22px, 2); }
-h5{ @include font-size(16px, 1); }
-h6{ @include font-size(11px, 1); }
-p{ @include font-size($font-size, 1); }
+h1{ @include adjust-font-size-to(26px, 1); @include margin-trailer(1, 26px); }
+h2{ @include adjust-font-size-to(24px, 1); @include margin-trailer(1, 24px); }
+h3{ @include adjust-font-size-to(22px, 1); @include margin-trailer(1, 22px); }
+h4{ @include adjust-font-size-to(20px, 1); @include margin-trailer(1, 20px); }
+h5{ @include adjust-font-size-to(18px, 1); @include margin-trailer(1, 18px); }
+h6{ @include adjust-font-size-to(16px, 1); @include margin-trailer(1, 16px); }
+h1,h2,h3,h4,h5,h6{ font-weight:normal;}
+p{  @include adjust-font-size-to($font-size); @include margin-trailer(1, $font-size); }
 
 a{ text-decoration:underline; color:$link-color;
 	&:hover{ color:$link-hover-color; }
@@ -66,14 +66,17 @@ abbr, acronym{ border-bottom: 1px dotted lighten($font-color, 10%); }
 address{ margin: 0 0 1.5em; font-style: italic; }
 pre{ margin: 1.5em 0; white-space:pre; }
 pre, code, tt{ @include fixed-width-text; }
-li ul, li ol{ margin: 0; }
-ul, ol{ margin: 0 1.5em 1.5em 0; padding-left: 1.5em; }
+ul, ol{ margin:0 1.5em rhythm(1, $font-size) 0; padding-left: 1.5em; 
+	li{ @include adjust-font-size-to($font-size); 
+		ol, ul{ margin:0; }
+	}
+}
 ul{ list-style-type: $unordered-list-type; }
 ol{ list-style-type: $ordered-list-type; }
-dl{ margin: 0 0 1.5em 0;
+dl{ margin: 0 0 rhythm(1, $font-size) 0;
 	dt{ font-weight: bold; } 
 }
-dd{ margin-left: 1.5em; }
+dd{ margin:0 1.5em rhythm(1, $font-size) 1.5em;  }
 table{ margin-bottom: 1.4em; width: 100%; 
 	th{ font-weight: bold; }
 	thead th{ background: $table-header-color; }
@@ -81,4 +84,6 @@ table{ margin-bottom: 1.4em; width: 100%;
 	table.striped tr:nth-child(even) td,
 	table tr.even td{ background:$table-stripe-color; }
 }
-
+nav{
+	ol, ul{ @include inline-block-list(1em); @include margin-trailer(1, $font-size); }
+}

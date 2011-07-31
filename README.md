@@ -1,24 +1,68 @@
-# Facades
+#Facades
+Facades is a gem designed to assist with front-end development and misc design. It includes a compass plugin / mixins, and various Rails view helpers to help with common development tasks. 
 
-Facades is a gem designed to assist with front-end development and misc design. It includes a compass plugin / mixins, and various Rails view helpers to help with 
-common development tasks. 
-
-## CSS / SASS
-
+##CSS / SASS
 Facades includes several mixins and includes for setting up a few defaults within your css. 
 
-### Reset
-A HTML5-friendly reset is included to ensure elements like `aside`, `section` etc are setup properly. It also sets up a few typography defaults using Compass' 
-vertical-rhythm format.
-
+###Reset
+A HTML5-friendly reset is included to ensure elements like `aside`, `section` etc are setup properly. It also sets up a few typography defaults using Compass' vertical-rhythm format.
 To configure, assign the variables to `$font-size` and `$line-height`.  These will default to 12px / 24px. Vertical-rhythm is defaulted to relative font sizes.
 
-### Layout
-Mixins are provided for a fixed grid, forms, and grid debugging. To setup a grid, `@include 'facades/layout/grid'` ( or simply `facades/layout`) and configure the following:
+	$font-size:12px;
+	$line-height:24px;
+	
+	@import 'facades/reset';  // Will automatically setup the vertical rhythm
 
-* `$grid-width` The full width of the container in which your layout resides (default 960px)
-* `$grid-columns` The number of columns within the grid (default 24)
-* `$grid-gutter-width` The spacing between each column (default 10px)
+###Layout
+Mixins are provided for a fixed grid, forms, and grid debugging. 
 
-To debug grid alignment, a shortcut to the Compass' grid background is provided. `@include debug-grid;` into your container element to debug.
+**Grid Setup**
+	
+	$grid-width: 960px; 		// Full width of the container
+	$grid-columns: 24; 			// Total number of columns
+	$grid-gutter-width: 10px;	// Spacing between each column
+	
+	@import 'facades/layout/grid'; /( or include 'facades/layout')
+	#wrapper{ @include container; }
 
+To debug grid alignment, a shortcut to the Compass' grid background is provided.
+
+	#wrapper{ @include debug-grid; }
+
+### Mixins
+Below is a list of available mixins
+	
+	Interface
+	-----------------------
+	tool-tip
+	
+	Forms
+	----------------------
+	form-field-list
+	form-split-field-list
+	form-field
+	form-input
+	form-select
+	form-textarea
+	form-errors
+	form-error-message
+	form-field-hint
+	
+	Grid (based off of the blueprint grid)
+	---------------------
+	column
+	push
+	pull
+	append
+	prepend
+	span (function) // width:span(2);
+	
+	Text
+	----------------------
+	leading (shortcut to Compass adjust-leading-to)
+	font-size (shortcut to Compass adjust-font-size-to)
+	
+	Utility
+	----------------------
+	position (shorthand position relative/fixed/absolute)
+	

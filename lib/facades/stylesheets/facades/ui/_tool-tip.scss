@@ -1,0 +1,43 @@
+@import "compass/typography/lists/inline-block-list";
+//
+// Creates a pure CSS tool tip using border-styles
+//
+$tool-tip-color:#333 !default;
+$tool-tip-text-color:#fff !default;
+
+@mixin tool-tip($color: false, $dir: bl, $size: 7px, $text-color: $tool-tip-text-color){
+	$text-color: if($text-color, $text-color, if(luminance($color) == dark, #fff, #333) );
+	background:$color;
+	color:$text-color;
+	padding:.75em 1em;
+	position:relative;
+	@include inline-block; 
+	
+	&:after{
+		content:"";
+		display:block;
+		position:absolute;
+		width:0;
+		border-width:$size $size 0;
+		border-style:solid;
+		border-color:$color transparent;
+		border-color:inherit transparent;
+		@if( $dir == bl or $dir == br ){ bottom: -$size; }
+		@if( $dir == tl or $dir == tr ){ top: -$size; }
+		@if( $dir == tl or $dir == bl ){ left:1em; }
+		@if( $dir == tl or $dir == bl ){ right:1em; }
+		@if( $dir == left ){ 
+			left:-$size;
+			border-width:$size ($size * 1.8) $size 0;
+		}
+		@if( $dir == right ){ 
+			right:-$size; 
+			border-width:$size 0 $size ($size * 1.8);			
+		}
+		@if( $dir == right or $dir == left ){ 
+			top:50%;
+			margin-top:-$size;
+			border-color:transparent $color;
+		}
+	}		
+}
