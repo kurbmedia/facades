@@ -35,6 +35,8 @@ Below is a list of available mixins
 	Interface
 	-----------------------
 	tool-tip
+	flash-message
+	flash-message-colors
 	
 	Forms
 	----------------------
