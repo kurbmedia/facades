@@ -73,11 +73,10 @@ dl{ margin: 0 0 rhythm(1, $font-size) 0;
 dd{ margin:0 1.5em rhythm(1, $font-size) 1.5em;  }
 table{ margin-bottom: 1.4em; width: 100%; 
 	th{ font-weight: bold; }
-	thead th{ background: $table-header-color; }
-	th,td,caption{ padding: 4px 10px 4px 5px; }
-	table.striped tr:nth-child(even) td,
-	table tr.even td{ background:$table-stripe-color; }
+	thead th{ background: $table-header-color; text-align:left; }
+	th,td,caption{ padding: 4px 10px 4px 5px; }	
 }
+table.striped tr:nth-child(even) td, tr.even td{ background:$table-stripe-color; }
 nav{
 	ol, ul{ @include inline-block-list(1em); @include margin-trailer(1, $font-size); }
 }

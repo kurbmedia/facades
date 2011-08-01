@@ -1,0 +1,20 @@
+<p class='pagination-detail'>Viewing Page <%= paginator.current_page %> of <%= paginator.total_pages %></p>
+<ul class='pagination-links'>
+	<li class='first'>
+		<%= paginator.first? ? "&larr;".html_safe : paginator.link(1, {}, "&larr;") %>
+	</li>
+	<li class='prev'>
+		<%= paginator.first? ? "&laquo; Previous".html_safe : paginator.link(paginator.prev, {}, "&larr;") %>
+	</li>
+	<% paginator.links.each do |link| %>
+	<li<%= link.current? ? " class='current'" : "" %>>
+		<%= paginator.link(link.value) %>
+	</li>
+	<% end %>
+	<li class='next'>
+		<%= paginator.first? ? "Next &raquo;".html_safe : paginator.link(paginator.next, {}, "&larr;") %>
+	</li>
+	<li class='last'>
+		<%= paginator.first? ? "&rarr;".html_safe : paginator.link(paginator.total_pages, {}, "&larr;") %>
+	</li>
+</ul>

@@ -31,21 +31,21 @@ $grid-column-width: $grid-width / $grid-columns * 1 - $grid-gutter-width;
 @mixin last{ margin-right:0; }
 
 @mixin prefix($n, $cols: $grid-columns){
-	padding-left: $grid-width / $cols * $n;
+	padding-left: $grid-width / $grid-columns * $n;
 }
 
 @mixin suffix($n, $cols: $grid-columns){
-	padding-right: $grid-width / $cols * $n;
+	padding-right: $grid-width / $grid-columns * $n;
 }
 
 @mixin push($n){
 	position:relative;
-	left: ($grid-width / $cols) * $n;
+	left: $grid-width / $grid-columns * $n;
 }
 
 @mixin pull($n){
 	position:relative;
-	right: -($grid-width / $cols) * $n;
+	right: -$grid-width / $grid-columns * $n;
 }
 
 @import 'compass/layout/grid-background';

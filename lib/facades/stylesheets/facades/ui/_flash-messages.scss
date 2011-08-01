@@ -1,0 +1,48 @@
+//
+// Mixins for styling flash messages
+//
+// Default error text color, red refault
+$error-color: #bd132a !default;
+// Background color for error/alert messages, red default
+$error-bg-color: #fde0e4 !default;
+// Border color for error/alert messages, red default
+$error-border-color: #E41D38 !default;
+// Default success/notice color, green default
+$success-color:#264409;
+// Background color for success/notice messages, green default
+$success-bg-color:#e6efc2;
+// Background color for success/notice messages, green default
+$success-border-color:#c6d880;
+// Default color for notice/warn messages, yellow default
+$notice-color:#514721;
+// Background color for notice/warn messages, yellow default
+$notice-bg-color:#fff6bf;
+// Border color for notice/warn messages, yellow default
+$notice-border-color:#ffd324;
+// Default color for informational messages, blue default
+$info-color:#205791;
+// Background color for informational messages, blue default
+$info-bg-color:#d5edf8;
+// Border color for informational messages, blue default
+$info-border-color:#92cae4;
+
+@mixin flash-message($success-name:success, $notice-name: notice, $error-name: error){
+	@include flash-message-colors($success-name, $notice-name, $error-name);
+}
+@mixin flash-message-colors($success-name:success, $notice-name: notice, $error-name: error){
+	&.flash_message_#{$success-name}{ 
+		color:$success-color; 
+		background-color:$success-bg-color;
+		border-color:$success-border-color;
+	}	
+	&.flash_message_#{$notice-name}{ 
+		color:$notice-color; 
+		background-color:$notice-bg-color;
+		border-color:$notice-border-color;
+	}	
+	&.flash_message_#{$error-name}{ 
+		color:$error-color; 
+		background-color:$error-bg-color;
+		border-color:$error-border-color;
+	}
+}

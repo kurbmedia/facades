@@ -104,3 +104,49 @@ To assign variables, pass their value to the method. To display, use the method 
 
 	<%= button_link 'Link Text', some_path, icon: 'image.png' %>  #=> <a href='#' class='button'><img src='image.png' /></a>
 	
+###Pagination Helper
+
+Any model which responds to current_page and total_pages can utilize the pagination helper. 
+
+	<%= paginate(collection) %>
+	
+Will render a link based list with the current collection pagination. If `Facades.enable_html5` is set to `true` items will be wrapped in a HTMl5 `<nav>` tag, otherwise a div  will be used. The class 'pagination' is added to that top level element. 
+By default the included partial facades/pagination is rendered. To customize output simply override this in your application. See app/views/facades/_pagination.html.erb for more info.
+
+###Navigation Helper
+
+Facades provides a navigation helper for creating nested navigation lists. 
+
+	<%= nav do %>
+		<%= nav_link 'About Me', about_path %>
+		<%= nav_link 'Top Level', some_path do %>
+			<%= nav_link 'Sub Item', some_sub_path %>
+		<% end %>
+	<% end %>
+	
+Will output
+
+	<nav>
+		<ol>
+			<li><a href='/about-path'>About Me</a></li>
+			<li><a href='/some-path'>Top Level</a>
+				<ol>
+					<li><a href="/some-sub-path">Sub Item</a></li>
+				</ol>
+			</li>
+		</ol>
+	</nav>
+
+Note: The `<nav>` tag is only included if `Facades.enable_html5` is set to true.
+	
+As a convenience, the class `on` will be added to a link when the current url matches that link. This can be overridden by using the `matcher` or `proc` attributes when calling `nav_link`.
+When using a proc/lambda, returning true will set the `on` class.
+
+	# Current path /home
+	<%= nav_link 'Path', some_path, proc: lambda{ |current_path| true } %> #=> <a href='/anything' class='on'>Path</a>
+	
+When using `:matcher`, pass a string or regular expression in which the request.path should match to be `on`.
+	
+	# Current path /somewhere
+	<%= nav_link 'Path', '/something-else', matcher: /somewhere/ %> #=> <a href='/something-else' class='on'>Path</a>
+	

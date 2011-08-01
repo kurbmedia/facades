@@ -43,9 +43,7 @@ module Facades
         link_attrs    = update_link_attrs(path, attrs.merge(:wrapper => (attrs.delete(:item) || {}) ))
         parent_link   = nav_link_to(text, path, attrs, false)
         child_links   = content_tag(container, capture(&block), wrapper_attrs)
-        content_tag(container) do
-          content_tag(wrapper, (parent_link << child_links), wrapper_attrs)
-        end
+        content_tag(wrapper, (parent_link << child_links), wrapper_attrs)
       end     
       private :sub_nav_link
       
@@ -110,7 +108,7 @@ module Facades
           when Proc then proc.call(path)
           when Regexp then request.path.match(regex)
           when String then (request.path == path || request.path.match(/#{path}\/\w/im))
-          else raise Motr::Errors::InvalidOptions.new('Proc, Regexp or String required... passed #{matcher.class}.')
+          else raise 'Proc, Regexp or String required... passed #{matcher.class}.'
         end
         
         if active

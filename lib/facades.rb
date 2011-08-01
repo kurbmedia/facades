@@ -7,17 +7,29 @@ module Facades
     autoload :Html, 'facades/debug/html'
   end
   
+  # When enabled, HTML5 elements are used within helpers
+  # This includes things like using <nav> within pagination
+  # and the nav helper.
+  #
   mattr_accessor :enable_html5
+  @@enable_html5 = true
+  
+  # When enabled, a div is added to each HTML page which displays
+  # errors with the resulting html. This includes things like missing page titles,
+  # missing keywords, etc.
+  # 
   mattr_accessor :debug_html
+  @@debug_html = false
+  
+  def self.helpers
+    Facades::Helpers
+  end
 
   def setup(&block)
     yield self
   end
   
 end
-
-Facades.enable_html5 = true
-Facades.debug_html   = true
 
 require 'facades/sass_ext'
 require 'compass'
