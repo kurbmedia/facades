@@ -87,6 +87,7 @@ To assign variables, pass their value to the method. To display, use the method 
 	body id="<%= page_id %>"
 	
 **Misc**
+
 `meta_tag` A shortcut for creating HTML meta tags. 
 
 	<%= meta_tag('name', 'content') %> #=> <meta name="name" content="content" />

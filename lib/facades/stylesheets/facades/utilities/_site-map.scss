@@ -1,0 +1,18 @@
+#sitemap{ @include inline-block-list(0); text-align:center; width:100%; padding-top:25px;
+	ol{ margin:0; padding:0; @include clearfix; }
+	li{ vertical-align:top; margin:0 10px 15px 10px; }
+	li.single{ float:left !important;
+		ol{ text-align:left !important; padding-top:15px; margin:0 -10px;
+			li{ display:block !important; float:none !important; }
+		}
+	}
+	li.multi{ float:left;
+		ol{ white-space:nowrap; padding-top:15px; margin:0 -10px;
+			li{ float:left; }
+		}
+	}
+	a{ @include inline-block; margin:0px; padding:2px 15px; @include border-radius(3px); @include box-shadow(rgba(100,100,100,0.5), 2px, 2px, 1px, 0);
+		@include background(linear-gradient(top, #b2cd23, darken(#b2cd23, 7%))); border:2px solid darken(#b2cd23, 5%); color:white; text-decoration:none;
+		font-weight:bold; @include single-text-shadow(darken(#b2cd23, 15%), 1px, 1px, 1px); 
+	}
+}

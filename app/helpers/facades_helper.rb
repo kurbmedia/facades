@@ -1,7 +1,6 @@
 module FacadesHelper
-  
-  include Facades::Helpers::Layout
-  include Facades::Helpers::Navigation
+
+  include Facades::Helpers
   
   def facade_assets
     content = if_ie(8) do

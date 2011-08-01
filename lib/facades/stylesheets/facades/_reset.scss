@@ -42,14 +42,8 @@ img{ margin:0; }
 
 // Establish reasonable heading and font sizes, with line-heights based on vertical rhythm.
 
-h1{ @include adjust-font-size-to(26px, 1); @include margin-trailer(1, 26px); }
-h2{ @include adjust-font-size-to(24px, 1); @include margin-trailer(1, 24px); }
-h3{ @include adjust-font-size-to(22px, 1); @include margin-trailer(1, 22px); }
-h4{ @include adjust-font-size-to(20px, 1); @include margin-trailer(1, 20px); }
-h5{ @include adjust-font-size-to(18px, 1); @include margin-trailer(1, 18px); }
-h6{ @include adjust-font-size-to(16px, 1); @include margin-trailer(1, 16px); }
 h1,h2,h3,h4,h5,h6{ font-weight:normal;}
-p{  @include adjust-font-size-to($font-size); @include margin-trailer(1, $font-size); }
+@include font-scaling;
 
 a{ text-decoration:underline; color:$link-color;
 	&:hover{ color:$link-hover-color; }

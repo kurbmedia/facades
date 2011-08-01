@@ -36,6 +36,7 @@ module Facades
         wrapper === false ? child_link : content_tag(wrapper, child_link, wrapper_attrs)
         
       end
+      alias :nav_link_to :nav_link
       
       def sub_nav_link(text, path, attrs = {}, wrapper = :li, container = :ol, &block)
         wrapper_attrs = attrs.delete(:wrapper)

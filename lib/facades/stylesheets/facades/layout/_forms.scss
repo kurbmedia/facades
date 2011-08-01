@@ -25,16 +25,19 @@ $error-border-color: #E41D38 !default;
 
 // Mixin for styling select boxes
 @mixin form-select( $font-size: $input-font-size, $normal-border: $unfocused-border-color, $focus-border: $focus-border-color, $border-radius: $input-border-radius ){
-	@include form-field($font-size, $input-size, $normal-border, $focus-border, $border-radius);
-	border-style:solid; 
+	@include form-field($font-size, $normal-border, $focus-border, $border-radius);
+	border-style:solid;
+	border-width:1px;	
 	&:focus{ outline:none; }
 	&[multiple=multiple]{ border-color:$unfocused-border-color; }
 }
 
 // Mixin for styling textareas
 @mixin form-textarea( $font-size: $input-font-size, $normal-border: $unfocused-border-color, $focus-border: $focus-border-color, $border-radius: $input-border-radius ){
-	@include form-field($font-size, $input-size, $normal-border, $focus-border, $border-radius);
-	margin:0.5em; padding:5px;	
+	@include form-field($font-size, $normal-border, $focus-border, $border-radius);
+	margin:0.5em; padding:5px;
+	border-style:solid;
+	border-width:1px;		
 }
 
 // Default input styling
@@ -42,8 +45,10 @@ $error-border-color: #E41D38 !default;
 	&.text,
 	&[type=text],
 	&[type=password],
-	&[type=email]{ 
-		@include form-field($font-size, $input-size, $normal-border, $focus-border, $border-radius); padding:.65em;
+	&[type=email]{ 		
+		@include form-field($font-size, $normal-border, $focus-border, $border-radius); padding:.5em;
+		border-style:solid;
+		border-width:1px;
 	}
 	&[type=checkbox],
 	&[type=radio]{
@@ -100,29 +105,34 @@ $error-border-color: #E41D38 !default;
 
 // Creates a single column list of fields within a form. Form elements should be marked up using ordered lists for semantic value.
 @mixin form-field-list{
-	ol{ list-style-type:none; margin:0px; padding:0px; padding-right:10px;		
-		li{ padding:.5em 0px;			
-			&.clear{ clear:both; }
-			&.buttons{ clear:both; padding:.25em 0px 0px 0px; }
-			&.inline label{ @include inline-block; }
-			&.multifield{
-				input, select{ @include inline-block; }
-			}
-			ol{ @include form-split-field-list; }
-			@include form-errors;
+	list-style-type:none; 
+	margin:0px; 
+	padding:0px; 
+	padding-right:10px;		
+	
+	li{ padding:.5em 0px;			
+		&.clear{ clear:both; }
+		&.buttons{ clear:both; padding:.25em 0px 0px 0px; }
+		&.inline label{ @include inline-block; }
+		&.multifield{
+			input, select{ @include inline-block; }
+		}
+		ol{ @include form-split-field-list; }
+		@include form-errors;
 			
-			#{$form-hint-selector}{ @include form-hint; }
-			#{$form-error-message-selector}{ @include form-error-messages( $color ); }
+		#{$form-hint-selector}{ @include form-field-hint; }
+		#{$form-error-message-selector}{ @include form-error-message( $error-color ); }
 			
-		}		
-		label{ display:block; }
-		@include form-select; @include form-input; @include form-textarea;
-	}
-	ol.inline li.label{ @include inline-block; }
-	label abbr{ outline:none; border:none; color:red; }
+	}		
 	label{ 
-		font-size:12px; 
-		height:20px; 		
+		display:block; 
+		font-size:12px;
+		height:20px;
 	}
+	#{fields_of_type(select)}{ @include form-select; }
+	#{fields_of_type(string, checkbox, radio)}{ @include form-input; }
+	#{fields_of_type(textarea)}{ @include form-textarea; }
+	
+	label abbr{ outline:none; border:none; color:red; }
 	fieldset{ border:none; }
 }

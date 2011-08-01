@@ -15,14 +15,15 @@ $grid-column-width: $grid-width / $grid-columns * 1 - $grid-gutter-width;
   @return $grid-width / $grid-columns * $n - $grid-gutter-width;
 }
 
-@mixin column-base($gutter: $gutter-width){
+@mixin column-base($gutter: $grid-gutter-width){
 	display: inline; float: left;
 	margin-left: $gutter / 2;
 	margin-right: $gutter / 2;
 }
 
-@mixin column($n, $cols: $grid-columns, $gutter: $grid-gutter-width){
-	@include column-base($gutter);
+@mixin column($n, $last:false){
+	@include column-base($grid-gutter-width);
+	@if $last{ margin-right:0; }
 	width:span($n);
 }
 
@@ -49,8 +50,9 @@ $grid-column-width: $grid-width / $grid-columns * 1 - $grid-gutter-width;
 
 @import 'compass/layout/grid-background';
 $grid-background-column-color: #eef2f9;
+$grid-background-offset: ceil($grid-gutter-width / 2);
 $grid-background-baseline-color: rgba(0,0,0,0.15);
-$grid-background-gutter-color: #fff;
+$grid-background-gutter-color: rgba(255,255,255,0);
 $grid-background-total-columns: $grid-columns;
 $grid-background-column-width: $grid-column-width;
 $grid-background-gutter-width: $grid-gutter-width;
@@ -58,5 +60,6 @@ $grid-background-baseline-height: #{($line-height / $font-size)}em;
 
 
 @mixin debug-grid{
+	background-color:transparent;
 	@include grid-background;
 }

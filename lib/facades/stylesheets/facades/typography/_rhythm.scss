@@ -7,9 +7,21 @@
 // Shorthand overrides for Compass' adjust-font-size/leading-to
 // because well.. they are freakin long.
 //
-@mixin font-size($size, $lines){
+@mixin font-size($size, $lines: lines-for-font-size($size)){
 	@include adjust-font-size-to($size, $lines);
 }
-@mixin leading($size, $lines){
+@mixin leading($size, $lines: lines-for-font-size($size)){
 	@include adjust-leading-to($size, $lines);
+}
+
+// Basic font scaling based on a typography scale. Its not perfect, but hey its nice lookin.
+// Scales h1-h6 and sets paragraphs.
+@mixin font-scaling($base: $font-size, $scale: 24px 22px 20px 18px 16px 14px){
+	$offset:1.618;
+	$scale: compact($scale);
+	@for $i from 1 through 6 {
+		$sizing: floor((nth($scale, $i) * $offset) - ($base / $offset));
+		h#{$i}{ @include adjust-font-size-to($sizing, 1); @include margin-trailer(1, $sizing); }
+	}
+	p{  @include adjust-font-size-to($font-size); @include margin-trailer(1, $font-size); }
 }
