@@ -1,0 +1,9 @@
+@import 'compass/css3';
+@mixin inset-text($offset-color, $lum:false, $down: false){
+	$lum: if($lum, $lum, luminance($offset-color));
+	$down: if($down, $down, -1px);
+	
+	$c: if($lum == dark, shade($offset-color, 40%), tint($offset-color, 70%)); 
+	$o: if($lum == dark, $down, 1px);
+	@include single-text-shadow($c, $o, $o, 0px);
+}

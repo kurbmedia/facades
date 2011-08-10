@@ -63,10 +63,14 @@ Below is a list of available mixins
 	----------------------
 	leading (shortcut to Compass adjust-leading-to)
 	font-size (shortcut to Compass adjust-font-size-to)
+	inset-text (text-shadow text insetting)
 	
 	Utility
 	----------------------
 	position (shorthand position relative/fixed/absolute)
+	luminance ( return a colors lightness in terms of 'light' or 'dark' )
+	tint (tint a color with white)
+	shade (darken a color with black)
 	
 ##Helpers
 

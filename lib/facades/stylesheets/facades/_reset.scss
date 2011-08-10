@@ -1,3 +1,24 @@
+$font-size:12px !default;
+$line-height:24px !default;
+$font-family:'Helvetica Nueue', Helvetica, Arial, sans-serif !default;
+$font-color:#333 !default;
+$fixed-font-family:"andale mono", "lucida console", monospace !default;
+
+// Link colors
+$link-color:#06c !default;
+$link-hover-color:#09f !default;
+$link-focus-color:$link-hover-color !default;
+$link-active-color:lighten(adjust-hue($link-color, 75deg), 10%) !default;
+$link-visited-color:darken($link-color, 10%) !default;
+
+// Lists
+$ordered-list-type:decimal !default;
+$unordered-list-type:disc !default;
+
+// Table striping
+$table-header-color:#bbb !default;
+$table-stripe-color:lighten($table-header-color, 20%) !default;
+
 @import 'facades/typography/rhythm';
 @import "compass/typography/lists/inline-block-list";
 // 

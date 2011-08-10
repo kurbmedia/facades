@@ -1,13 +1,12 @@
 require 'sass'
-
 module Facades
   module SassExt
-    autoload :FormElements, 'facades/sass_ext/form_elements'
   end
 end
 
-module Sass::Script::Functions
-  include Facades::SassExt::FormElements
+['form_elements', 'color'].each do |req|
+  require "facades/sass_ext/#{req}"
+  Sass::Script::Functions.send(:include, Facades::SassExt.const_get(req.camelize))
 end
 
 class Sass::Script::Functions::EvaluationContext

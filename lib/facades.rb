@@ -1,10 +1,19 @@
 require 'active_support'
+require 'active_support/core_ext/object'
 require 'facades/version'
 
 module Facades
   
+  module Support
+    autoload :Serve, 'facades/support/serve'
+  end
+  
   module Debug
     autoload :Html, 'facades/debug/html'
+  end
+  
+  module Builders
+    autoload :Sprite, 'facades/builders/sprite'
   end
   
   # When enabled, HTML5 elements are used within helpers
@@ -37,4 +46,4 @@ Compass::Frameworks.register('facades',
   :stylesheets_directory => File.join(File.dirname(__FILE__), 'facades/stylesheets'),
   :templates_directory   => File.join(File.dirname(__FILE__), 'facades/templates'))
 
-require 'facades/engine' if defined?(Rails)
+require 'facades/support/rails' if defined?(Rails)

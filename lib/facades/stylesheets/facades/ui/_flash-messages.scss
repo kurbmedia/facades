@@ -25,24 +25,30 @@ $info-color:#205791;
 $info-bg-color:#d5edf8;
 // Border color for informational messages, blue default
 $info-border-color:#92cae4;
+// Class used for success messages
+$flash-success-class: 'success';
+// Class used for notice messages
+$flash-notice-class: 'notice';
+// Class used for error flash messages
+$flash-error-class: 'error';
 
-@mixin flash-message($success-name:success, $notice-name: notice, $error-name: error){
+@mixin flash-message{
 	@include flash-message-colors($success-name, $notice-name, $error-name);
 }
-@mixin flash-message-colors($success-name:success, $notice-name: notice, $error-name: error){
-	&.flash_message_#{$success-name}{ 
+@mixin flash-message-colors($success: $flash-success-class, $notice: $flash-notice-class, $error: $flash-error-class){
+	&.flash_message_#{$success}{ 
 		color:$success-color; 
-		background-color:$success-bg-color;
+		background-color:transparentize($success-bg-color, 0.15);
 		border-color:$success-border-color;
 	}	
-	&.flash_message_#{$notice-name}{ 
+	&.flash_message_#{$notice}{ 
 		color:$notice-color; 
-		background-color:$notice-bg-color;
+		background-color:transparentize($notice-bg-color, 0.15);
 		border-color:$notice-border-color;
 	}	
-	&.flash_message_#{$error-name}{ 
+	&.flash_message_#{$error}{ 
 		color:$error-color; 
-		background-color:$error-bg-color;
+		background-color:transparentize($error-bg-color, 0.15);
 		border-color:$error-border-color;
 	}
 }

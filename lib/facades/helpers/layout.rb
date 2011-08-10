@@ -38,7 +38,7 @@ module Facades
       # 
       # 
       def page_id(content = nil)
-        _create_variable(:__page_id, content, false) and return unless content.nil?
+        _create_variable(:__page_id, content, false) and return if content
         return _retrieve_variable(:__page_id) if content_for?(:__page_id)
         cname = controller.class.to_s.gsub(/controller$/i,'').underscore.split("/").join('_')
         aname = controller.action_name
@@ -58,7 +58,7 @@ module Facades
       #   <title><%= page_title %></title> #=> <title>This is my page title</title>
       # 
       def page_title(content = nil)
-        _create_variable(:__page_title, content, false) and return unless content.nil?
+        _create_variable(:__page_title, content, false) and return if content
         return _retrieve_variable(:__page_title) if content_for?(:__page_title)
         return ""
       end
