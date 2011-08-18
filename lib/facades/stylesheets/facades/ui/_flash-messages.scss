@@ -8,47 +8,51 @@ $error-bg-color: #fde0e4 !default;
 // Border color for error/alert messages, red default
 $error-border-color: #E41D38 !default;
 // Default success/notice color, green default
-$success-color:#264409;
+$success-color:#264409 !default;
 // Background color for success/notice messages, green default
-$success-bg-color:#e6efc2;
+$success-bg-color:#e6efc2 !default;
 // Background color for success/notice messages, green default
-$success-border-color:#c6d880;
+$success-border-color:#c6d880 !default;
 // Default color for notice/warn messages, yellow default
-$notice-color:#514721;
+$notice-color:#514721 !default;
 // Background color for notice/warn messages, yellow default
-$notice-bg-color:#fff6bf;
+$notice-bg-color:#fff6bf !default;
 // Border color for notice/warn messages, yellow default
-$notice-border-color:#ffd324;
+$notice-border-color:#ffd324 !default;
 // Default color for informational messages, blue default
-$info-color:#205791;
+$info-color:#205791 !default;
 // Background color for informational messages, blue default
-$info-bg-color:#d5edf8;
+$info-bg-color:#d5edf8 !default;
 // Border color for informational messages, blue default
-$info-border-color:#92cae4;
+$info-border-color:#92cae4 !default;
 // Class used for success messages
-$flash-success-class: 'success';
+$flash-success-class: 'success' !default;
 // Class used for notice messages
-$flash-notice-class: 'notice';
+$flash-notice-class: 'notice' !default;
 // Class used for error flash messages
-$flash-error-class: 'error';
+$flash-error-class: 'error' !default;
 
 @mixin flash-message{
-	@include flash-message-colors($success-name, $notice-name, $error-name);
+	@include flash-message-base;
+	@include flash-message-colors($flash-success-class, $flash-notice-class, $flash-error-class);
 }
+
+@mixin flash-message-base{ display:block; position:relative; }
+
 @mixin flash-message-colors($success: $flash-success-class, $notice: $flash-notice-class, $error: $flash-error-class){
-	&.flash_message_#{$success}{ 
+	&.flash-message-#{unquote($success)}{ 
 		color:$success-color; 
-		background-color:transparentize($success-bg-color, 0.15);
+		background-color:$success-bg-color;
 		border-color:$success-border-color;
 	}	
-	&.flash_message_#{$notice}{ 
+	&.flash-message-#{unquote($notice)}{ 
 		color:$notice-color; 
-		background-color:transparentize($notice-bg-color, 0.15);
+		background-color:$notice-bg-color;
 		border-color:$notice-border-color;
 	}	
-	&.flash_message_#{$error}{ 
+	&.flash-message-#{unquote($error)}{ 
 		color:$error-color; 
-		background-color:transparentize($error-bg-color, 0.15);
+		background-color:$error-bg-color;
 		border-color:$error-border-color;
 	}
 }

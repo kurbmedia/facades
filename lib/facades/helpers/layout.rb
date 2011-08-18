@@ -40,9 +40,14 @@ module Facades
       def page_id(content = nil)
         _create_variable(:__page_id, content, false) and return if content
         return _retrieve_variable(:__page_id) if content_for?(:__page_id)
-        cname = controller.class.to_s.gsub(/controller$/i,'').underscore.split("/").join('_')
-        aname = controller.action_name
-        "#{cname}_#{aname}"
+        result = if defined?(controller)
+          cname = controller.class.to_s.gsub(/controller$/i,'').underscore.split("/").join('_')
+          aname = controller.action_name          
+          "#{cname}_#{aname}"
+        elsif defined?(request) && request.respond_to?(:path_info)
+          ::File.basename(request.path_info).to_s
+        end
+        result
       end
       
       ##
@@ -96,9 +101,7 @@ module Facades
       private
       
       def _create_variable(var, content, create_method = true) #:nodoc:
-        content_for(var.to_sym) do
-          content
-        end
+        content_for(var.to_sym, content)
         return '' unless create_method
         class_eval <<-MAKE_VAR, __FILE__, __LINE__ + 1
           def #{var}

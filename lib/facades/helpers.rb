@@ -3,6 +3,7 @@ require 'facades/helpers/navigation'
 require 'facades/helpers/elements'
 require 'facades/helpers/pagination'
 require 'facades/helpers/utility'
+require 'facades/helpers/builders'
 
 module Facades
   module Helpers
@@ -14,6 +15,7 @@ module Facades
       include Facades::Helpers::Elements
       include Facades::Helpers::Pagination
       include Facades::Helpers::Utility
+      include Facades::Helpers::Builders
     end
     
   end
