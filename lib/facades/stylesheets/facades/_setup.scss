@@ -1,0 +1,26 @@
+/* =============================================================================
+   Global variables 
+   =============================================================================*/
+
+$font-size:   12px !default;
+$line-height: 24px !default;
+
+$selection-background-color: #fe57a1 !default;
+
+$font-color: 		   #444 !default;
+$default-font-family: 'Helvetica Nueue', 'Helvetica', 'Arial', sans-serif !default;
+
+$link-color: 		 #00e !default;
+$link-hover-color:   lighten($link-color, 5%) !default;
+$link-visited-color: #551a8b !default;
+
+$error-color: 			 #cc0000 !default;
+$error-background-color: #f0dddd !default;
+$error-border-color: 	 #cc0000 !default;
+
+/* =================
+   Normalize / Add Utils
+   ================= */
+
+@import 'facades/setup/reset';
+@import 'facades/utils';

@@ -1,0 +1,12 @@
+body { 	
+	$scale:();
+	@for $i 10 through 26{ $scale:append($scale, $i); }
+	font:13px/1.231 sans-serif; *font-size:small; 
+}
+
+body, select, input, textarea {
+	color: #444;
+	font-family: $default-font-family;
+}
+
+select, input, textarea, button { font:99% sans-serif; }

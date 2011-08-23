@@ -1,0 +1,12 @@
+/* =============================================================================
+   Resets only necessary in IE stylesheets
+   ========================================================================== */
+
+audio[controls], canvas, video { 
+	display: inline-block; *display: inline; *zoom: 1; 
+}
+
+img { -ms-interpolation-mode: bicubic; }
+legend { border: 0; *margin-left: -7px; padding: 0; }
+button, input, select, textarea { *vertical-align: middle; }
+button, input { *overflow: visible; }

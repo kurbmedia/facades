@@ -21,6 +21,20 @@ module Facades
       end
       
       ##
+      # Create a script tag for activating google analytics
+      # @param [String] site_id The site ID provided by google analytics
+      # @return [String] script tag
+      # 
+      def google_analytics(site_id)
+        content_tag(:script) do
+          ["var _gaq=[['_setAccount','#{site_id}'],['_trackPageview'],['_trackPageLoadTime']];",
+           "(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;",
+           "g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';",
+           "s.parentNode.insertBefore(g,s)}(document,'script'));"].join("")
+        end
+      end
+      
+      ##
       # 
       # Creates a page id to be used for identifying a page for CSS/design purposes. If a variable
       # is defined, it will be used. If not, one will be generated from the current controller/action.

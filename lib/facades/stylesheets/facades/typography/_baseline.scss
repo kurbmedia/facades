@@ -1,0 +1,56 @@
+@import 'facades/reset/setup';
+
+$em-size: $font-size * 1;
+
+@mixin small-text{
+	/* 13px / 18px */
+	font-size: #{($font-size * 0.8125) / $em-size}em;
+	line-height: ($line-height * 0.75) / ($font-size * 0.8125) * 1em;
+}
+
+@mixin normal-text{
+	/* 16px / 24px */
+	font-size: #{$font-size / $em-size}em;
+	line-height: #{$line-height / $em-size}em; /* 24 */
+}
+
+@mixin large-text{
+	/* 26 / 36px */
+	font-size: #{26 / $em-size}em;
+	line-height: ($line-height * 1.5) / 26 * 1em;
+}
+
+@mixin huge-text{
+	/* 42px / 48px */
+	font-size: #{42 / $em-size}em;
+	line-height: ($line-height * 2) / 42 * 1em;
+}
+
+@mixin massive-text{
+	/* 68px / 72px */
+	font-size: #{68 / $em-size}em;
+	line-height: ($line-height * 3) / 68 * 1em;
+}
+
+@mixin gigantic-text{
+	/* 110px / 120px */
+	font-size: #{110 / $em-size}em;
+	line-height: ($line-height * 5) / 110 * 1em;
+}
+
+body {
+	font-size: $font-size / 16 * 1em;
+	line-height: #{$line-height / $em-size}em;
+}
+
+h1, h2{ 
+	@include large-text;
+	margin: (24/26*1em) 0 (36/26*1em);
+}
+
+h2{ font-weight:normal; }
+
+h3{
+	@include normal-text;
+	margin: #{24/$em-size}em 0 #{24px/$em-size}em;
+}

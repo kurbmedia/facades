@@ -1,3 +1,5 @@
+@warn "facades/reset is depreciated. Please use facades/setup (with facades/setup/ie in your ie stylesheet) to support normalization over resetting.";
+
 $font-size:12px !default;
 $line-height:24px !default;
 $font-family:'Helvetica Nueue', Helvetica, Arial, sans-serif !default;
@@ -50,14 +52,18 @@ table { border-collapse:collapse; border-spacing:0; }
 hr { display:block; height:1px; border:0; border-top:1px solid #cccccc; margin:1em 0; padding:0; }
 input, select { vertical-align:middle; }
 
-$base-font-size:   $font-size;
+$base-font-size: $font-size;
 $base-line-height: $line-height;
 
 // Establish a baseline by default. 
-@include establish-baseline($font-size);
 body{ 
-	font-size-adjust:none;
+	font-size-adjust:100%;
+	-ms-text-size-adjust: none;
+	-webkit-text-size-adjust: 100%;
+	-webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
 	@include normal-text; 
+	font-size:($font-size / 16px) * 1em;
+	line-height:($line-height / 16px) * 1em;
 }
 img{ margin:0; }
 
