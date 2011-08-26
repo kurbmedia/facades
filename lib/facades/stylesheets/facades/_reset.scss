@@ -107,3 +107,9 @@ table.striped tr:nth-child(even) td, tr.even td{ background:$table-stripe-color;
 nav{
 	ol, ul{ @include inline-block-list(1em); @include margin-trailer(1, $font-size); }
 }
+
+button, input, select, textarea { font-size: 100%; margin: 0; vertical-align: baseline; }
+button, input { line-height: normal;  }
+button, input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; -webkit-appearance: button; }
+input[type="checkbox"], input[type="radio"] { box-sizing: border-box; }
+input[type="search"] { -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; }
