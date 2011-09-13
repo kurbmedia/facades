@@ -1,0 +1,20 @@
+@import 'facades/utilities';
+
+// Creates a horizontal list, generally used for navigation elements.
+@mixin inline-list($padding: false) {
+	@include box-reset;
+	@include clearfix;
+  	@include no-list;	
+	li{ @include inline-block;
+		white-space:nowrap;
+		@if $padding{
+			padding-left:$padding;
+			padding-right:$padding;
+		}
+	}
+}
+
+// 'alias' for compass compatability
+@mixin inline-block-list($padding:false){
+	@include inline-list($padding);
+}

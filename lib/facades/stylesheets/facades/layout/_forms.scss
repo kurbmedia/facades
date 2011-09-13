@@ -27,7 +27,8 @@ $error-border-color: #E41D38 !default;
 @mixin form-select( $font-size: $input-font-size, $normal-border: $unfocused-border-color, $focus-border: $focus-border-color, $border-radius: $input-border-radius ){
 	@include form-field($font-size, $normal-border, $focus-border, $border-radius);
 	border-style:solid;
-	border-width:1px;	
+	border-width:1px;
+	font-size:$font-size;
 	&:focus{ outline:none; }
 	&[multiple=multiple]{ border-color:$unfocused-border-color; }
 }
@@ -38,6 +39,20 @@ $error-border-color: #E41D38 !default;
 	margin:0.5em; padding:5px;
 	border-style:solid;
 	border-width:1px;		
+}
+
+@mixin form-button($font-size: $input-font-size, $radius: $input-border-radius){
+	-webkit-appearance: none;
+	-moz-border-radius: $radius;
+	-webkit-border-radius: $radius;
+	border-radius: $radius;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding;
+	background-clip: padding-box;
+	cursor:pointer; outline:0; overflow:visible; width:auto;	
+	//IE7
+	*padding-top: 2px;
+	*padding-bottom: 0px;
 }
 
 // Default input styling
@@ -51,8 +66,12 @@ $error-border-color: #E41D38 !default;
 		border-style:solid;
 		border-width:1px;
 	}
+	
 	&[type=checkbox],
 	&[type=radio]{
+		position: relative; vertical-align:top; top:3px; 
+		// IE8, IE9, IE10
+		top:0\0; *top: -3px; // IE7		
 		@include inline-block; margin-right:1em; vertical-align:baseline; width:auto;
 	}
 }
@@ -62,6 +81,9 @@ $error-border-color: #E41D38 !default;
 	@include border-radius($border-radius); 
 	font-size:$font-size; 
 	border-color:$normal-border;
+	margin:0;
+  	vertical-align:middle;
+	::-moz-focus-inner{ border:0; padding:0; }
 	&:focus{ outline:none; border-color:$focus-border; }
 }
 
@@ -104,6 +126,10 @@ $error-border-color: #E41D38 !default;
 	}
 }
 
+@mixin form-field-hints{
+	#{$form-hint-selector}{ @include form-field-hint; }
+}
+
 // Creates a single column list of fields within a form. Form elements should be marked up using ordered lists for semantic value.
 @mixin form-field-list{
 	list-style-type:none; 
@@ -121,7 +147,7 @@ $error-border-color: #E41D38 !default;
 		ol{ @include form-split-field-list; }
 		@include form-errors;
 			
-		#{$form-hint-selector}{ @include form-field-hint; }
+		
 		#{$form-error-message-selector}{ @include form-error-message( $error-color ); }
 			
 	}		

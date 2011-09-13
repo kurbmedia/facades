@@ -1,44 +1,8 @@
-/* =============================================================================
-   normalize.css
-   2011-07-06T20:20 UTC
-   //github.com/jonathantneal/normalize.css
-
-   Normalize.css is a customisable CSS file that makes browsers render all
-   elements more consistently and in line with modern standards. We researched
-   the differences between default browser styles in order to precisely target
-   only the styles that need normalizing.
-
-   How comment documentation is written:
-   Comments: (anchor) (type of change) (summary of issue) in (affected browsers)
-   Url: (url related to above comment)
-
-   To be concise, comments are restricted to a length of 77 characters or less.
-
-   What 'types of change' mean:
-   Addresses: Changes involving downgrades for greater cross-browser consistency
-   Corrects: Bug fixes and corrections to unexpected visual quirks
-   Improves: Improvements based on popular usage and html5 recommendation
-   ========================================================================== */
-
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
 audio[controls], canvas, video { 
 	display: inline-block;
 }
 
-
-/* =============================================================================
-   Base
-   ========================================================================== */
-
-/*
- * 1. Correct text resizing oddly in IE6/7 when body font-size is set using em units
- *    http://clagnut.com/blog/348/#c790
- * 2. Force vertical scrollbar in non-IE
- * 3. Remove Android and iOS tap highlight color to prevent entire container being highlighted
- *    www.yuiblog.com/blog/2010/10/01/quick-tip-customizing-the-mobile-safari-tap-highlight-color/
- * 4. Prevent iOS text size adjust on device orientation change, without disabling user zoom
- *    www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom/
- */
 
 html { 
 	font-size: 100%; 
@@ -58,8 +22,8 @@ body, button, input, select, textarea { font-family: sans-serif; color: #222; }
  * Also: hot pink!
  */
 
-::-moz-selection { background: $selection-background-color; color: #fff; text-shadow: none; }
-::selection { background: $selection-background-color; color: #fff; text-shadow: none; }
+::-moz-selection { background: $selection-background-color; color: $selection-color; text-shadow: none; }
+::selection { background: $selection-background-color; color: $selection-color; text-shadow: none; }
 
 
 /* =============================================================================
@@ -71,7 +35,7 @@ a:visited { color: $link-visited-color; }
 a:focus { outline: thin dotted; }
 
 /* Improve readability when focused and hovered in all browsers: people.opera.com/patrickl/experiments/keyboard/test */
-a:hover, a:active { outline: 0; $link-hover-color; }
+a:hover, a:active { outline: 0; color:$link-hover-color; }
 
 
 /* =============================================================================
@@ -189,7 +153,11 @@ button, input[type="button"], input[type="reset"], input[type="submit"] { cursor
  */
 
 input[type="checkbox"], input[type="radio"] { box-sizing: border-box; }
-input[type="search"] { -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; }
+input[type="search"]{ 
+	-moz-box-sizing:content-box; 
+	-webkit-box-sizing:content-box; 
+	box-sizing: content-box; 
+}
 
 /* 
  * Remove inner padding and border in FF3/4
@@ -202,8 +170,8 @@ button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
 textarea { overflow: auto; vertical-align: top; }
 
 /* Colors for form validity */
-input:valid, textarea:valid {  }
-input:invalid, textarea:invalid { background-color: $error-background-color; }
+//input:valid, textarea:valid {  }
+//input:invalid, textarea:invalid { background-color: $error-background-color; }
 
 
 /* =============================================================================

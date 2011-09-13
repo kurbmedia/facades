@@ -6,6 +6,7 @@ $font-size:   12px !default;
 $line-height: 24px !default;
 
 $selection-background-color: #fe57a1 !default;
+$selection-color: 			 #ffffff !default;
 
 $font-color: 		   #444 !default;
 $default-font-family: 'Helvetica Nueue', 'Helvetica', 'Arial', sans-serif !default;
@@ -23,4 +24,4 @@ $error-border-color: 	 #cc0000 !default;
    ================= */
 
 @import 'facades/setup/reset';
-@import 'facades/utils';
+@import 'facades/utilities';

@@ -2,6 +2,8 @@
    Misc utilities 
    ===================================================== */
 
+@import 'facades/utilities/clearfix';
+@import 'facades/utilities/lists';
 
 // Alternative to display:none for hiding important elements
 
@@ -11,10 +13,20 @@
 	position: absolute;	
 }
 
-// Cross browser clearfix
 
-@mixin clearfix{
-	&:before, &:after { content: ""; display: table; }
-	&:after { clear: both; }
-	zoom: 1;
+// Simple mixin to reset boxes to margin-less/padding-less/border-less
+@mixin box-reset{
+	margin: 0;
+	padding: 0;
+	border: 0; 
+}
+
+// Cross browser inline-block implementations
+@mixin inline-block {
+    &{ *display: inline; } // IE7
+  	display: -moz-inline-box;
+	-moz-box-orient: vertical;
+	display: inline-block;
+	vertical-align: middle;
+    *vertical-align: auto; // IE7..again
 }
