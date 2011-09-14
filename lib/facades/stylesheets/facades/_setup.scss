@@ -1,27 +1,67 @@
-/* =============================================================================
-   Global variables 
-   =============================================================================*/
+// -------------------------------------------------------------------------------
+// Globals
+// -------------------------------------------------------------------------------
 
+// Font and Baseline
+// -------------------------------------------------
 $font-size:   12px !default;
 $line-height: 24px !default;
 
+
+// Selection states (hot pink action!)
+// -------------------------------------------------
 $selection-background-color: #fe57a1 !default;
 $selection-color: 			 #ffffff !default;
 
+
+// Default font color and family
+// -------------------------------------------------
 $font-color: 		   #444 !default;
 $default-font-family: 'Helvetica Nueue', 'Helvetica', 'Arial', sans-serif !default;
 
+
+// Link colors
+// -------------------------------------------------
 $link-color: 		 #00e !default;
 $link-hover-color:   lighten($link-color, 5%) !default;
 $link-visited-color: #551a8b !default;
 
-$error-color: 			 #cc0000 !default;
-$error-background-color: #f0dddd !default;
-$error-border-color: 	 #cc0000 !default;
 
-/* =================
-   Normalize / Add Utils
-   ================= */
+// Forms and fields
+// -------------------------------------------------
 
-@import 'facades/setup/reset';
+// Default state
+$input-border-radius:		2px !default;
+$input-font-size: 			.95em !default;
+$input-color: 				$font-color !default;
+$input-border-color:		#bbbbbb !default;
+$input-background-color: 	white !default;
+
+// Disabled state
+$disabled-input-color:			  #777 !default;
+$disabled-input-background-color: #aaa !default;
+$disabled-input-border-color: 	  #666 !default; 
+
+// Focus state
+$focus-input-border-color: 		#666666 !default; 
+$focus-input-background-color: 	$input-background-color !default;
+$focus-input-color: 			$input-color !default;
+
+// General
+$form-hint-color: 		#ccc !default;
+$fieldset-border-color: #ccc !default;
+
+// Buttons
+$button-color:#333333 !default;
+$button-border-color:#dddddd #bbbbbb #999999 !default;
+$button-padding: 0.5em 1em !default;
+$button-border-radius: 5px !default;
+
+// Visual cues
+// -------------------------------------------------
+
+$error-color: 			 #bd132a !default;
+$error-background-color: #fde0e4 !default;
+$error-border-color: 	 #E41D38 !default;
+
 @import 'facades/utilities';

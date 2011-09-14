@@ -1,137 +1,33 @@
-// Default border radius used on inputs
-$input-border-radius:2px !default;
-// Default font size for form fields... slightly smaller than body font size
-$input-font-size: .95em !default;
-// Default input border color
-$unfocused-border-color:#bbbbbb !default;
-// Input border color when focused
-$focus-border-color: #666666 !default; 
-// Class used on fields which are invalid
-$form-error-class: 'field-with-error' !default;
-// Selector representing the error class and element used to display error messages
-$form-error-message-selector: 'span.error-for-field' !default;
-// Text color for field hints
-$form-hint-color: #ccc;
-// Selector for field hints
-$form-hint-selector: 'span.hint';
-// Default fieldset border color
-$fieldset-border-color: #ccc !default;
-// Default error text color
-$error-color: #bd132a !default;
-// Default error background color, applies to inputs / selects / textareas
-$error-bg-color: #fde0e4 !default;
-// Default error border color, applies to inputs / selects / textareas
-$error-border-color: #E41D38 !default;
+@import 'facades/utilities';
 
-// Mixin for styling select boxes
-@mixin form-select( $font-size: $input-font-size, $normal-border: $unfocused-border-color, $focus-border: $focus-border-color, $border-radius: $input-border-radius ){
-	@include form-field($font-size, $normal-border, $focus-border, $border-radius);
-	border-style:solid;
-	border-width:1px;
-	font-size:$font-size;
-	&:focus{ outline:none; }
-	&[multiple=multiple]{ border-color:$unfocused-border-color; }
-}
+// Creates a column based list of fields within a form. 
+// Form elements should be marked up using ordered lists for semantic value.
+//-----------------------------------------------------------------------------------------------
 
-// Mixin for styling textareas
-@mixin form-textarea( $font-size: $input-font-size, $normal-border: $unfocused-border-color, $focus-border: $focus-border-color, $border-radius: $input-border-radius ){
-	@include form-field($font-size, $normal-border, $focus-border, $border-radius);
-	margin:0.5em; padding:5px;
-	border-style:solid;
-	border-width:1px;		
-}
-
-@mixin form-button($font-size: $input-font-size, $radius: $input-border-radius){
-	-webkit-appearance: none;
-	-moz-border-radius: $radius;
-	-webkit-border-radius: $radius;
-	border-radius: $radius;
-	-moz-background-clip: padding;
-	-webkit-background-clip: padding;
-	background-clip: padding-box;
-	cursor:pointer; outline:0; overflow:visible; width:auto;	
-	//IE7
-	*padding-top: 2px;
-	*padding-bottom: 0px;
-}
-
-// Default input styling
-@mixin form-input( $font-size: $input-font-size, $normal-border: $unfocused-border-color, $focus-border: $focus-border-color, $border-radius: $input-border-radius ){
-	&.text,
-	&[type=text],
-	&[type=password],
-	&[type=email],
-	&[type=url]{ 		
-		@include form-field($font-size, $normal-border, $focus-border, $border-radius); padding:.5em;
-		border-style:solid;
-		border-width:1px;
-	}
-	
-	&[type=checkbox],
-	&[type=radio]{
-		position: relative; vertical-align:top; top:3px; 
-		// IE8, IE9, IE10
-		top:0\0; *top: -3px; // IE7		
-		@include inline-block; margin-right:1em; vertical-align:baseline; width:auto;
-	}
-}
-
-// Global base styles for all input types
-@mixin form-field( $font-size: $input-font-size, $normal-border: $unfocused-border-color, $focus-border: $focus-border-color, $border-radius: $input-border-radius ){
-	@include border-radius($border-radius); 
-	font-size:$font-size; 
-	border-color:$normal-border;
-	margin:0;
-  	vertical-align:middle;
-	::-moz-focus-inner{ border:0; padding:0; }
-	&:focus{ outline:none; border-color:$focus-border; }
-}
-
-// Mixin for displaying errors and error messages on fields.
-@mixin form-errors( $color:$error-color, $border-color:$error-border-color, $bg-color:$error-bg-color ){
-	&.#{$form-error-class}{
-		input[type=text],
-		input[type=password], 
-		input[type=email], 
-		textarea{ 
-			border:1px solid $border-color; 
-			background:$bg-color; 
-		}
-		label{ color:$color; }
-		#{$form-hint-selector}{ display:none; }
-	}	
-}
-
-// Mixin for displaying form hints
-@mixin form-field-hint( $color: $form-hint-color ){
-	font-size:.95em; line-height:.95em; font-weight:normal; color:$color; display:block;
-}
-
-// Mixin for styling field error messages
-@mixin form-error-message($color: $error-color){	 
-	font-size:.95em; line-height:.95em; color:$error-color;  display:block; 
-}
-
-// Creates a column based list of fields within a form. Forms elements should be marked up using ordered lists for semantic value.
 @mixin form-split-field-list{
-	display:block; clear:both; margin:-.5em 0px; @include pie-clearfix;
-	li{ float:left; margin:0 1em 0 0; vertical-align:middle; 
-		label, 
-		input{
-			&[type=text],
-			&[type=password],
-			&[type=email]{ display:block; }
+	@include pie-clearfix;
+	
+	display:block; 
+	clear:both; 
+	margin:-.5em 0px; 
+
+	li{ float:left; 
+		margin:0 1em 0 0; 
+		vertical-align:middle; 
+		label, input[type=text], input[type=password],input[type=email]{ 
+			display:block; 
 		}
 		select{ margin:.75em 0px; }
 	}
 }
 
-@mixin form-field-hints{
-	#{$form-hint-selector}{ @include form-field-hint; }
-}
 
-// Creates a single column list of fields within a form. Form elements should be marked up using ordered lists for semantic value.
+// Creates a single column list of fields within a form. 
+// Form elements should be marked up using ordered lists for semantic value.
+// --------------------------------------------------------------------------------------------------
+
 @mixin form-field-list{
+	
 	list-style-type:none; 
 	margin:0px; 
 	padding:0px; 
@@ -145,21 +41,7 @@ $error-border-color: #E41D38 !default;
 			input, select{ @include inline-block; }
 		}
 		ol{ @include form-split-field-list; }
-		@include form-errors;
-			
-		
-		#{$form-error-message-selector}{ @include form-error-message( $error-color ); }
-			
 	}		
-	label{ 
-		display:block; 
-		font-size:12px;
-		height:20px;
-	}
-	#{fields_of_type(select)}{ @include form-select; }
-	#{fields_of_type(string, checkbox, radio)}{ @include form-input; }
-	#{fields_of_type(textarea)}{ @include form-textarea; }
-	
-	label abbr{ outline:none; border:none; color:red; }
+		
 	fieldset{ border:none; }
 }

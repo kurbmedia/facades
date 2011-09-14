@@ -1,0 +1,212 @@
+.input-tiny{ width: 50px; }
+.input-small{ width: 100px; }
+.input-medium{ width: 150px; }
+.input-large{ width: 200px; }
+.input-xlarge{ width: 250px; }
+.input-xxlarge{ width: 300px; }
+.input-full{ width: 100%; }
+
+.input_full_wrap, .input-full-wrap {
+  display: block;
+  padding-right: 8px; 
+}
+
+form{
+	margin-bottom:1em; 
+}
+
+fieldset{ 
+	margin-bottom:1em; 
+}
+
+select{
+	padding: 0; 
+}
+
+label, legend { 
+	abbr[title]{ 
+		outline:none; 
+		border:none; 
+		color:red; 
+	}
+	
+	display: block;
+	font-weight: bold;
+	font-size: $font-size;
+}
+
+
+// Make UI consistant across all browsers.
+//----------------------------------------------------------------------------------------------------
+
+::-moz-focus-inner{ border: 0; padding: 0; }
+input[type="search"]::-webkit-search-decoration { display: none; }
+
+input,button,select,textarea {
+  margin: 0;
+  vertical-align: middle; 
+}
+
+input[type="radio"], input[type="checkbox"] {
+  position: relative;
+  vertical-align: top;
+  top: 3px;  
+  top: 0 \0;  // IE8, IE9, IE10  
+  *top: -3px; // IE7
+}
+
+// iPad
+@media (-webkit-min-device-pixel-ratio: 1) and (max-device-width: 1024px) {
+	input[type="radio"], input[type="checkbox"] {
+		vertical-align: baseline;
+		top: 2px; 
+	}
+}
+
+// iPhone 3
+@media (-webkit-min-device-pixel-ratio: 1) and (max-device-width: 480px) {
+	input[type="radio"], input[type="checkbox"]{
+		vertical-align: baseline;
+		top: 0; 
+	}
+}
+
+// iPhone 4
+@media (-webkit-min-device-pixel-ratio: 2) and (max-device-width: 480px) {
+	input[type="radio"], input[type="checkbox"]{
+		vertical-align: baseline;
+		top: 0; 
+	}
+}
+
+button, input[type="reset"], input[type="submit"], input[type="button"] {
+	-webkit-appearance: none;
+	background: #dddddd;
+	-moz-background-clip: border-box;
+	-webkit-background-clip: border-box;
+	background-clip: border-box;
+	-webkit-border-radius: $button-border-radius;
+	-moz-border-radius: $button-border-radius;
+	border-radius: $button-border-radius;
+	border: 1px solid;
+	border-color: $button-border-color;
+	cursor: pointer;
+	color: $button-color;
+	font: bold 12px / 1.3 "Helvetica Neue", Arial, "Liberation Sans", FreeSans, sans-serif;
+	outline: 0;
+	overflow: visible;
+	padding:$button-padding;
+	width: auto;
+	user-select:none;
+	// IE7
+	*padding-top: 2px;
+	*padding-bottom: 0px; 
+}
+
+button{ // IE7
+	*padding-top: 1px;
+	*padding-bottom: 1px; 
+}
+
+textarea, select, input[type="date"], input[type="datetime"],
+input[type="datetime-local"], input[type="email"], input[type="month"],
+input[type="number"], input[type="password"], input[type="search"],
+input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"] {
+	-webkit-appearance: none;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding;
+	background-clip: padding-box;
+	background-color: $input-background-color;
+	border: 1px solid;
+	-webkit-border-radius: $input-border-radius;
+	-moz-border-radius: $input-border-radius;
+	border-radius: $input-border-radius;
+	border-color: $input-border-color;
+	color: $input-color;
+	outline: 0;
+	padding: 2px 3px;
+	font-size: $font-size;
+	font-family: Arial, "Liberation Sans", FreeSans, sans-serif;
+	height: 2em;
+
+	// IE7
+	*padding-top: 2px;
+	*padding-bottom: 1px;
+	*height: auto; 
+	
+	&[disabled]{ 
+		color: $disabled-input-color;
+		border-color: $disabled-input-border-color;
+		background-color: $disabled-input-background-color; 
+	}
+	
+	&:focus, &:active{
+		color:$focus-input-color;
+		border-color:$focus-input-border-color;
+		background-color:$focus-input-background-color;
+	}
+}
+
+
+\:invalid {
+	// Suppress red glow that Firefox
+	// adds to form fields by default,
+	// even when user is still typing.
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none; 
+}
+
+button, input, select, textarea{
+	&:focus, &:active{
+		outline:none;
+		z-index:1;
+	}
+}
+
+input[type="file"], input[type="file"], input[type="radio"], 
+input[type="radio"], input[type="checkbox"], input[type="checkbox"]{ 
+	outline:none;
+}
+
+button, input, select, select option, select optgroup, textarea{
+	user-select:none; 
+	color: $input-color; 
+	cursor:default;
+}
+
+textarea, select[size], select[multiple]{
+  height: auto; 
+}
+
+// Tweaks for Safari + Chrome.
+@media (-webkit-min-device-pixel-ratio: 0) {
+	select {
+		background-repeat: no-repeat;
+		background-position: right center;
+		padding-right: 20px; 
+	}
+	select[size], select[multiple]{
+		background-image: none;
+		padding: 0; 
+	}
+}
+
+textarea {
+	min-height: 40px;
+	overflow: auto;
+	resize: vertical;
+	width: 100%; 
+}
+
+optgroup {
+	color: black;
+	font-style: normal;
+	font-weight: normal; 
+}

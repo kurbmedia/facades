@@ -1,6 +1,6 @@
 @mixin dropdown-list($left:0px, $top:100%, $position:'absolute'){
 	li{ position:relative; 
-		ol{ position:$position; top:$top; left:$left; display:none; }
+		ol{ position:unquote($position); top:$top; left:$left; display:none; }
 		ol li{ text-align:left;  }
 		&:hover ol{ display:block; }
 	}

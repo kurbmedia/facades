@@ -15,6 +15,10 @@ module Facades
         [:checkbox, :password, :radio, :select, :string, :textarea].collect{ |t| send(:"#{t}_input_types") }.flatten.compact
       end
       
+      def button_input_types
+        "input[type=submit], input[type=reset], button[type=submit]"
+      end
+      
       def checkbox_input_types
         "input[type=checkbox]"
       end
@@ -31,9 +35,11 @@ module Facades
       def select_input_types
         "select"
       end
-      
+
       def string_input_types
-        %w{email password text}.collect{ |t| "input[type=#{t}]" }        
+        %w{email password text number search tel time url datetime date datetime-local week month}.collect do |type| 
+          "input[type=#{type}]"
+        end
       end
       
       def textarea_input_types

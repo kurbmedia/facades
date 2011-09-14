@@ -33,8 +33,9 @@ module Facades
         link_attrs    = update_link_attrs(path, attrs)
         wrapper_attrs = link_attrs.delete(:wrapper)      
         child_link    = link_to(text, path, link_attrs)
-        wrapper === false ? child_link : content_tag(wrapper, child_link, wrapper_attrs)
-        
+        built = (wrapper === false ? child_link : content_tag(wrapper, child_link, wrapper_attrs))
+        built = built.html_safe if built.respond_to?(:html_safe)
+        built
       end
       alias :nav_link_to :nav_link
       
@@ -73,17 +74,21 @@ module Facades
       #     </li>
       #   </ol>
       # 
-      def nav(container = :ol, html_attrs = {}, &block)
+      def nav(container = :ol, html_attrs = {}, heading = nil, &block)
         
         wrapper_attrs = html_attrs.delete(:wrapper) || {}
         
-        if Facades.enable_html5
+        built = if Facades.enable_html5
+          inner = content_tag(container, capture(&block), wrapper_attrs)
+          inner = (content_tag(:h3, heading) << inner) unless heading.nil?
           content_tag(:nav, html_attrs) do
-            content_tag(container, capture(&block), wrapper_attrs)
+            inner
           end          
         else
           content_tag(container, capture(&block), html_attrs)
         end
+        built = built.html_safe if built.respond_to?(:html_safe)
+        built
         
       end
       

@@ -1,6 +1,8 @@
 @import "compass/typography/vertical_rhythm";
 @import "compass/utilities/general/clearfix";
 
+@warn "Use facades/typography/baseline. This module will be depreciated.";
+
 @mixin normal-text      { font-family: $font-family; color: $font-color; }
 @mixin fixed-width-text { font: 1em $fixed-font-family; line-height: 1.5; }
 
@@ -21,7 +23,7 @@
 	$scale: compact($scale);
 	@for $i from 1 through 6 {
 		$sizing: floor((nth($scale, $i) * $offset) - ($base / $offset));
-		h#{$i}{ @include adjust-font-size-to($sizing, 1); @include margin-trailer(1, $sizing); }
+		#{$i}{ @include adjust-font-size-to($sizing, 1); @include margin-trailer(1, $sizing); }
 	}
 	p{  @include adjust-font-size-to($font-size); @include margin-trailer(1, $font-size); }
 }

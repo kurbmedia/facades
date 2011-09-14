@@ -1,0 +1,7 @@
+// Misc color utilities
+// --------------------------------------------------------------
+
+// Takes a color and returns a white if the color is dark or a black if the color is light.
+@function color-contrast($color, $threshold: 30%){
+	@return if(lightness($color) < $threshold, #fff, #000);
+}

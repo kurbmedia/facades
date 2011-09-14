@@ -1,14 +1,13 @@
-@import 'compass/css3';
 @import 'facades/utilities';
-
-$button-border-radius:5px !default;
+@import 'compass/css3';
 
 @mixin button-base($radius: $button-border-radius){
 	@include inline-block;
 	text-align:center;
-	padding:0 1em;
 	@if $radius not false{
-		@include border-radius($radius);
+		-webkit-border-radius:$radius;
+		-moz-border-radius:$radius;
+		border-radius:$radius;
 	}
 }
 

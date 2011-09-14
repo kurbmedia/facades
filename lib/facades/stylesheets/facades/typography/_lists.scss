@@ -18,3 +18,17 @@
 @mixin inline-block-list($padding:false){
 	@include inline-list($padding);
 }
+
+// Remove list bullets for a particular list item
+@mixin no-bullet {
+	list-style-image : none;
+	list-style-type  : none;
+	margin-left      : 0px;
+}
+
+// Convert a list into "not" a list.. removing all bullets and padding.
+@mixin no-list {
+	list-style: none;
+	padding-left:0;
+	li { @include no-bullet; }
+}

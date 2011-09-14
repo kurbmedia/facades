@@ -1,56 +1,89 @@
 @import 'facades/setup';
 
-$em-size: $font-size * 1;
+$em-size: $font-size / 1em;
+$em-unit: 1em;
+$font-scale: 0 2 4 6 8;
 
-@mixin small-text{
-	/* 13px / 18px */
-	font-size: #{($font-size * 0.8125) / $em-size}em;
-	line-height: ($line-height * 0.75) / ($font-size * 0.8125) * 1em;
+
+@mixin font-size($size, $lines: lines-for-font-size($size)){
+	$fsize: if(unit($size) == "em", $size, $size / $font-size);
+	font-size: $fsize;
+	@include leading($lines, $fsize);
 }
 
-@mixin normal-text{
-	/* 16px / 24px */
-	font-size: #{$font-size / $em-size}em;
-	line-height: #{$line-height / $em-size}em; /* 24 */
+@mixin leading($lines:1, $size:1em, $add-margin: false){
+	line-height:rhythm($lines, $size);
+	@if $add-margin == true { 
+		@include margin-trailer($lines, $size);
+	}
 }
 
-@mixin large-text{
-	/* 26 / 36px */
-	font-size: #{26 / $em-size}em;
-	line-height: ($line-height * 1.5) / 26 * 1em;
+@function rhythm($lines, $size: $font-size){
+	$r-height: $em-unit * $lines * $line-height / $size;
+	$r-height: if( unit($r-height) == "px", $r-height / $em-size, $r-height);
+	@return $r-height;
 }
 
-@mixin huge-text{
-	/* 42px / 48px */
-	font-size: #{42 / $em-size}em;
-	line-height: ($line-height * 2) / 42 * 1em;
+@mixin margin-trailer($lines, $size: $font-size){
+	margin-bottom:rhythm($lines, $size);
 }
 
-@mixin massive-text{
-	/* 68px / 72px */
-	font-size: #{68 / $em-size}em;
-	line-height: ($line-height * 3) / 68 * 1em;
+
+@mixin margin-leader($lines, $size: $font-size){
+	margin-top:rhythm($lines, $size);
 }
 
-@mixin gigantic-text{
-	/* 110px / 120px */
-	font-size: #{110 / $em-size}em;
-	line-height: ($line-height * 5) / 110 * 1em;
+@mixin padding-leader($lines, $size: $font-size){
+	padding-top:rhythm($lines, $size);
 }
 
-body {
-	font-size: $font-size / 16 * 1em;
-	line-height: #{$line-height / $em-size}em;
+@mixin padding-trailer($lines, $size: $font-size){
+	padding-bottom:rhythm($lines, $size);
 }
 
-h1, h2{ 
-	@include large-text;
-	margin: (24/26*1em) 0 (36/26*1em);
+
+@function lines-for-font-size($size:$font-size) {
+	$rhythm-line-height:if(unit($line-height) == "px", $line-height / $em-size, $line-height);
+	$lines: ceil($size / $rhythm-line-height);
+	@return $lines;
 }
 
-h2{ font-weight:normal; }
+h1, h2, h3, h4, h5, h6, p, ol, ul{ 
+	-webkit-margin-before:0;
+	-webkit-margin-after:0;
+}
 
-h3{
-	@include normal-text;
-	margin: #{24/$em-size}em 0 #{24px/$em-size}em;
+h1{ 
+	@include font-size(2em, 1);	
+	@include margin-trailer(1, 2em);
+}
+
+h2{ 
+	@include font-size(1.75em, 1);
+	@include margin-trailer(1, 1.75em);
+}
+
+h3{ 
+	@include font-size(1.5em, 1); 
+	@include margin-trailer(1, 1.5em);
+}
+
+h4{ 
+	@include font-size(1.25em, 1); 
+	@include margin-trailer(1, 1.25em);
+}
+
+h5{ 
+	@include font-size(1em, 1); 
+	@include margin-trailer(1, 1em);
+}
+
+h6{ 
+	@include font-size(0.9em, 1); 
+	@include margin-trailer(1, 0.9em);
+}
+
+p, ul, ol{ 
+	@include font-size(1em, 1); 
+	@include margin-trailer(1, 1em);
 }
