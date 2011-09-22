@@ -1,4 +1,5 @@
 @import 'facades/utilities';
+@import 'facades/typography/lists';
 
 // Creates a column based list of fields within a form. 
 // Form elements should be marked up using ordered lists for semantic value.
@@ -6,6 +7,7 @@
 
 @mixin form-split-field-list{
 	@include pie-clearfix;
+	@include no-list;
 	
 	display:block; 
 	clear:both; 
@@ -16,6 +18,12 @@
 		vertical-align:middle; 
 		label, input[type=text], input[type=password],input[type=email]{ 
 			display:block; 
+		}
+		&.clear{ clear:both; }
+		&.buttons{ clear:both; padding:.25em 0px 0px 0px; }
+		&.inline label{ @include inline-block; }
+		&.multifield{
+			input, select{ @include inline-block; }
 		}
 		select{ margin:.75em 0px; }
 	}
@@ -28,9 +36,7 @@
 
 @mixin form-field-list{
 	
-	list-style-type:none; 
-	margin:0px; 
-	padding:0px; 
+	@include no-list; 
 	padding-right:10px;		
 	
 	li{ padding:.5em 0px;			

@@ -116,7 +116,7 @@ module Facades
           else raise 'Proc, Regexp or String required... passed #{matcher.class}.'
         end
         
-        if active
+        if active === true
           klasses  << on_class
           wklasses << on_class
         end

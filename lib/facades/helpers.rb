@@ -14,7 +14,6 @@ module Facades
       include Facades::Helpers::Layout
       include Facades::Helpers::Navigation
       include Facades::Helpers::Elements
-      include Facades::Helpers::Pagination
       include Facades::Helpers::Utility
       include Facades::Helpers::Builders
       include Facades::Helpers::Mobile
