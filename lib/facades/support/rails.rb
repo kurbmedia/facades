@@ -1,3 +1,5 @@
+require 'rails'
+
 # Stub engine to integrate asset pipeline.
 module Facades
   class Engine < Rails::Engine 

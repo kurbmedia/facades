@@ -14,6 +14,7 @@ module Facades
   
   module Builders
     autoload :Sprite, 'facades/builders/sprite'
+    autoload :Form, 'facades/builders/form'
   end
   
   # When enabled, HTML5 elements are used within helpers
