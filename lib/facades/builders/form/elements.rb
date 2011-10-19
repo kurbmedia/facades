@@ -5,7 +5,7 @@ module Facades::Builders
       
       included do
         # create overrides for custom rendering
-        [:email_field, :password_field, :text_field, :text_area, :url_field].each do |method|      
+        [:email_field, :password_field, :text_field, :text_area, :url_field, :select].each do |method|      
           class_eval <<-FUNC, __FILE__, __LINE__ + 1
         
             alias :_super_#{method} :#{method}

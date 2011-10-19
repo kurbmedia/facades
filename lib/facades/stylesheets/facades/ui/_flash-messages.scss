@@ -1,36 +1,7 @@
 //
 // Mixins for styling flash messages
 //
-// Default error text color, red refault
-$error-color: #bd132a !default;
-// Background color for error/alert messages, red default
-$error-bg-color: #fde0e4 !default;
-// Border color for error/alert messages, red default
-$error-border-color: #E41D38 !default;
-// Default success/notice color, green default
-$success-color:#264409 !default;
-// Background color for success/notice messages, green default
-$success-bg-color:#e6efc2 !default;
-// Background color for success/notice messages, green default
-$success-border-color:#c6d880 !default;
-// Default color for notice/warn messages, yellow default
-$notice-color:#514721 !default;
-// Background color for notice/warn messages, yellow default
-$notice-bg-color:#fff6bf !default;
-// Border color for notice/warn messages, yellow default
-$notice-border-color:#ffd324 !default;
-// Default color for informational messages, blue default
-$info-color:#205791 !default;
-// Background color for informational messages, blue default
-$info-bg-color:#d5edf8 !default;
-// Border color for informational messages, blue default
-$info-border-color:#92cae4 !default;
-// Class used for success messages
-$flash-success-class: 'success' !default;
-// Class used for notice messages
-$flash-notice-class: 'notice' !default;
-// Class used for error flash messages
-$flash-error-class: 'error' !default;
+
 
 @mixin flash-message{
 	@include flash-message-base;

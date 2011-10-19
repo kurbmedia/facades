@@ -36,6 +36,7 @@ $input-font-size: 			.95em !default;
 $input-color: 				$font-color !default;
 $input-border-color:		#bbbbbb !default;
 $input-background-color: 	white !default;
+$input-padding:             0.65em 0.35em !default;
 
 // Disabled state
 $disabled-input-color:			  #777 !default;
@@ -57,11 +58,34 @@ $button-border-color:#dddddd #bbbbbb #999999 !default;
 $button-padding: 0.5em 1em !default;
 $button-border-radius: 5px !default;
 
+$select-arrow-image:'/images/select_arrow.gif' !default;
+
 // Visual cues
 // -------------------------------------------------
 
+// Error colors, red by refault
 $error-color: 			 #bd132a !default;
 $error-background-color: #fde0e4 !default;
 $error-border-color: 	 #E41D38 !default;
+
+// Success colors, green by default
+$success-color:#264409 !default;
+$success-background-color:#e6efc2 !default;
+$success-border-color:#c6d880 !default;
+
+// Notice colors, yellow by default
+$notice-color:#514721 !default;
+$notice-background-color:#fff6bf !default;
+$notice-border-color:#ffd324 !default;
+
+// Standard info colors, blue by default
+$info-color:#205791 !default;
+$info-background-color:#d5edf8 !default;
+$info-border-color:#92cae4 !default;
+
+$invalid-input-border-color: $error-border-color !default;
+$invalid-input-background-color: $error-background-color !default;
+$invalid-input-color: $error-color !default;
+
 
 @import 'facades/utilities';
