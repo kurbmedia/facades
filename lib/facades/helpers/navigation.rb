@@ -107,12 +107,14 @@ module Facades
         klasses  ||= []
         wklasses ||= []
         
-        matcher = (proc || regex || request.path)
+        matcher = (proc || regex || request.path.to_s)
+        cpath   = request.path.to_s.sub("/","")
+        lpath   = path.to_s.sub("/","")
         
         active = case matcher
           when Proc then proc.call(path)
           when Regexp then request.path.match(regex)
-          when String then (request.path == path || request.path.match(/#{path}\/\w/im))
+          when String then (cpath == lpath || cpath.match(/#{lpath}\/\w/i))
           else raise 'Proc, Regexp or String required... passed #{matcher.class}.'
         end
         
@@ -123,9 +125,9 @@ module Facades
 
         attrs.merge!(:class => klasses.join(" ")) unless klasses.compact.empty?
         wrapper_attrs.merge!(:class => wklasses.join(" ")) unless wklasses.compact.empty?
-        
+
         attrs.merge!(:wrapper => wrapper_attrs)
-                
+        attrs
       end
             
     end
