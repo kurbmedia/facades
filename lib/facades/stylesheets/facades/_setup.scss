@@ -88,4 +88,10 @@ $invalid-input-background-color: $error-background-color !default;
 $invalid-input-color: $error-color !default;
 
 
+// Misc typography
+//-------------------------------------------------
+
+$horizontal-rule-color:#ccc !default;
+$horizontal-rule-size:1px !default;
+
 @import 'facades/utilities';

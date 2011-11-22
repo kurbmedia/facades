@@ -25,15 +25,25 @@ module Facades
       # @param [String] site_id The site ID provided by google analytics
       # @return [String] script tag
       # 
-      def google_analytics(site_id)
-        content_tag(:script) do
-          ["var _gaq=[['_setAccount','#{site_id}'],['_trackPageview'],['_trackPageLoadTime']];",
-           "(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;",
-           "g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';",
-           "s.parentNode.insertBefore(g,s)}(document,'script'));"].join("")
-        end
+      def google_analytics(site_id, &block)
+        return "" if defined?(Rails) && Rails.env != "production"        
+        additional = capture(&block) if block_given?
+        additional ||= ""
+        content_tag(:script) do          
+          %Q{
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', #{site_id}]);
+            _gaq.push(['_trackPageview']);
+            #{additional}
+            (function() {
+              var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+              ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        	}
+      	end.html_safe
       end
-      
+    	
       ##
       # 
       # Creates a page id to be used for identifying a page for CSS/design purposes. If a variable

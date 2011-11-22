@@ -1,25 +1,27 @@
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
-audio[controls], canvas, video { 
-	display: inline-block;
+html {
+	cursor: default;
+	font-size: 100%;
+	overflow-y: scroll;
+	-webkit-tap-highlight-color: transparent;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
 }
 
-
-html { 
-	font-size: 100%; 
-	overflow-y: scroll; 
-	-webkit-overflow-scrolling: touch; 
-	-webkit-tap-highlight-color: rgba(0,0,0,0); 
-	-webkit-text-size-adjust: 100%; 
-	-ms-text-size-adjust: 100%; 
-}
-
+body, form, input, button, select, textarea{ font-size: 100%; margin: 0; }
 body { margin: 0; font-size: 13px; line-height: 1.231; }
-body, button, input, select, textarea { font-family: sans-serif; color: #222; }
+
+a, a:active, a:hover{ outline: none; }
+a:focus{ outline: thin dotted; }
+
+
+/* =============================================================================
+   Selection
+   ========================================================================== */
 
 /* 
  * These selection declarations have to be separate
  * No text-shadow: twitter.com/miketaylr/status/12228805301
- * Also: hot pink!
  */
 
 ::-moz-selection { background: $selection-background-color; color: $selection-color; text-shadow: none; }
@@ -27,50 +29,85 @@ body, button, input, select, textarea { font-family: sans-serif; color: #222; }
 
 
 /* =============================================================================
-   Links
-   ========================================================================== */
-
-a { color: $link-color; }
-a:visited { color: $link-visited-color; }
-a:focus { outline: thin dotted; }
-
-/* Improve readability when focused and hovered in all browsers: people.opera.com/patrickl/experiments/keyboard/test */
-a:hover, a:active { outline:none; outline: 0; color:$link-hover-color; }
-
-
-/* =============================================================================
    Typography
    ========================================================================== */
 
+/*
+ * Corrects styling not present in IE6/7/8/9 S5 C10
+ */
+
+abbr { _border-bottom: expression(this.title ? '1px dotted' : 'none'); }
 abbr[title] { border-bottom: 1px dotted; }
 
-b, strong { font-weight: bold; }
+/*
+ * Corrects style set incorrectly as 'bolder' in FF3/4 S4/5 C10
+*/
 
-blockquote { margin: 1em 40px; }
+b, strong{ font-weight: bold; }
 
-dfn { font-style: italic; }
+/*
+ * Corrects styling not present in S5 C10
+ */
 
-hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
+dfn{ font-style: italic; }
 
-ins { background: #ff9; color: #000; text-decoration: none; }
+/*
+ * Corrects styling not present in IE6/7/8/9
+ */
 
-mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
+mark{ background: #FF0; color: #000; }
 
-/* Redeclare monospace font family: en.wikipedia.org/wiki/User:Davidgothberg/Test59 */
-pre, code, kbd, samp { font-family: $fixed-font-family, monospace; _font-family: 'courier new', monospace; font-size: 1em; }
+hr{ 
+	display: block; 
+	height: 1px; 
+	border: 0; 
+	border-top: $horizontal-rule-size solid $horizontal-rule-color; 
+	margin: 1em 0; 
+	padding: 0; 
+}
 
-/* Improve readability of pre-formatted text in all browsers */
-pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
 
-q { quotes: none; }
-q:before, q:after { content: ""; content: none; }
+/*
+ * Corrects font family displayed oddly in IE6 S5 C10
+ * en.wikipedia.org/wiki/User:Davidgothberg/Test59
+ */
+
+pre, code, kbd, samp{ font-family: $fixed-font-family; _font-family: 'courier new', monospace; font-size: 1em; }
+
+/*
+ * Improves readability of pre-formatted text in all browsers
+ */
+
+pre{ white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
+
+/*
+ * Addresses CSS quotes not supported in IE6/7
+ */
+
+q{ quotes: none; }
+
+/*
+ * Addresses quote property not supported in S4
+ */
+
+q:before, q:after{ content: ''; content: none; }
+
+/*
+ * Improves appearance in all browsers
+ */
+
+small, sub, sup{ font-size: 75%; }
+
+/*
+ * Improves appearance in all browsers
+ * gist.github.com/413930
+ */
+
+sub,sup { line-height: 0; position: relative; vertical-align: baseline; }
+sup{ top: -0.5em; }
+sub{ bottom: -0.25em; }
 
 small { font-size: 85%; }
-
-/* Position subscript and superscript content without affecting line-height: gist.github.com/413930 */
-sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
-sup { top: -0.5em; }
-sub { bottom: -0.25em; }
 
 
 /* =============================================================================
@@ -87,20 +124,43 @@ nav ul, nav ol { list-style: none; margin: 0; padding: 0; }
    ========================================================================== */
 
 /*
- * Improve image quality when scaled in IE7
- * code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/
+ * Corrects display not defined in IE6/7/8/9 & FF3
  */
 
-img { border: 0;  }
+
+audio { display: none; _display: expression(this.controls ? 'inline' : 'none'); *zoom: 1; }
+audio[controls] { display: inline-block; }
 
 /*
- * Correct overflow displayed oddly in IE9 
+ * 1. Improves readability when inside 'a' in all browsers
+ * 2. Improves visual appearance when scaled in IE7
+ *    code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/
+ */
+
+img {
+	border: 0; /* 1 */
+}
+
+/*
+ * Corrects overflow displayed oddly in IE9 
  */
 
 svg:not(:root) {
     overflow: hidden;
 }
 
+/* =============================================================================
+   Tables
+   ========================================================================== */
+
+/* 
+ * Improves visual appearance in all browsers
+ */
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
 
 /* =============================================================================
    Figures
@@ -168,14 +228,6 @@ button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
 
 /* Remove default vertical scrollbar in IE6/7/8/9 */
 textarea { overflow: auto; vertical-align: top; }
-
-
-/* =============================================================================
-   Tables
-   ========================================================================== */
-
-table { border-collapse: collapse; border-spacing: 0; }
-td { vertical-align: top; }
 
 /* =======================================================
    Print styles.

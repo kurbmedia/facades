@@ -42,9 +42,16 @@ module Facades
 end
 
 require 'facades/sass_ext'
-require 'compass'
-Compass::Frameworks.register('facades',
-  :stylesheets_directory => File.join(File.dirname(__FILE__), 'facades/stylesheets'),
-  :templates_directory   => File.join(File.dirname(__FILE__), 'facades/templates'))
+
+begin
+  require 'compass'
+rescue LoadError
+end
+
+if defined?(Compass)
+  Compass::Frameworks.register('facades',
+    :stylesheets_directory => File.join(File.dirname(__FILE__), 'facades/stylesheets'),
+    :templates_directory   => File.join(File.dirname(__FILE__), 'facades/templates'))
+end
 
 require 'facades/support/rails' if defined?(Rails)
