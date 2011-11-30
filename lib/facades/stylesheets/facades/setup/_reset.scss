@@ -9,10 +9,15 @@ html {
 }
 
 body, form, input, button, select, textarea{ font-size: 100%; margin: 0; }
-body { margin: 0; font-size: 13px; line-height: 1.231; }
+body { margin: 0; font-size: $font-size; line-height: $line-height; }
 
-a, a:active, a:hover{ outline: none; }
-a:focus{ outline: thin dotted; }
+a{ color:$link-color; 
+	&:active{ color:$link-active-color; }
+	&:hover{ color:$link-hover-color; }
+	&:visited{ color:$link-visited-color; }
+	&:active, &:hover{ outline:none; }
+	&:focus{ outline:none; }
+}
 
 
 /* =============================================================================

@@ -15,7 +15,7 @@ module Facades
       # Use the resource class's table_headings method first, options hash next
       # 
       def headings
-        return resource_class.table_attributes if resource_class.respond_to?(:table_headings)
+        return resource_class.table_attributes if resource_class.respond_to?(:table_attributes)
         [options[:headings]].flatten.compact
       end
       
