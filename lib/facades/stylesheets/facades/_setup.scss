@@ -17,7 +17,8 @@ $selection-color: 			 #ffffff !default;
 // Default font color and family
 // -------------------------------------------------
 $font-color: 		   #444 !default;
-$default-font-family: 'Helvetica Nueue', 'Helvetica', 'Arial', sans-serif !default;
+$font-family: 'Helvetica Nueue', 'Helvetica', 'Arial', sans-serif !default;
+$default-font-family: $font-family !default;
 $fixed-font-family:"andale mono", "lucida console", monospace !default;
 
 // Link colors
