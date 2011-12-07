@@ -24,6 +24,7 @@ $fixed-font-family:"andale mono", "lucida console", monospace !default;
 // Link colors
 // -------------------------------------------------
 $link-color: 		 #00e !default;
+$link-active-color:  lighten($link-color, 5%) !default;
 $link-hover-color:   lighten($link-color, 5%) !default;
 $link-visited-color: #551a8b !default;
 
