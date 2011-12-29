@@ -1,0 +1,164 @@
+/* Arfully Masterminded by ZURB */
+
+/* --------------------------------------------------
+	:: Grid
+	
+	This is the mobile-friendly, responsive grid that
+	lets Foundation work much of its magic.
+	
+	-------------------------------------------------- */
+
+$grid-width:		  980px !default;
+$_grid-column-widths: 4.3% 13% 21.68% 30.37% 39.1% 47.8% 56.5% 65.2% 73.9% 82.6% 91.3% 100%;
+$_grid-gutter-width:  4.4%;
+
+@mixin row{
+	width:100%;
+	max-width: $grid-width;
+	min-width: 727px;
+	margin:0 auto;
+	zoom:1;
+	
+	.row{
+		min-width:0;
+	}
+
+	&:before, &:after { content: ""; display: table; }
+	&:after { clear: both; }
+	zoom: 1;
+	
+	@media only screen and (max-width: 767px) {
+		min-width:0px;
+		width: 99%;
+	    min-width: 0;
+	    margin-left: 0;
+	    margin-right: 0;
+	}
+}
+
+@mixin container{
+	padding:0 20px;
+	margin:0 auto;
+	@media only screen and (max-width: 767px) {
+		padding:0;
+	}
+}
+
+@mixin column($num:1){
+	@if( $num < length($_grid-column-widths) ){
+		margin-left:$_grid-gutter-width;
+	}
+	float:left;
+	min-height:1px;
+	width:width($num);
+	
+	&.first, &:first-child{
+		margin-left:0;
+	}
+	
+	@media only screen and (max-width: 767px) {
+		width: width($num) / 3;
+	    margin-left: $_grid-gutter-width / 6;
+		margin-right: $_grid-gutter-width / 6;
+	}
+}
+
+@mixin offset($num:1){
+	$widths: 13.1% 21.8% 30.5% 39.2% 47.9% 56.6% 65.3% 74.0% 82.7% 91.4%;		
+	$childs: 8.7% 17.4% 26.1% 34.8% 43.5% 52.2% 60.9% 69.6% 78.3% 87% 95.7%;
+	margin-left:nth($widths, $num);
+	&:first-child{
+		margin-left:nth($childs, $num);
+	}
+	
+	@media only screen and (max-width: 767px) {
+		margin-left:0px;
+		&:first-child{ margin-left:0px; }
+	}
+}
+
+@mixin push($num:1){
+	position:relative;
+	left: (width($num) + $_grid-gutter-width);
+}
+
+@mixin pull($num:1){
+	position:relative;
+	right: (width($num) + $_grid-gutter-width);
+}
+
+@function width($cols:1){
+	@return nth($_grid-column-widths, $cols);
+}
+
+// Convert classes to top-level mixin
+	
+@mixin responsive-grid-classes{
+	.container { padding: 0 20px; }
+	
+	.row { width: 100%; max-width: 980px; min-width: 727px; margin: 0 auto; }
+	/* To fix the grid into a certain size, set max-width to width */
+	.row .row { min-width: 0; }
+	
+	.column, .columns { margin-left: 4.4%; float: left; min-height: 1px; position: relative; }
+	.column:first-child, .columns:first-child { margin-left: 0; }
+	
+	.row .one.columns 		{ width: 4.3%; }
+	.row .two.columns 		{ width: 13%; }
+	.row .three.columns 	{ width: 21.68%; }
+	.row .four.columns 		{ width: 30.37%; }
+	.row .five.columns 		{ width: 39.1%; }
+	.row .six.columns 		{ width: 47.8%; }
+	.row .seven.columns 	{ width: 56.5%; }
+	.row .eight.columns 	{ width: 65.2%; }
+	.row .nine.columns 		{ width: 73.9%; }
+	.row .ten.columns 		{ width: 82.6%; }
+	.row .eleven.columns 	{ width: 91.3%; }
+	.row .twelve.columns 	{ width: 100%; }
+	
+	.row .offset-by-one 	{ margin-left: 13.1%;  }
+	.row .offset-by-two 	{ margin-left: 21.8%;  }
+	.row .offset-by-three 	{ margin-left: 30.5%;  }
+	.row .offset-by-four 	{ margin-left: 39.2%;  }
+	.row .offset-by-five 	{ margin-left: 47.9%;  }
+	.row .offset-by-six 	{ margin-left: 56.6%;  }
+	.row .offset-by-seven 	{ margin-left: 65.3%;  }
+	.row .offset-by-eight 	{ margin-left: 74.0%;  }
+	.row .offset-by-nine 	{ margin-left: 82.7%;  }
+	.row .offset-by-ten 	{ margin-left: 91.4%;  }
+	
+	.row .centered { float: none; margin: 0 auto; }
+
+	.row .offset-by-one:first-child 	{ margin-left: 8.7%;  }
+	.row .offset-by-two:first-child 	{ margin-left: 17.4%;  }
+	.row .offset-by-three:first-child 	{ margin-left: 26.1%;  }
+	.row .offset-by-four:first-child 	{ margin-left: 34.8%;  }
+	.row .offset-by-five:first-child 	{ margin-left: 43.5%;  }
+	.row .offset-by-six:first-child 	{ margin-left: 52.2%;  }
+	.row .offset-by-seven:first-child 	{ margin-left: 60.9%;  }
+	.row .offset-by-eight:first-child 	{ margin-left: 69.6%;  }
+	.row .offset-by-nine:first-child 	{ margin-left: 78.3%;  }
+	.row .offset-by-ten:first-child 	{ margin-left: 87%;  }
+	.row .offset-by-eleven:first-child 	{ margin-left: 95.7%;  }
+	
+	/* Source Ordering */
+	.push-two 		{ left: 17.4% }
+	.push-three 	{ left: 26.1%; }
+	.push-four 		{ left: 34.8%; }
+	.push-five 		{ left: 43.5%; }
+	.push-six 		{ left: 52.2%; }
+	.push-seven 	{ left: 60.9%; }
+	.push-eight 	{ left: 69.6%; }
+	.push-nine 		{ left: 78.3%; }
+	.push-ten 		{ left: 87%; }
+	
+	.pull-two 		{ right: 17.4% }
+	.pull-three 	{ right: 26.1%; }
+	.pull-four 		{ right: 34.8%; }
+	.pull-five 		{ right: 43.5%; }
+	.pull-six 		{ right: 52.2%; }
+	.pull-seven 	{ right: 60.9%; }
+	.pull-eight 	{ right: 69.6%; }
+	.pull-nine 		{ right: 78.3%; }
+	.pull-ten 		{ right: 87%; }
+}
