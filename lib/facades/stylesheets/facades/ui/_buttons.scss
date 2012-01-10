@@ -1,10 +1,9 @@
 @import 'facades/utilities';
-@import 'compass/css3';
 
 @mixin button-base($radius: $button-border-radius){
 	@include inline-block;
 	text-align:center;
-	@if $radius not false{
+	@if $radius not false and $radius not none{
 		-webkit-border-radius:$radius;
 		-moz-border-radius:$radius;
 		border-radius:$radius;
@@ -12,7 +11,7 @@
 }
 
 @mixin simple-button($bg-color, $text-color:white, $radius: $button-border-radius){
-	@include button-base;
+	@include button-base;	
 	color:$text-color;
 	background-color:$bg-color;
 	border-top:1px solid lighten($bg-color, 4%);

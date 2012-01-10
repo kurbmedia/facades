@@ -23,10 +23,10 @@
 
 // Cross browser inline-block implementations
 @mixin inline-block {
-    &{ *display: inline; } // IE7
-  	display: -moz-inline-box;
+	&{ *display: inline; } // IE7
+	display: -moz-inline-box;
 	-moz-box-orient: vertical;
 	display: inline-block;
 	vertical-align: middle;
-    *vertical-align: auto; // IE7..again
+	*vertical-align: auto; // IE7..again
 }

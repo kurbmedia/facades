@@ -4,7 +4,7 @@ module Facades
   end
 end
 
-['form_elements', 'color'].each do |req|
+['form_elements', 'color', 'funcs'].each do |req|
   require "facades/sass_ext/#{req}"
   Sass::Script::Functions.send(:include, Facades::SassExt.const_get(req.camelize))
 end

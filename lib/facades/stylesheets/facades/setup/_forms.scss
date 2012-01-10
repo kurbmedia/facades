@@ -84,11 +84,18 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
 	-moz-background-clip: border-box;
 	-webkit-background-clip: border-box;
 	background-clip: border-box;
-	-webkit-border-radius: $button-border-radius;
-	-moz-border-radius: $button-border-radius;
-	border-radius: $button-border-radius;
-	border: 1px solid;
-	border-color: $button-border-color;
+	
+	@if $button-border-radius not 0px{
+		-webkit-border-radius: $button-border-radius;
+		-moz-border-radius: $button-border-radius;
+		border-radius: $button-border-radius;
+	}
+	
+	@if $button-border-color not none{
+		border: 1px solid;
+		border-color: $button-border-color;
+	}
+	
 	cursor: pointer;
 	color: $button-color;
 	font: bold 12px / 1.3 "Helvetica Neue", Arial, "Liberation Sans", FreeSans, sans-serif;
@@ -120,11 +127,18 @@ input[type="time"], input[type="url"], input[type="week"] {
 	-webkit-background-clip: padding;
 	background-clip: padding-box;
 	background-color: white;
-	border: 1px solid;
-	-webkit-border-radius: $input-border-radius;
-	-moz-border-radius: $input-border-radius;
-	border-radius: $input-border-radius;
-	border-color: $input-border-color;
+	
+	@if $input-border-color not none{
+		border: 1px solid;
+		border-color: $input-border-color;
+	}
+	
+	@if $input-border-radius not none and $input-border-radius not 0px{
+		-webkit-border-radius: $input-border-radius;
+		-moz-border-radius: $input-border-radius;
+		border-radius: $input-border-radius;
+	}
+	
 	color: $input-color;
 	outline: 0;
 	height:auto;
@@ -156,21 +170,21 @@ input[type="time"], input[type="url"], input[type="week"] {
 // Separate rule for IE, too.
 // Cannot stack with WebKit's.
 ::-webkit-input-placeholder {
-	color: #888888;
+	color: $input-placeholder-color;
 }
 
 input:-moz-placeholder, textarea:-moz-placeholder{
-	color: #888888; 
+	color: $input-placeholder-color;
 }
 
 input.placeholder-text, textarea.placeholder-text{
-	color: #888888; 
+	color: $input-placeholder-color;
 }
 
 :invalid {
-  // Suppress red glow that Firefox
-  // adds to form fields by default,
-  // even when user is still typing.
+	// Suppress red glow that Firefox
+	// adds to form fields by default,
+	// even when user is still typing.
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
 	box-shadow: none; 
@@ -203,11 +217,13 @@ select[size]{ padding:0.35em; }
 // Tweaks for Safari + Chrome.
 @media (-webkit-min-device-pixel-ratio: 0) {
 	select {
-		@if($select-arrow-image != false ){
+		
+		@if($select-arrow-image not false and $select-arrow-image not "" ){
 			background-image:url($select-arrow-image);
 			background-repeat: no-repeat;
 			background-position: 98% 50%;
 		}		
+		
 		padding-right: 20px; 
 	}
 	

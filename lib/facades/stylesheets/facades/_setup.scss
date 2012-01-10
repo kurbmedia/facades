@@ -39,6 +39,7 @@ $input-color: 				$font-color !default;
 $input-border-color:		#bbbbbb !default;
 $input-background-color: 	white !default;
 $input-padding:             0.65em 0.35em !default;
+$input-placeholder-color:   #888888;
 
 // Disabled state
 $disabled-input-color:			  #777 !default;
@@ -89,6 +90,10 @@ $invalid-input-border-color: $error-border-color !default;
 $invalid-input-background-color: $error-background-color !default;
 $invalid-input-color: $error-color !default;
 
+// Flash messages
+$flash-success-class: 'success';
+$flash-notice-class:  'notice';
+$flash-error-class:   'error';
 
 // Misc typography
 //-------------------------------------------------

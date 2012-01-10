@@ -25,6 +25,14 @@ module Facades
         mix(color, black, Sass::Script::Number.new(100 - dilution.value))
       end
       
+      # Converts a rgba to hex string, via compass ie_hex_str
+      def rgba_to_hex(color)
+        assert_type color, :Color
+        alpha = (color.alpha * 255).round
+        alphastr = alpha.to_s(16).rjust(2, '0')
+        Sass::Script::String.new("##{alphastr}#{color.send(:hex_str)[1..-1]}".upcase)
+      end
+      
     end
   end
 end

@@ -6,7 +6,10 @@ module Facades
     
     require 'facades/helpers'
     require 'facades/builders/sprite'
+    require 'sass'
+    require 'sass/rails'
     
+    config.sass.load_paths << File.expand_path("../../stylesheets", __FILE__)
     Facades::Builders::Sprite
     
     initializer 'facades assets' do |app|

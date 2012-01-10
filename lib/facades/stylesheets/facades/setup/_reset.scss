@@ -9,7 +9,7 @@ html {
 }
 
 body, form, input, button, select, textarea{ font-size: 100%; margin: 0; }
-body { margin: 0; font-size: $font-size; line-height: $line-height; }
+body { color:$font-color; margin: 0; font: $font-size $font-family; line-height: $line-height; }
 
 a{ color:$link-color; 
 	&:active{ color:$link-active-color; }
