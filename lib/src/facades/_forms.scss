@@ -1,0 +1,86 @@
+@import 'facades/config';
+@import 'facades/mixins';
+
+/* 
+	General form styles. By default this creates a 'stacked' forms
+	where the label placement is above each field. 
+	
+	Styles are setup for the use of ordered lists in laying out elements for
+	semantic value.
+	
+// ----------------------------------------------------------------------------------------
+
+
+/*
+	Form field lists
+	------------------------------------------------------------------
+	1. .option-group: used for containing multiple checkbox or radio tags
+	2. .select-group: similar to the option-group, but for selects
+	
+*/
+
+form{
+	margin-bottom: $line-height;
+	
+	ul.columns, ol.columns{
+		@include clearfix;		
+		li{ float:left;
+			&.clear{ 
+				clear:both; }
+		}
+	}
+	
+	ul, ol{
+		margin:0;
+		padding:0;
+		list-style:none;
+		
+		ul, ol{		
+			@include clearfix;
+			
+			li{ float:left;
+				&.clear{ 
+					clear:both; }			
+			}
+		}
+		
+	}
+	
+}
+
+fieldset legend{
+	display: block;
+	margin-bottom: $line-height * 1.5;
+	font-size: $font-size * 1.5;
+	line-height: $line-height * 2;
+	-webkit-margin-collapse: separate;
+}
+
+input[type=button],
+input[type=reset],
+input[type=submit] {
+	width: auto;
+	height: auto;
+}
+
+li.option-group, fieldset.option-group{
+	input[type=checkbox], 
+	input[type=radio]{
+		display:inline-block;
+		*display:inline;
+		vertical-align:middle;		
+	}
+}
+
+li.select-group, fieldset.select-group{
+	select{
+		display:inline-block;
+		*display:inline;
+		vertical-align:middle;
+	}
+	
+	select[size]{ 
+		vertical-align:top;
+	}
+}
+

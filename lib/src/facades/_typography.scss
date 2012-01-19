@@ -1,0 +1,184 @@
+@import 'facades/config';
+@import 'facades/mixins';
+
+// 
+// Global typography styles for headings, paragraphs etc.
+// ----------------------------------------------------------------------------------------
+
+/*
+	Headings
+	------------------------------------
+	1. Fixes spacing and optimizes appearance
+	2. Sexier rendering in webkit and ios/android
+	
+*/
+
+*{
+	-webkit-margin-before: 0px;
+	-webkit-margin-after: 0px;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+}
+
+body{ 
+	font-family: $font-family;
+	font-size: $font-size;
+	line-height: $line-height;
+}
+
+h1, h2, h3, h4, h5, h6 {	
+	margin:0;
+	font-weight: bold;	
+	text-rendering: optimizelegibility; // 1
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+
+h1 {
+	@include font-size(30px, 2);
+	&.headline{
+		@include leading(1, 30px);
+		@include margins(1, 30px);
+	}
+	small{
+		font-size:18px;
+	}
+}
+
+h2 {
+	@include font-size(24px);
+	@include margins(.5, 24px);
+	&.headline{
+		@include margins(1, 24px);
+	}
+	small{
+		@include font-size(18px);
+	}
+}
+
+h3 {
+	@include font-size(18px);
+	@include margins(.5, 18px);
+	&.headline{
+		@include margins(.5, 18px);
+	}
+	small{
+		@include font-size(14px);
+	}
+}
+
+
+h4 {
+	@include font-size(14px);
+	@include margins(.5, 14px);
+	small{
+		@include font-size(12px);
+	}
+}
+
+h5 {
+	@include font-size(12px);
+}
+
+h6 {
+	@include font-size(11px);
+	text-transform:uppercase;
+}
+
+
+/*
+	Headings
+	------------------------------------
+*/
+
+p {
+	@include font-size($font-size);
+	@include margins(0 1, $font-size);
+}
+
+
+/*
+	Lists
+	------------------------------------
+*/
+
+ul, ol {
+	@include font-size($font-size);
+	@include margins(.5, $font-size);
+	margin-left: 1.6em;
+	padding:0;
+	
+	&.block{
+		margin-left:0;
+		list-style:none;
+	}
+	
+	ul, ol{
+		margin-bottom: $line-height/2;
+		margin-top: $line-height/2;
+	}
+	
+}
+
+ul {
+	list-style: disc;
+}
+
+ol {
+	list-style: decimal;
+}
+
+li {
+	line-height: $line-height * 1.15;
+}
+
+dl{
+	dt{ 
+		font-weight:bold; 
+	}
+	
+	dd{ 
+		margin:0 0 $line-height/2 $line-height/2; 
+	}
+}
+
+/*
+	Misc items.
+	------------------------------------
+*/
+
+hr {
+	margin: $line-height 0;
+	border: 0;
+	border-top: 1px solid $horizontal-rule-color;
+	border-bottom: 1px solid #fff;
+}
+
+address {
+	display: block;
+	margin-bottom: $line-height;
+	line-height: $line-height;
+}
+
+pre {
+	padding: 0 3px 2px;
+}
+
+code {
+	padding: 1px 3px;
+}
+
+pre {
+	display: block;
+	padding: ($line-height - 1) / 2;
+	margin: 0 0 $line-height / 2;
+	font-size: 12px;
+	line-height: $line-height;
+	white-space: pre;
+	white-space: pre-wrap;
+	word-break: break-all;
+
+	code {
+		padding: 0;
+		background-color: transparent;
+	}
+}

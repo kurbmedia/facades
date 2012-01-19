@@ -1,0 +1,64 @@
+
+// Table action
+// ----------------------------------------
+table {
+	width: 100%;
+	margin-bottom: $line-height;
+}
+
+th, td {
+	padding:.5em .4em;
+	line-height: $line-height;
+	text-align: left;
+	border-top: 1px solid $table-border-color;
+}
+
+th {
+	font-weight: bold;
+	vertical-align: bottom;
+}
+
+td {
+	vertical-align: top;
+}
+
+thead:first-child tr th,
+thead:first-child tr td {
+	border-top: 0;
+}
+
+tbody + tbody {
+	border-top: 2px solid $table-border-color;
+}
+
+
+// Bordered tables
+// --------------------------------
+
+table.bordered {
+	border: 1px solid $table-border-color;
+	border-collapse: separate;
+	th + th, td + td, th + td, td + th {
+		border-left: 1px solid $table-border-color;
+	}
+	
+	thead:first-child tr:first-child th,
+	tbody:first-child tr:first-child td {
+		border-top: 0;
+	}
+	
+}
+
+
+// Striped tables
+// --------------------------------
+
+
+table.striped{
+	tbody {
+		tr:nth-child(odd) td,
+		tr:nth-child(odd) th {
+			background-color: $table-stripe-color;
+		}
+	}
+}

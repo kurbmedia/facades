@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Brent Kirby"]
   s.email       = ["brent@kurbmedia.com"]
   s.homepage    = "https://github.com/kurbmedia/facades"
-  s.summary     = %q{Front-end development awesome-ness}
-  s.description = %q{Facades is a front-end development framework which supplies a few helpers, stylesheets and sass extensions for easier front-end development.}
+  s.summary     = %q{Front-end development awesome-ness.}
+  s.description = %q{Facades is a collection of front-end patterns and libraries designed to speed up development of web sites and applications.}
 
   s.rubyforge_project = "facades"
 
