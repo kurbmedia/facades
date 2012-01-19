@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.email       = ["brent@kurbmedia.com"]
   s.homepage    = "https://github.com/kurbmedia/facades"
   s.summary     = %q{Front-end development awesome-ness}
-  s.description = %q{Facades is a front-end development framework which takes }
+  s.description = %q{Facades is a front-end development framework which supplies a few helpers, stylesheets and sass extensions for easier front-end development.}
 
   s.rubyforge_project = "facades"
 

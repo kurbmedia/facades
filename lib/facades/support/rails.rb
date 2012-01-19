@@ -12,6 +12,10 @@ module Facades
     config.sass.load_paths << File.expand_path("../../stylesheets", __FILE__)
     Facades::Builders::Sprite
     
+    ActiveSupport.on_load(:action_controller) do
+      include Facades::Helpers::MobileController
+    end
+    
     initializer 'facades assets' do |app|
       app.config.assets.instance_eval do
         register_mime_type 'image/png', '.png'
