@@ -3,11 +3,23 @@
 // ----------------------------------------------------------------------------------------
 
 $font-size: 13px 		!default;
-$line-height: 18px 	!default;
+$line-height: 20px 	!default;
 
 $font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 
 $horizontal-rule-color: #e5e5e5 !default;
 
 $table-border-color: #ddd !default;
-$table-stripe-color: #f9f9f9 !default;
+$table-stripe-color: #f5f5f5 !default;
+
+
+
+// Global funcs and mixins
+// ----------------------------------------------------------------------------------------
+
+@mixin prefixed($prop, $value, $prefixes: -webkit -moz -o -ms official){
+	@each $prefix in $prefixes{
+		$prefix: if($prefix == official, '', "#{$prefix}-");
+		#{unquote($prefix)}#{$prop}: $value;
+	}
+}

@@ -22,7 +22,7 @@
 
 body{ 
 	font-family: $font-family;
-	font-size: $font-size;
+	font-size: 100% * $font-size / 16px;
 	line-height: $line-height;
 }
 
@@ -102,8 +102,9 @@ p {
 */
 
 ul, ol {
-	@include font-size($font-size);
-	@include margins(.5, $font-size);
+	@include font-size($font-size, 1);
+	@include margins(0 1, $font-size);
+	
 	margin-left: 1.6em;
 	padding:0;
 	
@@ -113,8 +114,7 @@ ul, ol {
 	}
 	
 	ul, ol{
-		margin-bottom: $line-height/2;
-		margin-top: $line-height/2;
+		@include margins(.5, $font-size);
 	}
 	
 }
@@ -128,7 +128,7 @@ ol {
 }
 
 li {
-	line-height: $line-height * 1.15;
+	line-height: $line-height;
 }
 
 dl{
@@ -137,7 +137,7 @@ dl{
 	}
 	
 	dd{ 
-		margin:0 0 $line-height/2 $line-height/2; 
+		margin:rhythm(.5) 0 rhythm(.5) rhythm(.5); 
 	}
 }
 
@@ -147,10 +147,17 @@ dl{
 */
 
 hr {
-	margin: $line-height 0;
 	border: 0;
+	line-height:$line-height;
+	margin-bottom:.3em;
+	overflow:hidden;
+	height:1.25em;
+	@include box-sizing(content-box);
+	position:relative;
+	padding:0;
+	display:block;
 	border-top: 1px solid $horizontal-rule-color;
-	border-bottom: 1px solid #fff;
+	border-bottom:1px solid rgba(white,0);
 }
 
 address {

@@ -1,24 +1,32 @@
+@import 'facades/config';
+@import 'facades/mixins/rhythm';
+@import 'facades/mixins/layout';
 
 // Table action
 // ----------------------------------------
 table {
 	width: 100%;
-	margin-bottom: $line-height;
+	border-collapse: separate;
+	margin-bottom: rhythm(1);
 }
 
-th, td {
-	padding:.5em .4em;
+th, td {	
 	line-height: $line-height;
 	text-align: left;
 	border-top: 1px solid $table-border-color;
+	@include box-sizing(border-box);
 }
 
+tr, tbody{ @include box-sizing(border-box); }
+
 th {
+	padding:.77em rhythm(.4, $font-size) .78em;
 	font-weight: bold;
 	vertical-align: bottom;
 }
 
 td {
+	padding:.77em rhythm(.4, $font-size) .75em;
 	vertical-align: top;
 }
 
@@ -35,13 +43,16 @@ tbody + tbody {
 // Bordered tables
 // --------------------------------
 
-table.bordered {
-	border: 1px solid $table-border-color;
-	border-collapse: separate;
+@mixin bordered-table{
+	border: 1px solid $table-border-color;	
+	
 	th + th, td + td, th + td, td + th {
 		border-left: 1px solid $table-border-color;
 	}
 	
+	th{
+		padding:.77em rhythm(.4, $font-size) .75em;
+	}
 	thead:first-child tr:first-child th,
 	tbody:first-child tr:first-child td {
 		border-top: 0;
@@ -54,7 +65,7 @@ table.bordered {
 // --------------------------------
 
 
-table.striped{
+@mixin striped-table{
 	tbody {
 		tr:nth-child(odd) td,
 		tr:nth-child(odd) th {

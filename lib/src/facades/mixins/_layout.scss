@@ -1,0 +1,4 @@
+@mixin box-sizing($sizing) {
+  $sizing: unquote($sizing);
+  @include prefixed(box-sizing, $sizing, -moz -webkit official);
+}

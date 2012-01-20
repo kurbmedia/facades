@@ -1,4 +1,6 @@
 @import 'facades/config';
+@import 'facades/mixins/rhythm';
+@import 'facades/mixins/layout';
 
 // Clearing floats
 
@@ -14,26 +16,5 @@
 	&:after {
 		clear: both;
 	}
-	
-}
-
-
-@mixin font-size($size: $font-size, $lines: 1){
-	font-size: $size;
-	@include leading($lines, $size);
-}
-
-@mixin leading($lines: 1, $size: $font-size){
-	line-height: ( $line-height / $size * $lines) * 1em;
-}
-
-@mixin margins($lines: 1, $size: $font-size){
-	@if type-of($lines) == list{
-		margin-top: ($line-height / $size * nth($lines, 1)) * 1em;
-		margin-bottom: ($line-height / $size * nth($lines, 2)) * 1em; }
-	@else{
-		margin-top:($line-height / $size * $lines) * 1em;
-		margin-bottom:($line-height / $size * $lines) * 1em; }
-	
 	
 }
