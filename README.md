@@ -36,17 +36,29 @@ grounds for which to expand upon. Common colors, sizes and line-heights are full
 The more common options you probably want to configure are:
 
 `$font-color`: The body/default font color.
+
 `$font-size`: The base font size, also used when calculating vertical rhythm
+
 `$line-height`: The base line-height, combined with `$font-size` establishes a baseline and sets up the vertical-rhythm
+
 `$font-family`: The base font-family
+
 `$notice-color`: The color used for .notice alerts labels, blue by default
+
 `$success-color`: The color used for .success labels and alerts, green by default
+
 `$error-color`: The color used for :invalid fields, .error labels and alerts, red by default
+
 `$warning-color`: The color used for .warning labels and alerts, yellow by default
+
 `$input-border-color`: The default color used for form elements, grey by default.
+
 `$input-focus-color`: The font color used when an input is focused, defaults to `$font-color`
+
 `$input-focus-border-color`: The border color used for inputs when in a :focus state. Defaults to `$notice-color`
+
 `$input-error-color`: The font color used for inputs in an :invalid or .error state. Defaults to red.
+
 `$input-error-border-color`: The border color used for inputs in an :invalid or .error state. Defaults to `$error-color`.
 
 Contributing
