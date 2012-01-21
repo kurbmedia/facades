@@ -1,0 +1,31 @@
+// 
+// Global styles import. Includes all base styles and
+// formatting, and sets up default classes.
+// ----------------------------------------------------------------------------------------
+
+@import 'facades/config';
+@import 'facades/mixins';
+@import 'facades/setup';
+@import 'facades/typography';
+@import 'facades/typography/tables';
+@import 'facades/forms';
+@import 'facades/patterns/labels';
+@import 'facades/patterns/notifications';
+@import 'facades/patterns/pagination';
+@import 'facades/patterns/tabs';
+
+.label{
+	@include label;
+}
+
+.alert{
+	@include alert;
+}
+
+table.bordered{
+	@include bordered-table;
+}
+
+table.striped{
+	@include striped-table;
+}
