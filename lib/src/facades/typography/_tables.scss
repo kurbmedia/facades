@@ -11,7 +11,8 @@ table {
 }
 
 th, td {	
-	line-height: $line-height;
+  @include leading(1);
+	border-spacing:0;
 	text-align: left;
 	border-top: 1px solid $table-border-color;
 	@include box-sizing(border-box);
@@ -20,13 +21,13 @@ th, td {
 tr, tbody{ @include box-sizing(border-box); }
 
 th {
-	padding:.77em rhythm(.4, $font-size) .78em;
+	padding:border-rhythm(1px, .5) rhythm(.4, $font-size) rhythm(.5);
 	font-weight: bold;
 	vertical-align: bottom;
 }
 
 td {
-	padding:.77em rhythm(.4, $font-size) .75em;
+	padding:border-rhythm(1px, .5) rhythm(.4, $font-size) rhythm(.5);
 	vertical-align: top;
 }
 
@@ -37,6 +38,7 @@ thead:first-child tr td {
 
 tbody + tbody {
 	border-top: 2px solid $table-border-color;
+	@include box-sizing(border-box);
 }
 
 
@@ -44,15 +46,14 @@ tbody + tbody {
 // --------------------------------
 
 @mixin bordered-table{
+	
+	margin-bottom: border-rhythm(2px, 1);
 	border: 1px solid $table-border-color;	
 	
 	th + th, td + td, th + td, td + th {
 		border-left: 1px solid $table-border-color;
 	}
 	
-	th{
-		padding:.77em rhythm(.4, $font-size) .75em;
-	}
 	thead:first-child tr:first-child th,
 	tbody:first-child tr:first-child td {
 		border-top: 0;

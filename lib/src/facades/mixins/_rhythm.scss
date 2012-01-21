@@ -8,14 +8,29 @@
 }
 
 @mixin margins($lines: 1, $size: $font-size){
-	@if type-of($lines) == list{
-		margin-top: ($line-height / $size * nth($lines, 1)) * 1em;
-		margin-bottom: ($line-height / $size * nth($lines, 2)) * 1em; }
-	@else{
-		margin-top: ($line-height / $size * $lines) * 1em;
-		margin-bottom:($line-height / $size * $lines) * 1em; }	
+	@include spacing(margin, $lines, $size);
 }
 
-@function rhythm($lines, $size: $font-size, $leading: $line-height){
-	@return ($leading / $size * $lines) * 1em;
+@mixin padding($lines: 1, $size: $font-size){
+	@include spacing(padding, $lines, $size);
+}
+
+
+@mixin spacing($type: margin, $lines: 1, $size: $font-size){
+	$type:unquote($type);
+	@if type-of($lines) == list{
+		#{$type}-top: rhythm(nth($lines, 1), $size);
+		#{$type}-bottom: rhythm(nth($lines, 2), $size); }
+	@else{
+		#{$type}-top: rhythm($lines, $size);
+		#{$type}-bottom: rhythm($lines, $size); }
+}
+
+@function rhythm($lines, $size: $font-size, $leading: $line-height){	
+	@return 1em * $lines * ($leading / $size);
+}
+
+@function border-rhythm($width: 1px, $lines:1, $size: $font-size, $leading: $line-height){
+	$unit: 1em;
+	@return $unit / $size * ($lines * $leading - $width);
 }

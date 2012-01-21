@@ -20,10 +20,15 @@
 	-webkit-margin-end: 0px;
 }
 
+
 body{ 
-	font-family: $font-family;
-	font-size: 100% * $font-size / 16px;
-	line-height: $line-height;
+	font-family: $font-family;	
+	line-height: $font-size / (16px / 100%);
+	line-height: $font-size * 1 * $line-height / $font-size;
+}
+
+html>body {
+  font-size: $font-size;
 }
 
 h1, h2, h3, h4, h5, h6 {	
@@ -91,7 +96,8 @@ h6 {
 */
 
 p {
-	@include font-size($font-size);
+	font-size:$font-size;
+	line-height:$line-height;
 	@include margins(0 1, $font-size);
 }
 
@@ -104,7 +110,7 @@ p {
 ul, ol {
 	@include font-size($font-size, 1);
 	@include margins(0 1, $font-size);
-	
+	line-height:1;
 	margin-left: 1.6em;
 	padding:0;
 	
@@ -119,6 +125,8 @@ ul, ol {
 	
 }
 
+
+
 ul {
 	list-style: disc;
 }
@@ -128,7 +136,12 @@ ol {
 }
 
 li {
-	line-height: $line-height;
+	@include leading(1);
+}
+
+// for some reason older ie makes list items slightly smaller?
+.lt-ie9 li{
+	@include leading(1.01);
 }
 
 dl{
@@ -158,6 +171,10 @@ hr {
 	display:block;
 	border-top: 1px solid $horizontal-rule-color;
 	border-bottom:1px solid rgba(white,0);
+}
+
+html.lt-ie9{
+	hr{ margin-bottom:.4em; }
 }
 
 address {

@@ -4,6 +4,8 @@ require 'facades/version'
 module Facades
 end
 
+require 'facades/sass_extensions'
+
 if defined?(Rails)
   require 'facades/support/rails'
 end

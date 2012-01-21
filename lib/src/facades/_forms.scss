@@ -20,7 +20,7 @@
 */
 
 form{
-	margin-bottom: $line-height;
+	@include margins(0 1);
 	
 	ul.columns, ol.columns{
 		@include clearfix;		
@@ -28,6 +28,10 @@ form{
 			&.clear{ 
 				clear:both; }
 		}
+	}
+	
+	li{ 
+		@include padding(0 1);
 	}
 	
 	ul, ol{
@@ -48,6 +52,12 @@ form{
 	
 }
 
+label{ 
+	display:block; 
+	@include leading(1);
+	font-weight:bold;
+}
+
 fieldset legend{
 	display: block;
 	margin-bottom: $line-height * 1.5;
@@ -56,27 +66,54 @@ fieldset legend{
 	-webkit-margin-collapse: separate;
 }
 
-input[type=button],
-input[type=reset],
-input[type=submit] {
+#{input-types(all)}, textarea{
+	&:focus{ 
+		outline:none; 
+	}
+}
+
+#{input-types(button)}{
 	width: auto;
 	height: auto;
 }
 
+#{input-types(text)},
+select{
+	border-style:solid;
+	border-width:1px;
+	border-color:$input-border-color;
+	outline:none;
+	&:focus{
+		border-color:$input-focus-border-color;
+	}
+	
+}
+
+#{input-types(text)}{
+	margin:border-rhythm(1px, .25) 0;
+	padding:rhythm(.25) .25em;
+	@include leading(1);	
+}
+
+select{ 
+	height:rhythm(1.2);
+	margin-top:border-rhythm(1px, .4);
+	margin-bottom:border-rhythm(1px, .5);
+	
+	option{
+		padding-right:32px;
+	}
+}
+
 li.option-group, fieldset.option-group{
-	input[type=checkbox], 
-	input[type=radio]{
-		display:inline-block;
-		*display:inline;
-		vertical-align:middle;		
+	#{input-types(boolean)}{
+		@include inline-block;	
 	}
 }
 
 li.select-group, fieldset.select-group{
 	select{
-		display:inline-block;
-		*display:inline;
-		vertical-align:middle;
+		@include inline-block;
 	}
 	
 	select[size]{ 

@@ -1,6 +1,7 @@
 @import 'facades/config';
 @import 'facades/mixins/rhythm';
 @import 'facades/mixins/layout';
+@import 'facades/mixins/design';
 
 // Clearing floats
 
@@ -17,4 +18,11 @@
 		clear: both;
 	}
 	
+}
+
+
+@mixin opacity($opacity: 100) {
+	filter:("alpha(opacity=%d)", $opacity);
+	-moz-opacity: $opacity / 100;
+	opacity: $opacity / 100;
 }

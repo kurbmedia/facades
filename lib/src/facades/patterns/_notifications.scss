@@ -1,0 +1,64 @@
+@import 'facades/config';
+@import 'facades/mixins';
+
+@mixin alert($with-color: true){
+	
+	@include margins(1);
+	padding:border-rhythm(1px, .5) rhythm(.5);
+	@include leading(1);
+	border-width: 1px;
+	border-style: solid;
+	@include border-radius(4px);
+	
+	@if $with-color{
+		background:#eee;
+		border-color:#dedede;
+		border-color:darken(#eee, 5%);
+		text-shadow:rgba(0,0,0,.1) 1px 1px 0px;		
+		
+		&.notice{
+			background:$notice-color;
+			border-color:darken($notice-color, 5%);
+			color:white;
+		}
+		
+		&.success{
+			background:$success-color;
+			border-color:darken($success-color, 5%);	
+			color:white;
+		}
+		
+		&.error{
+			background:$error-color;
+			border-color:darken($error-color, 5%);
+			color:white;
+		}
+		
+		&.warning{
+			background:$warning-color;
+			border-color:darken($warning-color, 5%);
+			color:$font-color;
+		}
+		
+	}
+	
+	.close {
+		text-transform:lowercase;
+		font-family: Arial, sans-serif;
+		float: right;
+		font-size:$font-size + 4px;
+		font-weight: bold;
+		display:block;
+		color: #111;
+		text-shadow:rgba(255,255,255,1) 0 1px 0;
+		@include opacity(20);
+
+		&:hover {
+			color: #333;
+			text-decoration: none;
+			@include opacity(40);
+			cursor: pointer;
+		}
+		
+	}
+}

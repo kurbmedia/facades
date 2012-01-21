@@ -2,10 +2,19 @@
 // Global configuration variables
 // ----------------------------------------------------------------------------------------
 
+$font-color: #222		!default;
 $font-size: 13px 		!default;
 $line-height: 20px 	!default;
 
-$font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family: 			"Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$fixed-font-family: "Monaco", 'Courier New', monospace !default;
+$serif-font-family: "Georgia", "Times", "Times New Roman", serif !default;
+
+
+
+// 
+// General colors
+// --------------------------
 
 $horizontal-rule-color: #e5e5e5 !default;
 
@@ -13,9 +22,30 @@ $table-border-color: #ddd !default;
 $table-stripe-color: #f5f5f5 !default;
 
 
+// 
+// Notification colors
+// --------------------------
 
-// Global funcs and mixins
+$notice-color: 	#339BB9 !default;
+$success-color: #57A957 !default;
+$error-color:		#C43C35 !default;
+$warning-color: #EED74F !default;
+
+// 
+// Form and input colors
+// --------------------------
+
+$input-border-color: 				#ccc !default;
+$input-focus-color:					$font-color !default;
+$input-focus-border-color:  $notice-color !default;
+$input-error-color:					$error-color !default;
+$input-error-border-color:  $error-color !default;
+
+// Global functions and mixins
 // ----------------------------------------------------------------------------------------
+
+// Adds vendor prefixes to any passed property, and
+// sets the value. 
 
 @mixin prefixed($prop, $value, $prefixes: -webkit -moz -o -ms official){
 	@each $prefix in $prefixes{
