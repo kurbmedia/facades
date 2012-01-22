@@ -1,0 +1,8 @@
+/* Facades was written by kurb media llc, a web design and development firm in Richmond, VA */
+/* kurbmedia.com */
+/* humanstxt.org */
+
+/* SITE */
+  Standards: HTML5, CSS3
+  Components: jQuery
+  Software: Ruby, Compass, SASS, TextMate, Git

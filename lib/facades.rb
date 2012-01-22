@@ -2,6 +2,8 @@ require 'active_support/all'
 require 'facades/version'
 
 module Facades
+  autoload :Helpers,  'facades/helpers'
+  autoload :Patterns, 'facades/patterns'
 end
 
 require 'facades/sass_extensions'

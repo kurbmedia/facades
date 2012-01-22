@@ -21,4 +21,8 @@ Gem::Specification.new do |s|
   s.add_dependency('sass', ['~> 3.1'])
   s.add_dependency('compass', ['>= 0.11.7'])
   
+  s.add_development_dependency('combustion', '~> 0.3.1')
+  s.add_development_dependency("rspec", ">= 2.7.0")
+  s.add_development_dependency("rspec-rails", ">= 2.7.0")
+  
 end
