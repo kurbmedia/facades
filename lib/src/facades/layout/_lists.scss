@@ -1,0 +1,32 @@
+// used as a base for inline-list style navigations
+@mixin inline-list{
+	white-space:nowrap;
+	list-style:none;
+	display:block;
+	
+	li{
+		@include inline-block;
+		white-space:normal;
+	}
+	
+	li a{ 
+		display:block;
+	}
+	
+}
+
+// used as a base for floated-list style navigations
+@mixin floated-list{
+	list-style:none;
+	display:block;
+	
+	li{
+		display:block;
+		float:left;
+	}
+	
+	li a{ 
+		display:block;
+	}
+	
+}

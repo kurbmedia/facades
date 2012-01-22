@@ -4,11 +4,13 @@
 @mixin alert($with-color: true){
 	
 	@include margins(1);
-	padding:border-rhythm(1px, .5) rhythm(.5);
+	padding:border-rhythm(1px, .5) rhythm(1.25);
+	padding-left:rhythm(1);
 	@include leading(1);
 	border-width: 1px;
 	border-style: solid;
 	@include border-radius(4px);
+	position:relative;
 	
 	@if $with-color{
 		background:#eee;
@@ -17,25 +19,25 @@
 		text-shadow:rgba(0,0,0,.1) 1px 1px 0px;		
 		
 		&.notice{
-			background:$notice-color;
+			@include background-image(linear-gradient(darken($notice-color, 3%) 0%, $notice-color 100%));
 			border-color:darken($notice-color, 5%);
 			color:white;
 		}
 		
 		&.success{
-			background:$success-color;
+			@include background-image(linear-gradient(darken($success-color, 3%) 0%, $success-color 100%));
 			border-color:darken($success-color, 5%);	
 			color:white;
 		}
 		
 		&.error{
-			background:$error-color;
+			@include background-image(linear-gradient(darken($error-color, 3%) 0%, $error-color 100%));
 			border-color:darken($error-color, 5%);
 			color:white;
 		}
 		
 		&.warning{
-			background:$warning-color;
+			@include background-image(linear-gradient(top, darken($warning-color, 3%) 0%, $warning-color 100%));
 			border-color:darken($warning-color, 5%);
 			color:$font-color;
 		}
@@ -49,6 +51,11 @@
 		font-size:$font-size + 4px;
 		font-weight: bold;
 		display:block;
+		position:absolute;
+		top:50%;
+		right:.5em;
+		height: $font-size + 4px;
+		margin-top:-(ceil(($font-size + 4px) / 2));
 		color: #111;
 		text-shadow:rgba(255,255,255,1) 0 1px 0;
 		@include opacity(20);

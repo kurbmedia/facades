@@ -45,8 +45,8 @@ body, button, input, select, textarea { font-family: sans-serif; color: #222; }
  * Also: hot pink! (or customize the background color to match your design)
  */
 
-::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
-::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::-moz-selection { background: $selection-background-color; color: $selection-color; text-shadow: none; }
+::selection { background: $selection-background-color; color: $selection-color; text-shadow: none; }
 
 
 /* =============================================================================
@@ -190,12 +190,6 @@ button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
  */
 
 textarea { overflow: auto; vertical-align: top; resize: vertical; }
-
-/* Colors for form validity */
-input:valid, textarea:valid {  }
-input:invalid, textarea:invalid { 
-	border-color: $input-error-border-color; 
-}
 
 
 /* =============================================================================

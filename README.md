@@ -2,25 +2,27 @@ Facades
 =================
 
 Facades is a framework, written in SASS (.scss) designed to assist with front-end development rapid prototyping. It includes a number of base classes, patterns and mixins, 
-focused on semantic html, and styled around a consistent vertical rhythm.
+focused on semantic html, and styled around a consistent vertical rhythm. 
 
 **Another one? Come on**
-Theres tons of css / rapid dev frameworks around, and some pretty awesome ones. Facades doesn't re-invent the wheel.. instead we've combined the best parts of 
-some of the best frameworks around such as [Twitter's Bootstrap](http://bootstrap.io) and [foundation](http://foundation.zurb.com), and optimized them 
-for HTML5 and a clean baseline
+Theres tons of css / rapid dev frameworks around, and some pretty awesome ones including  [Twitter's Bootstrap](http://bootstrap.io) and [foundation](http://foundation.zurb.com). We took inspiration from 
+each of these to create a more standards based solution writtenfor HTML5 and designed around a clean baseline rhythm.
 
 **Why not just use one of the existing frameworks then?**
-There were/are a number of things about the frameworks listed above (and any others we've utilized) we felt weren't quite 'up to par', but that didn't mean 
-they weren't still great.  Instead of implementing multiple divs and non-semantic elements, facades utlizes HTML5 elements and css3, while 
-keeping support for IE7+, plus recent versions of Webkit and Firefox.
+We wanted something that was more standards friendly where at all possible, and felt as though a lot of what was out there missed the mark. We've
+utilized the concepts that worked, and scrapped a few that didn't. Keeping a clean vertical rhythm was also important, which 
+wasn't available with anything existing at the time.
 
-Facades also utilizes SASS mixins for patterns and ui-specific elements, providing more flexiblity in implementation. For instance, 
-the notifications pattern (alerts/flash messages) is implemented as a mixin, allowing the developer to decide their own node and class 
+Facades also utilizes the fantastic [Compass](https://github.com/chriseppstein/compass) library to add additional function and flexiblity. 
+This helps increase the functionality and reliability of the framework as a whole.
+
+Most of the patterns included here are written using sass mixins, with configuration options for fonts, sizes, and colors.
+For instance, the notifications pattern (alerts/flash messages) is implemented as a mixin, allowing the developer to decide their own node and class 
 scheme to use. This makes facades easier to implement in existing projects, without having to change existing classes or html format.
 
-When implementing patterns color schemes are provided as an option, for those instances where you'd prefer your own class names and color schemes.
+When implementing patterns color schemes are provided as an option, for those instances where you'd prefer your own class names and design.
 
-For those who just want to import and go, theres also a `_globals.scss` which creates all of the defaults, with classes and all. To utilize import it into your main css file.
+For those who just want to import and go, theres also a `_globals.scss` which creates all of the defaults, with classes and all. To utilize, import it into your main css file.
 
 ``` scss	
 @import 'facades/global';
@@ -77,7 +79,7 @@ Document patterns with html examples, which should utilize HTML5 elements, in an
 Thanks
 ------------------------------
 
-Thanks to Twitter, Zurb, The fine folks who work on the HTML5 Boilerplate, the Compass library and contributors, and the hundreds of 
+Thanks to the fine folks who work on the HTML5 Boilerplate, the Compass library and contributors, and the hundreds of 
 random people who've blogged the tons and tons of google search results we've read in creating this library.
 
 Licence
@@ -88,7 +90,5 @@ MIT/GPL ( do whatever you want, but check the licenses below )
 
 **Components:**
 
-Twitter Bootstrap: AL2
-Zurb Foundation: MIT license
-jQuery: MIT/GPL license
+Compass: MIT (modified)
 HTML5 Boilerplate reset.css: Public Domain

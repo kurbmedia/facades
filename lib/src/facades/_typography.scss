@@ -36,6 +36,15 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: bold;	
 	text-rendering: optimizelegibility; // 1
 	-webkit-font-smoothing: subpixel-antialiased;
+	&.headline{
+		@include box-sizing(border-box);
+	}
+	// this fixes rhythm breakage introduced by the added tag
+	small{
+		@include inline-block(baseline);
+		margin:-.2em 0;
+		font-size:.75em;
+	}
 }
 
 h1 {
@@ -43,9 +52,6 @@ h1 {
 	&.headline{
 		@include leading(1, 30px);
 		@include margins(1, 30px);
-	}
-	small{
-		font-size:18px;
 	}
 }
 
@@ -55,9 +61,7 @@ h2 {
 	&.headline{
 		@include margins(1, 24px);
 	}
-	small{
-		@include font-size(18px);
-	}
+	
 }
 
 h3 {
@@ -66,18 +70,14 @@ h3 {
 	&.headline{
 		@include margins(.5, 18px);
 	}
-	small{
-		@include font-size(14px);
-	}
+
 }
 
 
 h4 {
 	@include font-size(14px);
 	@include margins(.5, 14px);
-	small{
-		@include font-size(12px);
-	}
+
 }
 
 h5 {

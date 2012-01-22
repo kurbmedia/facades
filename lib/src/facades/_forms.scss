@@ -25,14 +25,16 @@ form{
 	ul.columns, ol.columns{
 		@include clearfix;		
 		li{ float:left;
+			margin-right:1.5em;
 			&.clear{ 
 				clear:both; }
 		}
 	}
 	
 	li{ 
-		@include padding(0 1);
+		@include padding(0 1);		
 	}
+
 	
 	ul, ol{
 		margin:0;
@@ -69,7 +71,7 @@ fieldset legend{
 #{input-types(all)}, textarea{
 	&:focus{ 
 		outline:none; 
-	}
+	}	
 }
 
 #{input-types(button)}{
@@ -79,17 +81,33 @@ fieldset legend{
 
 #{input-types(text)},
 select{
+	@include box-shadow(#efefef 3px 3px 6px 0px inset);
 	border-style:solid;
 	border-width:1px;
 	border-color:$input-border-color;
 	outline:none;
+	@if $enable-transitions == true{
+		@include transition-property(all);
+		@include transition-duration($transition-duration);
+	}
+	
 	&:focus{
 		border-color:$input-focus-border-color;
+		@include box-shadow(rgba($input-focus-border-color, .6) 0 0 5px 0);
 	}
 	
 }
 
+input[type=file], #{input-types(boolean)}, select{
+	&:focus{
+		border-color:$input-border-color;
+		@include box-shadow(none);
+		outline: 1px dotted darken($input-border-color, 3%);
+	}
+}
+
 #{input-types(text)}{
+	@include border-radius($input-border-radius);
 	margin:border-rhythm(1px, .25) 0;
 	padding:rhythm(.25) .25em;
 	@include leading(1);	
@@ -100,15 +118,49 @@ select{
 	margin-top:border-rhythm(1px, .4);
 	margin-bottom:border-rhythm(1px, .5);
 	
+	&[size]{
+		display:block;
+		@include box-sizing(content-box);
+		margin-top:border-rhythm(1px, .3);
+		margin-bottom:border-rhythm(1px, .6);
+		padding-top:rhythm(.1);
+		height:auto;
+	}
+	
+	@for $i from 1 through 10{
+		&[size='#{$i}']{
+			height:($line-height * $i);
+		}
+	}
+	
 	option{
 		padding-right:32px;
 	}
 }
 
-li.option-group, fieldset.option-group{
-	#{input-types(boolean)}{
-		@include inline-block;	
+select[size]{
+	option{
+		text-indent:.3em;
 	}
+}
+
+// boolean inputs are inline-block. 
+// if labels follow them (instead of wrapped) those are inline-block as well.
+#{input-types(boolean)}{
+	@include inline-block;	
+	margin-right:.5em;
+	
+	& + label{
+		@include inline-block;
+	}
+}
+
+input[disabled], textarea[disabled], input.disabled, textarea.disabled{
+	cursor: not-allowed;
+	border-color:$input-disabled-border-color;
+	color: $input-disabled-color;
+	background-color:#eee;
+	@include box-shadow(none);
 }
 
 li.select-group, fieldset.select-group{
@@ -121,3 +173,25 @@ li.select-group, fieldset.select-group{
 	}
 }
 
+input.invalid, textarea.invalid{	
+	@include box-shadow(rgba($input-error-border-color, .6) 0 0 5px 0);
+	@include box-shadow(rgba($input-error-color, .15) 3px 3px 6px 0 inset);
+	border-color: $input-error-border-color; 
+	color: $input-error-color;
+}
+
+input, textarea{	
+	& + .hint{
+		display:block;
+		color: $field-hint-color;
+		@include font-size($font-size - 2px);
+	}	
+}
+
+input.invalid + .hint, textarea.invalid + .hint{
+	display:none;
+}
+
+input.invalid + .error, textarea.invalid + .error{
+	display:block;
+}

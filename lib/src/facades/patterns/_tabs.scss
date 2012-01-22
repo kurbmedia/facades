@@ -1,0 +1,83 @@
+// 
+// Tabs. Requires the use of tabs.js
+// ----------------------------------------------------------------------------------------
+
+/*
+	The tabbed base mixin is / can be used with both tabbed and pill base setups.
+	when including the style can either be set to tab or pill. There are lots of other 
+	mixins below for the various features of a tabbed based nav. This way when used in 
+	things like _global.scss, we don't end up with a lot of duplication.
+*/
+
+@import 'facades/layout/lists';
+
+@mixin tabbed($style: tab){
+	.tab{
+		display:none;
+	}
+	
+	.tab.active{
+		display:block;
+		// padding the tab content keeps the rhythm intact because of margin collapsing
+		padding-top:rhythm(.5); 
+	}
+	
+	&.no-js .tab{
+		display:block;
+	}
+}
+
+// Styles a list to function as a tab based navigation
+@mixin tab-navigation{
+	@if $facades-global-import-used == false{ 
+		@include inline-list; 		
+	}	
+	margin:0 0 rhythm(.5) 0; 
+	padding:0;
+	border-bottom:1px solid $tab-border-color;
+	@include clearfix;
+	
+	li{					
+		@include tab-list-item;
+	}
+
+}
+
+// really for internal use. makes a li into a tab.
+@mixin tab-list-item{
+	margin:0 0 0 .25em;
+	
+	a{
+		color:$font-color;
+		text-decoration:none;
+		padding:border-rhythm(1px, .5) rhythm(.75) rhythm(.5);
+		@include opacity(50);
+		&:hover{
+			@include opacity(75);
+		}
+	}
+	
+	&.active a{
+		@include border-radius(4px 4px 0px 0px);
+		background-color:transparent;			
+		border: 1px solid $tab-border-color;
+		border-width:4px 1px 0 1px;
+		border-top-color: $tab-accent-color;
+		padding:border-rhythm(4px, .5) rhythm(.75) rhythm(.5);
+
+		&, &:hover{
+			@include opacity(100);
+		}
+	}
+	
+}
+
+
+
+@mixin tabs{	
+	.tab-navigation{
+		@include tab-navigation;
+	}
+	
+	@include tabbed;
+}

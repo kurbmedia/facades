@@ -1,7 +1,13 @@
 require 'sass'
 
 module Facades
-  module SassExtensions    
+  module SassExtensions 
+    extend self
+    
+    def vendor_prefixes
+      [:webkit, :moz, :ms, :o]
+    end   
+    
   end
 end
 

@@ -2,6 +2,10 @@
 // Global configuration variables
 // ----------------------------------------------------------------------------------------
 
+// internal use... when calling facades/global, the imported mixins contain
+// checks against adding duplicate css based on this value
+$facades-global-import-used: false !default;
+
 $font-color: #222		!default;
 $font-size: 13px 		!default;
 $line-height: 20px 	!default;
@@ -10,6 +14,15 @@ $font-family: 			"Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $fixed-font-family: "Monaco", 'Courier New', monospace !default;
 $serif-font-family: "Georgia", "Times", "Times New Roman", serif !default;
 
+$selection-background-color: #fe57a1 !default; 	// hot pink selection action!
+$selection-color:						 #fff !default;
+
+// set to false to disable misc transition properties. 
+// for when you need to sacrifice beauty for file size
+$enable-transitions: true !default;
+
+$transition-property: all !default;
+$transition-duration: .2s !default;
 
 
 // 
@@ -32,24 +45,26 @@ $error-color:		#C43C35 !default;
 $warning-color: #EED74F !default;
 
 // 
-// Form and input colors
+// Forms and inputs
 // --------------------------
 
-$input-border-color: 				#ccc !default;
-$input-focus-color:					$font-color !default;
-$input-focus-border-color:  $notice-color !default;
-$input-error-color:					$error-color !default;
-$input-error-border-color:  $error-color !default;
+$input-border-color: 					#ccc !default;
+$input-focus-color:						$font-color !default;
+$input-focus-border-color:  	$notice-color !default;
+$input-error-color:						$error-color !default;
+$input-error-border-color:  	$error-color !default;
+$input-border-radius:					3px !default;
+$input-disabled-color:      	#ccc;
+$input-disabled-border-color: #ddd;
+$field-hint-color: #aaa;
 
-// Global functions and mixins
-// ----------------------------------------------------------------------------------------
+// 
+// UI elements
+// --------------------------
 
-// Adds vendor prefixes to any passed property, and
-// sets the value. 
+$button-border-radius: 3px !default;
+$tooltip-color:				 rgba(0,0,0,.8) !default;
 
-@mixin prefixed($prop, $value, $prefixes: -webkit -moz -o -ms official){
-	@each $prefix in $prefixes{
-		$prefix: if($prefix == official, '', "#{$prefix}-");
-		#{unquote($prefix)}#{$prop}: $value;
-	}
-}
+$tab-border-color: #ccc !default;
+$tab-accent-color: $notice-color !default; // the border color used on active tabs
+$pill-color:			 $notice-color !default; // color of active pills

@@ -1,3 +1,0 @@
-@mixin border-radius($radius){
-	@include prefixed(border-radius, $radius, -moz -webkit -o -ms official);
-}

@@ -1,28 +1,26 @@
+$legacy-support-for-ie8: true;
+$legacy-support-for-ie7: true;
+$experimental-support-for-svg: true;
+
 @import 'facades/config';
 @import 'facades/mixins/rhythm';
-@import 'facades/mixins/layout';
-@import 'facades/mixins/design';
-
-// Clearing floats
-
-@mixin clearfix {
-	zoom: 1;
-	&:before, &:after {
-		display: table;
-		*display: inline;
-		content: "";
-		zoom: 1;
-	}
-	
-	&:after {
-		clear: both;
-	}
-	
-}
-
+@import 'compass/css3';
+@import 'compass/utilities/general/clearfix';
 
 @mixin opacity($opacity: 100) {
 	filter:("alpha(opacity=%d)", $opacity);
 	-moz-opacity: $opacity / 100;
 	opacity: $opacity / 100;
+}
+
+// Cross browser inline-block implementations
+@mixin inline-block($align: middle){
+	&.lt-ie8{ 
+		display: inline; 
+		vertical-align: auto
+	} 	
+	display: -moz-inline-box;
+	-moz-box-orient: vertical;
+	display: inline-block;
+	vertical-align: $align;
 }

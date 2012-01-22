@@ -1,0 +1,84 @@
+// 
+// Twipsy tooltip
+// Courtesy Twitter Bootstrap
+// https://github.com/twitter/bootstrap
+// ----------------------------------------------------------------------------------------
+
+@mixin tooltip{
+	position: absolute;
+  display: block;
+  visibility: visible;
+  padding: 5px;
+  font-size: 11px;
+  @include opacity(0);
+  &.in     { @include opacity(80); }
+  &.top    { margin-top:  -2px; }
+  &.right  { margin-left:  2px; }
+  &.bottom { margin-top:   2px; }
+  &.left   { margin-left: -2px; }
+  &.top .tooltip-arrow    { @include tooltip-arrow-top; }
+  &.left .tooltip-arrow   { @include tooltip-arrow-top; }
+  &.bottom .tooltip-arrow { @include tooltip-arrow-top; }
+  &.right .tooltip-arrow  { @include tooltip-arrow-top; }
+	
+	.tooltip-inner {
+	  max-width: 200px;
+	  padding: 3px 8px;
+	  color: white;
+	  text-align: center;
+	  text-decoration: none;
+	  background-color: $tooltip-color;
+	  @include border-radius(4px);
+	}
+	
+	.tooltip-arrow {
+	  position: absolute;
+	  width: 0;
+	  height: 0;
+	}	
+	
+}
+
+
+// alias
+@mixin twipsy{
+	@include tooltip;
+}
+
+// Popover arrows
+// For tipsies and tooltips
+@mixin tooltip-arrow-top($arrow-width: 5px){
+	bottom: 0;
+	left: 50%;
+	margin-left: -$arrow-width;
+	border-left: $arrow-width solid transparent;
+	border-right: $arrow-width solid transparent;
+	border-top: $arrow-width solid $tooltip-color;
+}
+
+@mixin tooltip-arrow-left($arrow-width: 5px){
+	top: 50%;
+    right: 0;
+    margin-top: -$arrow-width;
+    border-top: $arrow-width solid transparent;
+    border-bottom: $arrow-width solid transparent;
+    border-left: $arrow-width solid $tooltip-color;
+}
+
+@mixin tooltip-arrow-bottom($arrow-width: 5px){
+    top: 0;
+    left: 50%;
+    margin-left: -$arrow-width;
+    border-left: $arrow-width solid transparent;
+    border-right: $arrow-width solid transparent;
+    border-bottom: $arrow-width solid $tooltip-color;
+}
+
+@mixin tooltip-arrow-right($arrow-width: 5px){
+    top: 50%;
+    left: 0;
+    margin-top: -$arrow-width;
+    border-top: $arrow-width solid transparent;
+    border-bottom: $arrow-width solid transparent;
+    border-right: $arrow-width solid $tooltip-color;
+}

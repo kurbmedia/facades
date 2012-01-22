@@ -13,6 +13,10 @@
 @import 'facades/patterns/notifications';
 @import 'facades/patterns/pagination';
 @import 'facades/patterns/tabs';
+@import 'facades/patterns/pills';
+@import 'facades/patterns/twipsy';
+
+$facades-global-import-used: true;
 
 .label{
 	@include label;
@@ -28,4 +32,17 @@ table.bordered{
 
 table.striped{
 	@include striped-table;
+}
+
+div.tabbed{
+	@include tabbed;
+	.tab-navigation, .pill-navigation{
+		@include inline-list;
+	}
+	.tab-navigation{
+		@include tab-navigation;
+	}
+	.pill-navigation{
+		@include pill-navigation;
+	}
 }
