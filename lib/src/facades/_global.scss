@@ -15,6 +15,7 @@
 @import 'facades/patterns/tabs';
 @import 'facades/patterns/pills';
 @import 'facades/patterns/twipsy';
+@import 'facades/buttons';
 
 $facades-global-import-used: true;
 
@@ -44,5 +45,16 @@ div.tabbed{
 	}
 	.pill-navigation{
 		@include pill-navigation;
+	}
+}
+
+
+.button, input[type=button], input[type=submit]{
+	@include simple-button;
+	&.glossy{
+		@include glossy-button;
+	}
+	&.rounded{
+		@include rounded-button;
 	}
 }

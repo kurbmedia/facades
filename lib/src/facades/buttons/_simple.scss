@@ -1,0 +1,9 @@
+@import 'shared';
+
+@mixin simple-button($color: $notice-color, $radius: $button-border-radius){
+	@include button-base($radius);
+	background:$color;
+	color:white;
+	text-shadow:darken($color, 5%) 0px 1px 0px;
+	@include box-shadow(rgba(255,255,255,0.2) 0 0 3px 0 inset);
+}

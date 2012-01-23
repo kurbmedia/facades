@@ -1,0 +1,7 @@
+@import 'shared';
+
+@mixin rounded-button($color: $notice-color, $radius: $button-border-radius){
+	@if $facades-global-import-used == false{ 
+		@include button-base($radius);
+	}
+}
