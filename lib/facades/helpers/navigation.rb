@@ -44,6 +44,8 @@ module Facades
         # 
         def render(&block)
           wrap_attrs = options.delete(:wrapper) || :ul
+          heading    = options.delete(:heading)
+          
           unless wrap_attrs.is_a?(Hash)
             wrapper    = wrap_attrs
             wrap_attrs = {}
@@ -56,6 +58,11 @@ module Facades
           
           output = content_tag(wrapper, view.capture(self, &block), options)
           return output if nested?
+          
+          if heading
+            heading = generate_heading(heading)
+            output  = heading << output
+          end
           content_tag(:nav, output, wrap_attrs)
           
         end
@@ -103,6 +110,20 @@ module Facades
         
         private
 
+        ##
+        # To be valid, a <nav> should have a heading of some sort.
+        # When passed via options, this generates the proper tag
+        # 
+        def generate_heading(opts)
+          if opts.is_a?(Hash)
+            heading_tag  = opts.delete(:tag)
+            heading_text = opts.delete(:text)
+          else 
+            heading_text = opts
+          end
+          heading_tag ||= :h3
+          content_tag(heading_tag, heading_text)
+        end
         
         def merge_html_classes(*args) #:nodoc:
           Navigator.merge_html_classes(*args)
