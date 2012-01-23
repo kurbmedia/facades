@@ -1,76 +1,52 @@
 require 'spec_helper'
 
-describe 'Navigation helpers', :type => :helper do
-  
+describe 'Navigation helpers', :type => :view do
+
   class << self
     def stub_path(path)
       before do
-        helper.controller.request.stub!(:path).and_return(path)
+        view.controller.request.stub!(:path).and_return(path)
       end
     end
   end
   
   it 'creates a nav method' do
-    helper.respond_to?(:nav).should be_true
+    view.respond_to?(:nav).should be_true
   end
   
   it 'aliases .navigation to nav' do
-    helper.respond_to?(:navigation).should be_true
-  end
-  
-  def generate_nav(options = {}, link_opts = {})
-    link_opts[:home] ||= {}
-    link_opts[:about] ||= {}
-    result = helper.nav(options) do |nav|
-      nav.link('Home', '/', link_opts[:home])
-      nav.link('About', '/about', link_opts[:about])
-    end
-    result.to_s
+    view.respond_to?(:navigation).should be_true
   end
   
   describe 'single level list' do
     
-    let(:result) do
-      generate_nav
+    before do
+      render('navigation/single_list')
     end
     
     it 'should create a nav element' do
-      result.should have_selector(:nav)
+      rendered.should have_selector(:nav)
     end
   
     it 'should create a single unordered list' do
-      result.should have_selector(:ul, :count => 1)
+      rendered.should have_selector(:ul, :count => 1)
     end
   
     it 'should create list items for each call to .link' do
-      result.should have_selector(:li, :count => 2)
+      rendered.should have_selector(:li, :count => 2)
     end
   
     it 'should create links for each call to .link' do
-      result.should have_selector(:a, :count => 2)
+      rendered.should have_selector(:a, :count => 2)
     end
     
   end
   
   describe 'multi-level lists' do
     
-    def generate_nav(options = {}, link_opts = {})
-      link_opts.reverse_merge!(:home => {}, :about => {}, :sub => {})
-      result = helper.nav(options) do |nav|
-        nav.link('Home', '/', link_opts[:home])
-        nav.link('About', '/about', link_opts[:about]) do |subnav|
-          subnav.link('About Sub', '/about/sub-path', link_opts[:sub])
-        end
-      end
-      result.to_s
-    end
-    
-    let(:result) do
-      generate_nav
-    end
-    
     it 'creates a nested list within any link containing a block' do
-      result.should have_selector("li > ul")
+      render('navigation/multi_list')
+      rendered.should have_selector("li > ul")
     end
     
     describe 'active state' do
@@ -78,11 +54,13 @@ describe 'Navigation helpers', :type => :helper do
       stub_path("/about/sub-path")
       
       it 'adds active to the parent tag' do
-        result.should have_xpath('//a', :href => '/about', :class => 'active')
+        render('navigation/multi_list')
+        rendered.should have_xpath('//a', :href => '/about', :class => 'active')
       end
       
       it 'adds active to the matching child tag' do
-        result.should have_xpath('//a', :href => '/about/sub-path', :class => 'active')
+        render('navigation/multi_list')
+        rendered.should have_xpath('//a', :href => '/about/sub-path', :class => 'active')
       end
       
     end
@@ -92,29 +70,31 @@ describe 'Navigation helpers', :type => :helper do
   describe 'options' do
     
     context 'when setting :wrapper to a tag' do
-
-      let(:result) do
-        generate_nav({ :wrapper => :ol })
+      
+      before do
+        assign(:options, { :wrapper => :ol })
+        render('navigation/single_list')
       end
 
       it 'wraps the list in the tag passed to :wrapper' do
-        result.should have_selector('nav > ol')
+        rendered.should have_selector('nav > ol')
       end
 
     end # wrapper
     
     context 'when setting options to :wrapper' do
       
-      let(:result) do
-        generate_nav({ :wrapper => { :id => 'main_navigation' }, :id => 'main_nav_list' })
+      before do
+        assign(:options, { :wrapper => { :id => 'main_navigation' }, :id => 'main_nav_list' })
+        render('navigation/single_list')
       end
       
       it 'adds any options passed to :wrapper to the wrapping tag' do
-        result.should have_xpath('//nav', :id => 'main_navigation')
+        rendered.should have_xpath('//nav', :id => 'main_navigation')
       end
       
       it 'adds any options passed to the wrapping list' do
-        result.should have_xpath('//ul', :id => 'main_nav_list')
+        rendered.should have_xpath('//ul', :id => 'main_nav_list')
       end          
       
     end # options
@@ -123,21 +103,21 @@ describe 'Navigation helpers', :type => :helper do
       
   describe 'links matching request.path' do
     
-    let(:result) do
-      generate_nav
+    stub_path("/about")
+    
+    before do
+      render('navigation/single_list')
     end
     
-    stub_path("/about")
-
     it 'adds active to the link matching the path' do
-      result.should have_selector('a.active', :count => 1)
-      result.should have_xpath('//a', :href => '/about', :class => 'active')
-      result.should have_xpath('//li', :class => 'active')
-      result.should_not have_xpath('//a', :href => '/', :class => 'active')
+      rendered.should have_selector('a.active', :count => 1)
+      rendered.should have_xpath('//a', :href => '/about', :class => 'active')
+      rendered.should have_xpath('//li', :class => 'active')
+      rendered.should_not have_xpath('//a', :href => '/', :class => 'active')
     end
     
     it 'does not add active to the link matching the path' do
-      result.should_not have_xpath('//a', :href => '/', :class => 'active')
+      rendered.should_not have_xpath('//a', :href => '/', :class => 'active')
     end
     
   end
@@ -146,24 +126,26 @@ describe 'Navigation helpers', :type => :helper do
     
     context 'and the proc is true' do
       
-      let(:result) do
-        generate_nav({}, { :home => { :proc => lambda{ |x| true } } })
+      before do
+        assign(:link_options, { :home => { :proc => lambda{ |x| true } } })
+        render('navigation/single_list')
       end
       
       it 'adds active to the link' do
-        result.should have_xpath('//a', :href => '/', :class => 'active')
+        rendered.should have_xpath('//a', :href => '/', :class => 'active')
       end
       
     end # true proc
     
     context 'and the proc is false' do
       
-      let(:result) do
-        generate_nav({}, { :home => { :proc => lambda{ |x| false } } })
+      before do
+        assign(:link_options, { :home => { :proc => lambda{ |x| false } } })
+        render('navigation/single_list')
       end
       
       it 'does not active to the link' do
-        result.should_not have_xpath('//a', :href => '/', :class => 'active')
+        rendered.should_not have_xpath('//a', :href => '/', :class => 'active')
       end
       
     end # false proc
@@ -174,24 +156,27 @@ describe 'Navigation helpers', :type => :helper do
     
     context 'and the matcher is a match' do
       
-      let(:result) do
-        generate_nav({}, { :about => { :matcher => /about/ } })
+      before do
+        assign(:link_options, { :about => { :matcher => /about/ } })
+        render('navigation/single_list')
       end
       
       it 'adds active to the link' do
-        result.should have_xpath('//a', :href => '/about', :class => 'active')
+        rendered.should have_xpath('//a', :href => '/about', :class => 'active')
       end
       
     end # matches
     
     context 'and the matcher is not a match' do
       
-      let(:result) do
-        generate_nav({}, { :home => { :matcher => /^not-home/ } })
+      
+      before do
+        assign(:link_options, { :home => { :matcher => /^not-home/ } })
+        render('navigation/single_list')
       end
       
       it 'does not active to the link' do
-        result.should_not have_xpath('//a', :href => '/', :class => 'active')
+        rendered.should_not have_xpath('//a', :href => '/', :class => 'active')
       end
       
     end # does not match

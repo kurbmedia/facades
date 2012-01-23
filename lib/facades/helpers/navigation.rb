@@ -30,10 +30,10 @@ module Facades
       
       class Navigator
         attr_reader :view, :path
-        attr_accessor :options, :nested
+        attr_accessor :options, :nested, :links
         
         def initialize(tpl, options = {}, nested = false)
-          @view, @options, @nested = tpl, options, nested
+          @view, @options, @nested, @links = tpl, options, nested, []
           @path = view.request.path
         end
         
@@ -51,10 +51,13 @@ module Facades
             wrapper = wrap_attrs.delete(:tag) || :ul
           end
           
-          output = view.capture(self, &block)
-          output = content_tag(wrapper, output, options)
+          @wrapper_attrs = wrap_attrs
+          @wrapper       = wrapper
+          
+          output = content_tag(wrapper, view.capture(self, &block), options)
           return output if nested?
-          concat(content_tag(:nav, output, wrap_attrs))
+          content_tag(:nav, output, wrap_attrs)
+          
         end
         
         ##
@@ -73,12 +76,12 @@ module Facades
           end
           
           if block_given?
-            subnav = Navigator.new(view, wrap_attrs, true, &block)
+            subnav = Navigator.new(view, wrap_attrs, true)
             output = link_to(link.text, link.href, link.options) << subnav.render(&block) 
-            concat content_tag(:li, output, wrap_attrs)
+            content_tag(:li, output, wrap_attrs)
           else
-            concat content_tag(:li, link_to(link.text, link.href, link.options), wrap_attrs)
-          end          
+            content_tag(:li, link_to(link.text, link.href, link.options), wrap_attrs)
+          end        
         end
         
         class << self
@@ -99,6 +102,7 @@ module Facades
         end
         
         private
+
         
         def merge_html_classes(*args) #:nodoc:
           Navigator.merge_html_classes(*args)

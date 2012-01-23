@@ -27,3 +27,9 @@ $experimental-support-for-svg: true;
 	display: inline-block;
 	vertical-align: $align;
 }
+
+@mixin clipped{
+	clip:rect(1px 1px 1px 1px);
+	clip:rect(1px, 1px, 1px, 1px); // Stupid IE
+	position: absolute;	
+}

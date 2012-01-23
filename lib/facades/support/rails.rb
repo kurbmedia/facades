@@ -1,12 +1,16 @@
 require 'rails'
 require 'sass/rails'
-require 'facades'
 
 ##
 # Integrates facades assets into the Rails asset pipeline. 
 # 
 module Facades
   class Engine < Rails::Engine 
-    config.sass.load_paths << File.expand_path("../../../src", __FILE__)     
+    
+    initializer 'load facades assets' do |app|
+      app.config.sass.load_paths ||= []
+      app.config.sass.load_paths << File.expand_path("../../../src", __FILE__)     
+    end
+    
   end
 end
