@@ -1,6 +1,9 @@
 #Facades
 Facades is a gem designed to assist with front-end development and misc design. It includes a compass plugin / mixins, and various Rails view helpers to help with common development tasks. 
 
+**Note** With version 1.0 there are a number of changes in functionality setup. Check [here](https://github.com/kurbmedia/facades/tree/1.0) for more info. Currently master 
+tracks the released version. 
+
 ##CSS / SASS
 Facades includes several mixins and includes for setting up a few defaults within your css. 
 
