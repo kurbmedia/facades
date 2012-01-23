@@ -21,14 +21,14 @@ module Facades
       # @return [String] script tag
       # 
       def google_analytics(site_id, &block)
-        return "" if defined?(Rails) && Rails.env != "production"        
+        return "" if defined?(Rails) && Rails.env != "production"
         content_tag(:script) do          
           %Q{
             var _gaq=[['_setAccount','#{site_id}'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
-            #{(block_given? capture(&block) : "")}
+            #{(block_given? ? capture(&block) : "")}
         	}
       	end.html_safe
       end

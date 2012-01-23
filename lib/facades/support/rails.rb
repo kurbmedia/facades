@@ -1,4 +1,6 @@
 require 'rails'
+require 'sass/rails'
+require 'facades'
 
 ##
 # Integrates facades assets into the Rails asset pipeline. 

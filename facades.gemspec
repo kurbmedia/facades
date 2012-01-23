@@ -23,6 +23,8 @@ Gem::Specification.new do |s|
   
   s.add_development_dependency('combustion', '~> 0.3.1')
   s.add_development_dependency("rspec", ">= 2.7.0")
+  s.add_development_dependency("sass-rails", "~> 3.1")
+  s.add_development_dependency("webrat", "~> 0.7")
   s.add_development_dependency("rspec-rails", ">= 2.7.0")
   
 end
