@@ -27,4 +27,8 @@
 		margin-bottom:0;
 	}
 	
+	&:active{
+		@include box-shadow(rgba(0,0,0,0.1) 0 0 3px 0 inset);
+	}
+	
 }
