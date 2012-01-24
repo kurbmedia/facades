@@ -1,0 +1,18 @@
+@import 'shared';
+
+@mixin gradient-button($color: $notice-color, $radius: $button-border-radius){
+	@if $facades-global-import-used == false{ 
+		@include button-base($radius);
+	}
+
+	@include border-radius($radius);
+	border-top:1px solid darken($color, 10%);
+	@include box-shadow(rgba(0,0,0,.1) 0 0 3px 0 inset);
+	background-color:$color;
+	@include background-image(linear-gradient(lighten($color, 5%), $color 25%, darken($color, 10%)));
+	
+	&:hover{
+		background-color:lighten($color, 7%);
+		@include background-image(linear-gradient(lighten($color, 7%), lighten($color, 3%) 25%, darken($color, 5%)));
+	}
+}

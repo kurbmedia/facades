@@ -8,8 +8,23 @@
 @mixin button-base($radius: $button-border-radius){
 	@include inline-block;
 	@include box-shadow(none);
-	border:none;
-	padding:rhythm(0.25) 1em;
-	@include margins(0.25);
+	@include box-sizing(border-box);
+	$button-font-size: $font-size * 0.95;
+	@include font-size($button-font-size);		
+	margin:border-rhythm(1px, .2, $button-font-size) 0;
+	padding:rhythm(.3, $button-font-size) 1em;	
 	@include border-radius($radius);
+	
+	@include transition-property(all);
+	@include transition-duration(0.15s);
+	@include transition-timing-function(ease-in-out);
+	
+	&.large{
+		$button-font-size: $font-size * 1.1;
+		@include font-size($button-font-size);	
+		padding:border-rhythm(1px, .5, $button-font-size) 1.5em;
+		margin-top:0;
+		margin-bottom:0;
+	}
+	
 }

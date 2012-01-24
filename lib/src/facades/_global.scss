@@ -54,7 +54,7 @@ div.tabbed{
 	&.glossy{
 		@include glossy-button;
 	}
-	&.rounded{
-		@include rounded-button;
+	&.gradient{
+		@include gradient-button;
 	}
 }
