@@ -11,7 +11,7 @@ module Facades
   end
 end
 
-['color', 'conversions', 'functions'].each do |extension|
+['color', 'conversions', 'functions', 'icons'].each do |extension|
   require "facades/sass_extensions/#{extension}"
   Sass::Script::Functions.send(:include, Facades::SassExtensions.const_get(extension.camelize))
 end
