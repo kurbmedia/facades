@@ -9,7 +9,7 @@ module Facades
     
     initializer 'load facades assets' do |app|
       app.config.sass.load_paths ||= []
-      app.config.sass.load_paths << File.expand_path("../../../src", __FILE__)     
+      app.config.sass.load_paths << Facades.scss_path
     end
     
   end

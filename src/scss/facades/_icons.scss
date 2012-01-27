@@ -1,0 +1,129 @@
+@import 'facades/config';
+
+@mixin icon($name, $size: $font-size){
+	&:before{
+		font-family:$icon-font-family;
+		@include icon-content($name);
+		display:inline;
+		font-size:$size;
+	}
+}
+
+@mixin icon-content($name){
+	content:'#{icon-glyph($name)}';
+}
+
+@mixin icon-classes($base-class:'.icon'){
+	#{unquote($base-class)}.pencil{ @include icon(pencil, .975em); }
+	#{unquote($base-class)}.check{ @include icon(check, .975em); }
+	#{unquote($base-class)}.check-round{ @include icon(check-round, .975em); }
+	#{unquote($base-class)}.cross{ @include icon(cross, .975em); }
+	#{unquote($base-class)}.cross-round{ @include icon(cross-round, .975em); }
+	#{unquote($base-class)}.cancel{ @include icon(cancel, .975em); }
+	#{unquote($base-class)}.plus-round{ @include icon(plus-round, .975em); }
+	#{unquote($base-class)}.minus-round{ @include icon(minus-round, .975em); }
+	#{unquote($base-class)}.arrow-left-round{ @include icon(arrow-left-round, .975em); }
+	#{unquote($base-class)}.arrow-up-round{ @include icon(arrow-up-round, .975em); }
+	#{unquote($base-class)}.arrow-right-round{ @include icon(arrow-right-round, .975em); }
+	#{unquote($base-class)}.arrow-down-round{ @include icon(arrow-down-round, .975em); }
+	#{unquote($base-class)}.arrow-left-light{ @include icon(arrow-left-light, .975em); }
+	#{unquote($base-class)}.arrow-up-light{ @include icon(arrow-up-light, .975em); }
+	#{unquote($base-class)}.arrow-right-light{ @include icon(arrow-right-light, .975em); }
+	#{unquote($base-class)}.arrow-down-light{ @include icon(arrow-down-light, .975em); }
+	#{unquote($base-class)}.arrow-left{ @include icon(arrow-left, .975em); }
+	#{unquote($base-class)}.arrow-up{ @include icon(arrow-up, .975em); }
+	#{unquote($base-class)}.arrow-right{ @include icon(arrow-right, .975em); }
+	#{unquote($base-class)}.arrow-down{ @include icon(arrow-down, .975em); }
+	#{unquote($base-class)}.play{ @include icon(play, .975em); }
+	#{unquote($base-class)}.pause{ @include icon(pause, .975em); }
+	#{unquote($base-class)}.fast-forward{ @include icon(fast-forward, .975em); }
+	#{unquote($base-class)}.rewind{ @include icon(rewind, .975em); }
+	#{unquote($base-class)}.next-track{ @include icon(next-track, .975em); }
+	#{unquote($base-class)}.prev-track{ @include icon(prev-track, .975em); }
+	#{unquote($base-class)}.stop{ @include icon(stop, .975em); }
+	#{unquote($base-class)}.eject{ @include icon(eject, .975em); }
+	#{unquote($base-class)}.mute{ @include icon(mute, .975em); }
+	#{unquote($base-class)}.volume{ @include icon(volume, .975em); }
+	#{unquote($base-class)}.signal{ @include icon(signal, .975em); }
+	#{unquote($base-class)}.battery-empty{ @include icon(battery-empty, .975em); }
+	#{unquote($base-class)}.battery-charge{ @include icon(battery-charge, .975em); }
+	#{unquote($base-class)}.battery-half-charge{ @include icon(battery-half-charge, .975em); }
+	#{unquote($base-class)}.battery-charged{ @include icon(battery-charged, .975em); }
+	#{unquote($base-class)}.power{ @include icon(power, .975em); }
+	#{unquote($base-class)}.trash{ @include icon(trash, .975em); }
+	#{unquote($base-class)}.print{ @include icon(print, .975em); }
+	#{unquote($base-class)}.locked{ @include icon(locked, .975em); }
+	#{unquote($base-class)}.un-locked{ @include icon(un-locked, .975em); }
+	#{unquote($base-class)}.folder{ @include icon(folder, .975em); }
+	#{unquote($base-class)}.folder-open{ @include icon(folder-open, .975em); }
+	#{unquote($base-class)}.document{ @include icon(document, .975em); }
+	#{unquote($base-class)}.document-alt{ @include icon(document-alt, .975em); }
+	#{unquote($base-class)}.address-book{ @include icon(address-book, .975em); }
+	#{unquote($base-class)}.mail{ @include icon(mail, .975em); }
+	#{unquote($base-class)}.mail-open{ @include icon(mail-open, .975em); }
+	#{unquote($base-class)}.briefcase{ @include icon(briefcase, .975em); }
+	#{unquote($base-class)}.bubble-square{ @include icon(bubble-square, .975em); }
+	#{unquote($base-class)}.bubble{ @include icon(bubble, .975em); }
+	#{unquote($base-class)}.bubbles{ @include icon(bubbles, .975em); }
+	#{unquote($base-class)}.tag{ @include icon(tag, .975em); }
+	#{unquote($base-class)}.house{ @include icon(house, .975em); }
+	#{unquote($base-class)}.flag{ @include icon(flag, .975em); }
+	#{unquote($base-class)}.calendar{ @include icon(calendar, .975em); }
+	#{unquote($base-class)}.cart{ @include icon(cart, .975em); }
+	#{unquote($base-class)}.clock{ @include icon(clock, .975em); }
+	#{unquote($base-class)}.disk{ @include icon(disk, .975em); }
+	#{unquote($base-class)}.buildings{ @include icon(buildings, .975em); }
+	#{unquote($base-class)}.zoom-in{ @include icon(zoom-in, .975em); }
+	#{unquote($base-class)}.zoom-out{ @include icon(zoom-out, .975em); }
+	#{unquote($base-class)}.search{ @include icon(search, .975em); }
+	#{unquote($base-class)}.wrench{ @include icon(wrench, .975em); }
+	#{unquote($base-class)}.gear{ @include icon(gear, .975em); }
+	#{unquote($base-class)}.heart{ @include icon(heart, .975em); }
+	#{unquote($base-class)}.star{ @include icon(star, .975em); }
+	#{unquote($base-class)}.link{ @include icon(link, .975em); }
+	#{unquote($base-class)}.plus{ @include icon(plus, .975em); }
+	#{unquote($base-class)}.minus{ @include icon(minus, .975em); }
+	#{unquote($base-class)}.key{ @include icon(key, .975em); }
+	#{unquote($base-class)}.bulb{ @include icon(bulb, .975em); }
+	#{unquote($base-class)}.scissors{ @include icon(scissors, .975em); }
+	#{unquote($base-class)}.clipboard{ @include icon(clipboard, .975em); }
+	#{unquote($base-class)}.paste{ @include icon(paste, .975em); }
+	#{unquote($base-class)}.vcard{ @include icon(vcard, .975em); }
+	#{unquote($base-class)}.image{ @include icon(image, .975em); }
+	#{unquote($base-class)}.film{ @include icon(film, .975em); }
+	#{unquote($base-class)}.alert{ @include icon(alert, .975em); }
+	#{unquote($base-class)}.info{ @include icon(info, .975em); }
+	#{unquote($base-class)}.exclamation{ @include icon(exclamation, .975em); }
+	#{unquote($base-class)}.question{ @include icon(question, .975em); }
+	#{unquote($base-class)}.pin-right{ @include icon(pin-right, .975em); }
+	#{unquote($base-class)}.pin-down{ @include icon(pin-down, .975em); }
+	#{unquote($base-class)}.right-round{ @include icon(right-round, .975em); }
+	#{unquote($base-class)}.down-round{ @include icon(down-round, .975em); }
+	#{unquote($base-class)}.left-round{ @include icon(left-round, .975em); }
+	#{unquote($base-class)}.up-round{ @include icon(up-round, .975em); }
+	#{unquote($base-class)}.zoom-in-round{ @include icon(zoom-in-round, .975em); }
+	#{unquote($base-class)}.zoom-out-round{ @include icon(zoom-out-round, .975em); }
+	#{unquote($base-class)}.plus-square{ @include icon(plus-square, .975em); }
+	#{unquote($base-class)}.minus-square{ @include icon(minus-square, .975em); }
+	#{unquote($base-class)}.cross-square{ @include icon(cross-square, .975em); }
+	#{unquote($base-class)}.plus-square-dark{ @include icon(plus-square-dark, .975em); }
+	#{unquote($base-class)}.minus-square-dark{ @include icon(minus-square-dark, .975em); }
+	#{unquote($base-class)}.cross-square-dark{ @include icon(cross-square-dark, .975em); }
+	#{unquote($base-class)}.refresh-e{ @include icon(refresh-e, .975em); }
+	#{unquote($base-class)}.refresh-w{ @include icon(refresh-w, .975em); }
+	#{unquote($base-class)}.transfer{ @include icon(transfer, .975em); }
+	#{unquote($base-class)}.refresh{ @include icon(refresh, .975em); }
+	#{unquote($base-class)}.refresh-alt{ @include icon(refresh-alt, .975em); }
+	#{unquote($base-class)}.headphones{ @include icon(headphones, .975em); }
+	#{unquote($base-class)}.text-justify{ @include icon(text-justify, .975em); }
+	#{unquote($base-class)}.text-left-align{ @include icon(text-left-align, .975em); }
+	#{unquote($base-class)}.text-centered{ @include icon(text-centered, .975em); }
+	#{unquote($base-class)}.text-right-align{ @include icon(text-right-align, .975em); }
+	#{unquote($base-class)}.bold{ @include icon(bold, .975em); }
+	#{unquote($base-class)}.italic{ @include icon(italic, .975em); }
+	#{unquote($base-class)}.ribbon{ @include icon(ribbon, .975em); }
+	#{unquote($base-class)}.camera{ @include icon(camera, .975em); }
+	#{unquote($base-class)}.spinner{ @include icon(spinner, .975em); }
+	#{unquote($base-class)}.note{ @include icon(note, .975em); }
+	#{unquote($base-class)}.gift{ @include icon(gift, .975em); }
+}

@@ -12,18 +12,22 @@
 	}
 
 	@include border-radius($radius);
+	border-color:darken($color, 10%);
 	border-top:1px solid darken($color, 10%);
-	@include box-shadow(rgba(0,0,0,.1) 0 0 3px 0 inset);
+	@include box-shadow(lighten($color, 30%) 0 1px 1px 0 inset);
 	background-color:$color;
+	text-shadow:darken($color, 5%) 0px 1px 0px;
 	@include background-image(linear-gradient(lighten($color, 5%), $color 25%, darken($color, 10%)));
 	
 	&:hover{
 		background-color:lighten($color, 7%);
+		@include box-shadow(lighten($color, 20%) 0 1px 1px 0 inset);
 		@include background-image(linear-gradient(lighten($color, 7%), lighten($color, 3%) 25%, darken($color, 5%)));
 	}
 	
 	&:active{
 		background-color:darken($color, 7%);
+		@include box-shadow($color 0 1px 1px 0 inset);
 		@include background-image(linear-gradient(darken($color, 7%), darken($color, 3%) 25%, darken($color, 10%)));
 	}
 }

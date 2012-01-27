@@ -16,6 +16,7 @@
 @import 'facades/patterns/pills';
 @import 'facades/patterns/twipsy';
 @import 'facades/buttons';
+@import 'facades/icons';
 
 $facades-global-import-used: true;
 
@@ -48,6 +49,12 @@ div.tabbed{
 	}
 }
 
+ul, ol{
+	&.inline-list{
+		@include inline-list;
+	}
+	
+}
 
 .button, input[type=button], input[type=submit]{
 	@include simple-button;
@@ -58,3 +65,5 @@ div.tabbed{
 		@include gradient-button;
 	}
 }
+
+@include icon-classes('.icon');

@@ -2,8 +2,18 @@ require 'active_support/all'
 require 'facades/version'
 
 module Facades
+  extend self
   autoload :Helpers,  'facades/helpers'
   autoload :Patterns, 'facades/patterns'
+  
+  def scss_path
+    File.expand_path("../../src", __FILE__) << "/scss"
+  end
+  
+  def image_path
+    File.expand_path("../../src", __FILE__) << "/images"
+  end
+  
 end
 
 require 'facades/sass_extensions'
