@@ -26,6 +26,10 @@ $transition-duration: .2s !default;
 
 $icon-font-family:'FacadesRegular' !default; // the font family to use for icons.
 
+$link-color: #00e !default;
+$link-visited-color: darken($link-color, 5%) !default;
+$link-hover-color: lighten($link-color, 5%) !default;
+
 // 
 // General colors
 // --------------------------

@@ -183,24 +183,24 @@ address {
 	line-height: $line-height;
 }
 
-pre {
-	padding: 0 3px 2px;
-}
-
 code {
-	padding: 1px 3px;
+	@include font-size($font-size * .9);
+	@include leading(1, $font-size + 1px);
+	padding:1px .5em;
+	position:relative;
+	top:-1px;
 }
 
 pre {
 	display: block;
-	padding: ($line-height - 1) / 2;
-	margin: 0 0 $line-height / 2;
-	font-size: 12px;
-	line-height: $line-height;
+	@include margins(0 1, 12px);
+	@include font-size(12px);
 	white-space: pre;
 	white-space: pre-wrap;
 	word-break: break-all;
-
+	padding:rhythm(0.5);
+	border-style:solid;
+	
 	code {
 		padding: 0;
 		background-color: transparent;

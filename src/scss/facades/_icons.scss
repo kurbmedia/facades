@@ -132,10 +132,10 @@ $legacy-icon-format: false !default;
 	#{unquote($base-class)}.refresh{ @include icon(refresh, .975em); }
 	#{unquote($base-class)}.refresh-alt{ @include icon(refresh-alt, .975em); }
 	#{unquote($base-class)}.headphones{ @include icon(headphones, .975em); }
-	#{unquote($base-class)}.justify{ @include icon(text-justify, .975em); }
-	#{unquote($base-class)}.left-align{ @include icon(text-left-align, .975em); }
-	#{unquote($base-class)}.centered{ @include icon(text-centered, .975em); }
-	#{unquote($base-class)}.right-align{ @include icon(text-right-align, .975em); }
+	#{unquote($base-class)}.justify{ @include icon(justify, .975em); }
+	#{unquote($base-class)}.left-align{ @include icon(left-align, .975em); }
+	#{unquote($base-class)}.centered{ @include icon(centered, .975em); }
+	#{unquote($base-class)}.right-align{ @include icon(right-align, .975em); }
 	#{unquote($base-class)}.bold{ @include icon(bold, .975em); }
 	#{unquote($base-class)}.italic{ @include icon(italic, .975em); }
 	#{unquote($base-class)}.ribbon{ @include icon(ribbon, .975em); }
