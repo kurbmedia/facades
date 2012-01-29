@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en" id="ie7"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en" id="ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" lang="en"><!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Facades: Demo Page</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="" />
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<!-- pre-fetch dns info for external sites -->
+	<link rel="dns-prefetch" href="//ajax.googleapis.com" />
+	<!-- 'pinned' sites in IE ( see: http://html5boilerplate.com/docs/head-Tips/ ) -->	
+	<meta name="application-name" content="" />
+	<meta name="msapplication-tooltip" content="" />
+	<!-- Facebook open graph ( seff: http://developers.facebook.com/docs/share ) -->
+	<meta property="og:title" content="" />
+	<meta property="og:description" content="" />
+	<meta property="og:image" content="" />		
+	<link rel="stylesheet" href="assets/prettify.css" />	
+	<script src="assets/prettify.js"></script>
+	<link rel="stylesheet" href="assets/screen.css" />
+	
+	<!--[if lte IE 8]> 
+		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<!--[if lte IE 7]> 
+		<link rel="stylesheet" href="assets/ie7.css" />
+	<![endif]-->
+</head>
+<body>
+	<div id="wrapper">
+		<header id="heading">
+			<nav id="main_navigation" role="navigation">
+				<ul class="inline-list">
+					<li><a href="/facades"><span class="icon info">Overview</span></a></li>
+					<li><a href="/facades/demo.html"><span class="icon arrow-right-light">Demo</span></a></li>
+					<li><a href="/facades/helpers.html"><span class="icon gear">Helpers</span></a></li>
+					<li><a href="/facades/icons.html"><span class="icon ribbon">Icons</span></a></li>
+				</ul>
+			</nav>
+		</header>
+		<div id="main" role="main">
+			<hgroup>
+				<h1 class="headline">Facades</h1>
+				<h2>Front-end awesomeness, with Compass and SASS</h2>
+			</hgroup>
+			<h1 class="headline">Facades</h1>
+<p>All elements are set to a vertical rhythm wherever possible. To assist with this facades provides a number of 
+functions and mixins for setting margin and padding values based on a consistent leading.	
+</p>
+
+<section id="typography">
+	<h2 class="headline">Typography</h2>
+	<div>
+		<h2>Heading 2</h2>
+		<p>Lorem <span class="label">label</span> dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+	</div>
+    <div>
+      	<h3>Heading 3</h3>
+		<p>Nullam quis risus eget <span class='label success'>success</span> mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+		<p>Vivamus lacus vel augue laoreet rutrum faucibus dolor auctor. </p>
+	</div>
+    <div>
+		<h1>h1. Heading 1</h1>
+		<h2>h2. Heading 2</h2>
+		<h3>h3. Heading 3</h3>
+		<h4>h4. Heading 4</h4>
+		<h5>h5. Heading 5</h5>
+		<h6>h6. Heading 6</h6>
+	</div>
+	<div class="clear">
+		<h3>Unordered Lists</h3>
+		<ul>
+			<li>Lorem ipsum dolor sit amet</li>
+			<li>Consectetur adipiscing elit</li>
+			<li>Integer molestie lorem at massa</li>
+			<li>Facilisis in <span class='label error'>error</span> nisl aliquet</li>
+			<li>Nulla volutpat aliquam velit
+				<ul>
+					<li>Phasellus iaculis neque</li>
+					<li>Purus sodales ultricies</li>
+					<li>Vestibulum laoreet porttitor sem</li>
+					<li>Ac tristique libero volutpat at</li>
+				</ul>
+			</li>
+			<li>Faucibus porta lacus fringilla vel</li>
+			<li>Aenean sit amet erat nunc</li>
+			<li>Eget porttitor lorem</li>
+		</ul>			
+	</div>	
+	<div>
+		<h3>Ordered Lists</h3>
+		<ol>
+			<li>Lorem ipsum dolor sit amet</li>
+			<li>Consectetur adipiscing elit</li>
+			<li>Integer molestie lorem at massa</li>
+			<li>Facilisis in pretium nisl aliquet</li>
+			<li>Nulla volutpat aliquam velit
+		</ol>
+	</div>
+	<div>
+		<h3>Block or bullet-less lists</h3>
+		<ul class="block">
+			<li>Lorem ipsum dolor sit amet</li>
+			<li>Consectetur adipiscing elit</li>
+			<li>Integer molestie lorem at massa</li>
+			<li>Facilisis in pretium nisl aliquet</li>
+			<li>Nulla volutpat aliquam velit
+				<ul>
+					<li>Phasellus iaculis neque</li>
+					<li>Purus sodales ultricies</li>
+					<li>Vestibulum laoreet porttitor sem</li>
+					<li>Ac tristique libero volutpat at</li>
+				</ul>
+			</li>
+			<li>Faucibus porta lacus fringilla vel</li>
+			<li>Aenean sit amet erat nunc</li>
+			<li>Eget porttitor lorem</li>
+		</ul>
+	</div>
+	<div class="last">
+		<h3>Definition List</h3>
+		<dl>
+			<dt>Description lists</dt>
+			<dd>A description list is perfect for defining terms.</dd>
+			<dt>Euismod</dt>
+			<dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+			<dt>Malesuada porta</dt>
+			<dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+		</dl>
+	</div>	
+</section>
+<section id="tables">
+	<h2 class="headline">Regular Tables</h2>
+	<table border="0">
+		<thead>
+			<tr>
+				<th width="40%">Header</th>
+				<th>Another Header</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Even tables by default adhere to a vertical rhythm, keeping everything nice and consistent.</td>
+				<td>Data</td>
+			</tr>
+			<tr>
+				<td>Data</td>
+				<td>Data</td>
+			</tr>
+			<tr>
+				<td>Data</td>
+				<td>Data</td>
+			</tr>
+		</tbody>
+	</table>
+	<h2 class="headline">Border Tables</h2>
+	<table class="bordered">
+		<thead>
+			<tr>
+				<th>Header</th>
+				<th>Another Header</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Data</td>
+				<td>Data</td>
+			</tr>
+			<tr>
+				<td>Data</td>
+				<td>Data</td>
+			</tr>
+			<tr>
+				<td>Data</td>
+				<td>Data</td>
+			</tr>
+		</tbody>
+	</table>
+	<h2 class="headline">Stripe Tables</h2>
+	<table class="striped">
+		<thead>
+			<tr>
+				<th>Header</th>
+				<th>Another Header</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Data</td>
+				<td>Data</td>
+			</tr>
+			<tr>
+				<td>Data</td>
+				<td>Data</td>
+			</tr>
+			<tr>
+				<td>Data</td>
+				<td>Data</td>
+			</tr>
+		</tbody>
+	</table>
+</section>
+<section id="notifications">
+	<h1 class="headline">Alerts and Notifications</h1>
+	<p>Basic alerts and flash messages.</p>
+	
+	<div class="alert">
+		This is a basic alert message, no color styles. <span class="close">x</span>
+	</div>
+	<div class="alert notice">
+		This is a notice alert message, for normal information. <span class="close">x</span>
+	</div>
+	<div class="alert success">
+		This is a success alert message, green because everything went awesome. <span class="close">x</span>
+	</div>
+	<div class="alert error">
+		This is a error alert message, red cus something went terribly wrong. <span class="close">x</span>
+	</div>
+	<div class="alert warning">
+		This is a warning alert message, its not terrible, but not good either. <span class="close">x</span>
+	</div>
+</section>
+<section id="forms">
+	<h2 class="headline">Forms &amp; Buttons</h2>
+	<form action="#">
+		<ul class="columns">
+			<li>
+				<label for="text_field">Text Field</label>
+				<input type="text" name="text_field" value="" id="text_field" />				
+			</li>
+			<li>
+				<label for="email_field">Email Field</label>
+				<input type="email" name="email_field" value="" id="email_field" />
+				<span class="hint">Please enter a valid email address</span>
+			</li>
+			<li>
+				<label for="disabled_field">Disabled Field</label>
+				<input type="text" name="disabled_field" value="" id="disabled_field" disabled />
+			</li>
+			<li>
+				<label for="single_select">Single Select</label>
+				<select name="single_select" id="single_select">				
+					<option value="option">Please select...</option>
+				</select>
+			</li>
+			<li class="clear">
+				<label for="multi_select">Multiple Select</label>
+				<select name="multi_select" id="multi_select" size="5">				
+					<option value="option">Option number 1</option>
+					<option value="option">Option number 2</option>
+					<option value="option">Option number 3</option>
+					<option value="option">Option number 4</option>
+					<option value="option">Option number 5</option>
+				</select>
+			</li>
+			<li>
+				<label for="invalid_field">Invalid Field</label>
+				<input type="text" name="invalid_field" value="" id="invalid_field" class="invalid" />
+				<span class="hint">Please enter a valid email address</span>
+			</li>
+			<li class="option-group">
+				<label>
+					<input type="radio" name="grouped_radio" value="1" id="radio" />
+					Option 1
+				</label>
+				<label>
+					<input type="radio" name="grouped_radio" value="2" id="radio" />
+					Option 2
+				</label>
+				<label>
+					<input type="radio" name="grouped_radio" value="3" id="radio" />
+					Option 3
+				</label>
+			</li>
+			<li>
+				<input type="checkbox" name="checkbox" value="1" id="checkbox" />
+				<label for="checkbox">Checkbox</label>
+			</li>
+			<li>
+				<input type="radio" name="radio" value="1" id="radio" />
+				<label for="radio">Radio</label>
+			</li>
+			<li class="clear">
+				<button class="button">Simple Button</button>
+				<button class="large button">Large Button</button>
+				<button class="glossy button">Glossy Button</button>
+				<button class="glossy large button">Large Glossy Button</button>
+				<button class="gradient button">Gradient Button</button>
+				<button class="gradient large button">Large Gradient Button</button>
+			</li>
+		</ul>
+	</form>
+</section>
+<section id="tabs">
+	<h2 class="headline">Tab &amp; Pill Navigations</h2>
+	<div class="tabbed">
+		<ul class="tab-navigation" data-pattern="tab">
+			<li class="active">
+				<a href="#tab1">Active Tab</a>
+			</li>
+			<li>
+				<a href="#tab2">Second Tab</a>
+			</li>
+			<li>
+				<a href="#tab3">Third Tab</a>
+			</li>
+		</ul>
+		<section class="tab active" id="tab1">
+			<h3>This is some content for the first tab.</h3>
+			<p>Nullam quis risus eget mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+			<p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p>
+		</section>
+		<section class="tab" id="tab2">
+			<h3>This is some content for the second tab.</h3>
+			<p>Nullam quis risus eget mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+			<p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p>
+		</section>
+		<section class="tab" id='tab3'>
+			<h3>This is some content for the third tab.</h3>
+			<p>Nullam quis risus eget mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+			<p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p>
+		</section>
+	</div>
+	<div class="tabbed">
+		<ul class="pill-navigation" data-pattern="pill">
+			<li class="active">
+				<a href="#pill1">Active Tab</a>
+			</li>
+			<li>
+				<a href="#pill2">Second Tab</a>
+			</li>
+			<li>
+				<a href="#pill3">Third Tab</a>
+			</li>
+		</ul>
+		<section class="tab active" id="pill1">
+			<h3>This is some content for the first tab.</h3>
+			<p>Nullam quis risus eget mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+			<p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p>
+		</section>
+		<section class="tab" id="pill2">
+			<h3>This is some content for the second tab.</h3>
+			<p>Nullam quis risus eget mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+			<p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p>
+		</section>
+		<section class="tab" id='pill3'>
+			<h3>This is some content for the third tab.</h3>
+			<p>Nullam quis risus eget mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+			<p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p>
+		</section>
+	</div>
+</section>
+		</div>
+		<footer id="footer">
+
+		</footer>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="assets/site.js"></script>
+	<!--[if lt IE 7 ]>
+		<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+		<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+	<![endif]-->
+	<script type="text/javascript">
+	//<![CDATA[
+		$(function(){
+			prettyPrint();
+		});
+	//]]>
+	</script>
+</body>
+</html>

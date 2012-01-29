@@ -21,6 +21,8 @@
 	<meta property="og:title" content="" />
 	<meta property="og:description" content="" />
 	<meta property="og:image" content="" />		
+	<link rel="stylesheet" href="assets/prettify.css" />	
+	<script src="assets/prettify.js"></script>
 	<link rel="stylesheet" href="assets/screen.css" />
 	
 	<!--[if lte IE 8]> 
@@ -32,14 +34,32 @@
 </head>
 <body>
 	<div id="wrapper">
-		<header>
-
+		<header id="heading">
+			<nav id="main_navigation" role="navigation">
+				<ul class="inline-list">
+					<li><a href="/facades"><span class="icon info">Overview</span></a></li>
+					<li><a href="/facades/demo.html"><span class="icon arrow-right-light">Demo</span></a></li>
+					<li><a href="/facades/helpers.html"><span class="icon gear">Helpers</span></a></li>
+					<li><a href="/facades/icons.html"><span class="icon ribbon">Icons</span></a></li>
+				</ul>
+			</nav>
 		</header>
 		<div id="main" role="main">
-			<h1 class="headline">Facades</h1>
-<p>Front-end awesomeness, with Compass and SASS</p>
-<div id="icons">
-	<h2 class="headline">Icon Test - Accessibility <small>class names optional</small></h2>
+			<hgroup>
+				<h1 class="headline">Facades</h1>
+				<h2>Front-end awesomeness, with Compass and SASS</h2>
+			</hgroup>
+			<section id="icons">
+	<h2 class="headline">Accessible Font-Face Icons <small>class names optional</small></h2>
+	<p class="intro">Facades includes a @font-face friendly icon set, using the unicode private range (U+e00+) for all of its glyphs. This 
+	way you can join in on all of the font-icon madness like the other cool kids do, but in a screen-reader friendly manner. 
+	Since icons aren't mapped to standard letters/numbers/punctuation, a <code>icon</code> mixin is included. 
+	</p>
+	<p class="intro">If you'd like to have all of the classes below, you can include the <code>icon-classes</code> mixin in your top-level stylesheet.</p>
+<pre class="prettyprint language-css">
+// The icon-classes takes a single argument which represents the selector to 'scope' all icons to.
+@include icon-classes("span.icon") 
+</pre>
 	<p>
 		<span class="icon address-book">.address-book</span>
 		<span class="icon alert">.alert</span>
@@ -154,9 +174,9 @@
 		<span class="icon zoom-out">.zoom-out</span>
 		<span class="icon zoom-out-round">.zoom-out-round</span>
 	</p>
-</div>
+</section>
 		</div>
-		<footer>
+		<footer id="footer">
 
 		</footer>
 	</div>
@@ -166,5 +186,12 @@
 		<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
 		<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
 	<![endif]-->
+	<script type="text/javascript">
+	//<![CDATA[
+		$(function(){
+			prettyPrint();
+		});
+	//]]>
+	</script>
 </body>
 </html>

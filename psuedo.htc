@@ -1,0 +1,74 @@
+<public:attach event="ondocumentready" onevent="Psuedo()" />
+<script>
+/**
+ *	Psuedo - V0.1
+ *	------------------------------------------------------------
+ *	body { behavior:url("psuedo.htc"); }
+ *	------------------------------------------------------------
+ */
+
+window.Psuedo = (function(){
+
+	var Psuedo = {
+		CONTENT: /content\s*:\s*([^;]*)(;|$)/,
+	    MATCH: /(.*):(before|after)(.*)}$/ig,
+		
+		init: function(){
+			// don't run in IE8 standards
+			if(!(/msie (5|6|7)/i).test(navigator.userAgent) && !(/backcompat/i).test(window.document.compatMode)) {
+				return;
+			}
+			
+			var sheets = window.document.styleSheets, i, ii, matches;
+			
+			for( i = 0; i < sheets.length; i++ ){
+				if( sheets[i].href == "" ) continue;
+				console.log(sheets[i].cssText.match(Psuedo.CONTENT));
+				matches = sheets[i].cssText.match(Psuedo.CONTENT);
+				if( matches ){
+					for( ii = 0; ii < matches.length; ii++ ){
+						Psuedo.parseContent(matches[ii], sheets[i].cssText);
+					}
+				}
+			}
+		},
+		
+		parseContent: function(selector, css){	
+			console.log(selector);		
+			// var content = cssText.match(Psuedo.CONTENT), match, entity;
+			// 		      if (content) {
+			// 		        content = content[1];
+			// 		        match = content.split(/\s+/);
+			// 		        for (var i = 0; (entity = match[i]); i++) {
+			// 		          match[i] = /^attr/.test(entity) ? {attr: entity.slice(5, -1)} :
+			// 		            entity.charAt(0) === "'" ? getString(entity) : decode(entity);
+			// 		        }
+			// 		        content = match;
+			// 		      }
+			// 		      this.content = content;
+			
+		},
+		
+		patch: function(node, content, klass){
+			
+		}
+	};
+	
+
+	/**
+	 *	Public hook
+	 *	--------------------------
+	 */
+	
+	return function(node, type, className, property) {
+		if(node) {
+			// called via the css expression; patches individual nodes
+			return Psuedo.patch(node, content, klass);
+		} else {
+			// called ondomcontentready via the public:attach node
+			Psuedo.init();
+		}
+	};
+
+})();
+</script>
