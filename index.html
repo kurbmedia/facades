@@ -32,15 +32,15 @@
 		<link rel="stylesheet" href="assets/ie7.css" />
 	<![endif]-->
 </head>
-<body>
+<body id="home">
 	<div id="wrapper">
 		<header id="heading">
 			<nav id="main_navigation" role="navigation">
 				<ul class="inline-list">
-					<li><a href="/facades"><span class="icon info">Overview</span></a></li>
-					<li><a href="/facades/demo.html"><span class="icon arrow-right-light">Demo</span></a></li>
-					<li><a href="/facades/helpers.html"><span class="icon gear">Helpers</span></a></li>
-					<li><a href="/facades/icons.html"><span class="icon ribbon">Icons</span></a></li>
+					<li><a class="home" href="/facades"><span class="icon info">Overview</span></a></li>
+					<li><a class="demo" href="/facades/demo.html"><span class="icon arrow-right-light">Demo</span></a></li>
+					<li><a class="helpers" href="/facades/helpers.html"><span class="icon gear">Helpers</span></a></li>
+					<li><a class="icons" href="/facades/icons.html"><span class="icon ribbon">Icons</span></a></li>
 				</ul>
 			</nav>
 		</header>
@@ -50,6 +50,89 @@
 				<h2>Front-end awesomeness, with Compass and SASS</h2>
 			</hgroup>
 			
+<p>Facades is a framework, written in SASS (.scss) designed to assist with front-end development rapid prototyping. It includes a number of base classes, patterns and mixins, 
+focused on semantic html, and styled around a consistent vertical rhythm. </p>
+
+<p><strong class="block">Another one? Come on</strong>
+Theres tons of css / rapid dev frameworks around, and some pretty awesome ones including 
+<a href="http://bootstrap.io">Twitter's Bootstrap</a> and <a href="http://foundation.zurb.com">foundation</a>. We took inspiration from 
+each of these to create a more standards based solution writtenfor HTML5 and designed around a clean baseline rhythm.</p>
+
+<p><strong class="block">Why not just use one of the existing frameworks then?</strong>
+We wanted something that was more standards friendly where at all possible, and felt as though a lot of what was out there missed the mark. We've
+utilized the concepts that worked, and scrapped a few that didn't. Keeping a clean vertical rhythm was also important, which 
+wasn't available with anything existing at the time.</p>
+
+<p>Facades also utilizes the fantastic <a href="https://github.com/chriseppstein/compass">Compass library</a> to add additional function and flexiblity. 
+This helps increase the functionality and reliability of the framework as a whole.</p>
+
+<p>Most of the patterns included here are written using sass mixins, with configuration options for fonts, sizes, and colors.
+For instance, the notifications pattern (alerts/flash messages) is implemented as a mixin, allowing the developer to decide their own node and class 
+scheme to use. This makes facades easier to implement in existing projects, without having to change existing classes or html format.</p>
+
+<p>When implementing patterns color schemes are provided as an option, for those instances where you'd prefer your own class names and design.</p>
+
+<p>For those who just want to import and go, theres also a <code>_globals.scss</code> which creates all of the defaults, with classes and all. To utilize, import it into your main css file.</p>
+
+<pre class="prettyprint language-css">
+@import 'facades/global';
+</pre>
+
+<p>If you'd like to configure any particular variables such as sizes or line heights, do so before importing the global file.</p>
+<section>
+	<h3>Reset and Configuration</h3>
+	<p>Facades implements the awesome <a href="https://github.com/h5bp/html5-boilerplate">HTML5 Boilerplate</a> reset/normalize stylesheet to establish a 
+	grounds for which to expand upon. Common colors, sizes and line-heights are fully configurable using the variables found in <code>_config.scss</code>.</p>
+	
+	<p>The more common options you probably want to configure are:</p>
+	<ul class="block config-vars">
+		<li>$font-color: The body/default font color.</li>
+		<li>$font-size: The base font size, also used when calculating vertical rhythm</li>
+		<li>$line-height: The base line-height, combined with <code>$font-size</code> establishes a baseline and sets up the vertical-rhythm</li>
+		<li>$font-family: The base font-family</li>
+		<li>$notice-color: The color used for .notice alerts labels, blue by default</li>
+		<li>$success-color: The color used for .success labels and alerts, green by default</li>
+		<li>$error-color: The color used for :invalid fields, .error labels and alerts, red by default</li>
+		<li>$warning-color: The color used for .warning labels and alerts, yellow by default</li>
+		<li>$input-border-color: The default color used for form elements, grey by default.</li>
+		<li>$input-focus-color: The font color used when an input is focused, defaults to <code>$font-color</code></li>
+		<li>$input-focus-border-color: The border color used for inputs when in a :focus state. Defaults to <code>$notice-color</code></li>
+		<li>$input-error-color: The font color used for inputs in an :invalid or .error state. Defaults to red.</li>
+		<li>$input-error-border-color: The border color used for inputs in an :invalid or .error state. Defaults to <code>$error-color</code>.</li>
+	</ul>
+</section>
+<section>
+	<h3>Contributing</h3>
+	<p>Fork and create. When coding styles or ruby libs, adhere to a 2 space indention. Patterns should be written as mixins, with a 
+	default class construction in <code>_global.scss</code>. Colors should be configurable, either by using one of the colors included in <code>_config.scss</code>
+	(preferred) or by 'namespaced' variable (ie: $patternname-border-color). </p>
+
+	<p>Pre-built classes / styles should be as lightweight as possible and avoid css hacks. We encourage support of Paul Irish's class conventions 
+	found <a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">here</a>. CSS overrides for IE should utilize this technique. 
+	Styles should confirm to a vertical-rhythm as much as possible (some things seem to always be off a hair in IE (who would have thought)).</p>
+
+	<p>Document patterns with html examples, which should utilize HTML5 elements, in an intended/semantic manner. </p>
+</section>
+<section>
+	<h3>Thanks</h3>
+
+	<p>Thanks to the fine folks who work on the HTML5 Boilerplate, the Compass library and contributors, and the hundreds of 
+	random people who've blogged the tons and tons of google search results we've read in creating this library.</p>
+</section>
+<section>
+	<h3>Licence</h3>
+
+	<p>
+		Copyright 2012 kurb media llc. <br />
+		MIT/GPL ( do whatever you want, but check the licenses below )
+	</p>
+
+	<p>
+		<strong>Components:</strong><br />
+		Compass: MIT (modified)<br />
+		HTML5 Boilerplate reset.css: Public Domain
+	</p>
+</section>
 		</div>
 		<footer id="footer">
 
