@@ -1,16 +1,33 @@
 @import 'facades/config';
 
+$legacy-icon-format: false !default;
+
 @mixin icon($name, $size: $font-size){
-	&:before{
-		font-family:$icon-font-family;
-		@include icon-content($name);
-		display:inline;
-		font-size:$size;
+	@if $legacy-icon-format{
+		*background-image:expression(this.runtimeStyle.backgroundImage="none",this.innerHTML = '<i class="ie7-psuedo-icon" style="font-style:normal; font-family:#{$icon-font-family};">#{icon-glyph($name, true)}</i>'+this.innerHTML);
+	}@else{
+		&::before{
+			font-family:$icon-font-family;
+			@include icon-content($name);
+			display:inline;
+			font-size:$size;
+		}	
 	}
 }
 
 @mixin icon-content($name){
 	content:'#{icon-glyph($name)}';
+}
+
+@mixin legacy-icon-classes($base-class: '.icon'){
+	$o-format: $legacy-icon-format;
+	$legacy-icon-format: true;
+	@include icon-classes($base-class);
+	i.ie7-psuedo-icon{
+		display:inline-block;
+		display:inline;
+	}
+	$legacy-icon-format: $o-format;
 }
 
 @mixin icon-classes($base-class:'.icon'){
@@ -115,10 +132,10 @@
 	#{unquote($base-class)}.refresh{ @include icon(refresh, .975em); }
 	#{unquote($base-class)}.refresh-alt{ @include icon(refresh-alt, .975em); }
 	#{unquote($base-class)}.headphones{ @include icon(headphones, .975em); }
-	#{unquote($base-class)}.text-justify{ @include icon(text-justify, .975em); }
-	#{unquote($base-class)}.text-left-align{ @include icon(text-left-align, .975em); }
-	#{unquote($base-class)}.text-centered{ @include icon(text-centered, .975em); }
-	#{unquote($base-class)}.text-right-align{ @include icon(text-right-align, .975em); }
+	#{unquote($base-class)}.justify{ @include icon(text-justify, .975em); }
+	#{unquote($base-class)}.left-align{ @include icon(text-left-align, .975em); }
+	#{unquote($base-class)}.centered{ @include icon(text-centered, .975em); }
+	#{unquote($base-class)}.right-align{ @include icon(text-right-align, .975em); }
 	#{unquote($base-class)}.bold{ @include icon(bold, .975em); }
 	#{unquote($base-class)}.italic{ @include icon(italic, .975em); }
 	#{unquote($base-class)}.ribbon{ @include icon(ribbon, .975em); }

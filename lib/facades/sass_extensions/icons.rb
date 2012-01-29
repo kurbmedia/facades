@@ -9,13 +9,15 @@ module Facades
         
       end
 
-      def icon_glyph(name)
+      def icon_glyph(name, use_entity = false)
         name  = name.to_s
         value = icon_translations[name]
         if value.nil?
           raise Sass::SyntaxError, "The icon '#{name}' does not exist."
         end
-        Sass::Script::String.new("\\#{value}")
+        ## So we can support IE7 (TODO: Add time spent to ongoing invoice for microsoft)
+        value = (use_entity ? "&#x#{value};" : "\\#{value}")
+        Sass::Script::String.new(value)
       end
       
       private

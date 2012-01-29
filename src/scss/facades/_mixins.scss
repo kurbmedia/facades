@@ -1,6 +1,6 @@
-$legacy-support-for-ie8: true;
-$legacy-support-for-ie7: true;
-$experimental-support-for-svg: true;
+$legacy-support-for-ie8: true !default;
+$legacy-support-for-ie7: true !default;
+$experimental-support-for-svg: true !default;
 
 @import 'facades/config';
 @import 'facades/mixins/rhythm';
@@ -9,23 +9,21 @@ $experimental-support-for-svg: true;
 
 // Custom opacity mixin, uses whole numbers instead of floats.
 @mixin opacity($opacity: 100) {
-	filter:("alpha(opacity=%d)", $opacity);
-	-moz-opacity: $opacity / 100;
+	@if $legacy-support-for-ie7{
+		filter: alpha(opacity=#{$opacity});
+	}
+	@if $legacy-support-for-ie8{
+		-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$opacity})";
+	}	
 	opacity: $opacity / 100;
 }
 
 // Cross browser inline-block implementations
-// We use this instead of the built-in compass version to opt-out of the
-// css hacks.
-@mixin inline-block($align: middle){
-	&.lt-ie8{ 
-		display: inline; 
-		vertical-align: auto
-	} 	
-	display: -moz-inline-box;
-	-moz-box-orient: vertical;
+@mixin inline-block($align: middle){		
 	display: inline-block;
 	vertical-align: $align;
+	*display: inline; 
+	*vertical-align: auto;
 }
 
 @mixin clipped{

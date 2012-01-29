@@ -24,7 +24,7 @@ form{
 	
 	ul.columns, ol.columns{
 		@include clearfix;		
-		li{ float:left;
+		li{ float:left; 
 			margin-right:1.5em;
 			&.clear{ 
 				clear:both; }
@@ -33,6 +33,7 @@ form{
 	
 	li{ 
 		@include padding(0 1);		
+		display:block;
 	}
 
 	
@@ -117,32 +118,33 @@ select{
 	height:rhythm(1.2);
 	margin-top:border-rhythm(1px, .4);
 	margin-bottom:border-rhythm(1px, .5);
-	
-	&[size]{
-		display:block;
-		@include box-sizing(content-box);
-		margin-top:border-rhythm(1px, .3);
-		margin-bottom:border-rhythm(1px, .6);
-		padding-top:rhythm(.1);
-		height:auto;
-	}
-	
-	@for $i from 1 through 10{
-		&[size='#{$i}']{
-			height:($line-height * $i);
-		}
-	}
-	
 	option{
 		padding-right:32px;
 	}
 }
 
 select[size]{
+	border-style:solid;
+	display:block;
+	@include box-sizing(content-box);
+	margin-top:border-rhythm(1px, .3);
+	margin-bottom:border-rhythm(1px, .6);
+	padding-top:rhythm(.1);
+	height:auto;
 	option{
 		text-indent:.3em;
 	}
 }
+
+select{
+	@for $i from 1 through 10{
+		&[size='#{$i}']{
+			height:($line-height * $i);
+		}
+	}
+}
+
+
 
 // boolean inputs are inline-block. 
 // if labels follow them (instead of wrapped) those are inline-block as well.

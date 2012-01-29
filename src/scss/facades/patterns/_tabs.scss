@@ -16,7 +16,7 @@
 		display:none;
 	}
 	
-	.tab.active{
+	& > .tab.active{
 		display:block;
 		// padding the tab content keeps the rhythm intact because of margin collapsing
 		padding-top:rhythm(.5); 

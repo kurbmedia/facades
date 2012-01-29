@@ -56,6 +56,14 @@ ul, ol{
 	
 }
 
+html.lt-ie8{
+	ul, ol{
+		&.inline-list li{
+			display:inline;
+		}
+	}
+}
+
 .button, input[type=button], input[type=submit]{
 	@include simple-button;
 	&.glossy{
@@ -65,5 +73,3 @@ ul, ol{
 		@include gradient-button;
 	}
 }
-
-@include icon-classes('.icon');

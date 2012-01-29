@@ -2,15 +2,15 @@
 @mixin inline-list{
 	white-space:nowrap;
 	list-style:none;
-	display:block;
-	
+	display:block;	
 	li{
-		@include inline-block;
-		white-space:normal;
+		@include inline-block;		
 	}
 	
 	li a{ 
 		display:block;
+		white-space:normal;
+		@include inline-block;
 	}
 	
 }
