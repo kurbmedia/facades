@@ -25,6 +25,16 @@ module Facades
         if link.active?
           link.options = Navigator.merge_html_classes('active', link.options)
         end
+        if wrapper = options.delete(:wrapper)
+          if wrapper.is_a?(Hash)
+            wrap_attrs = wrapper
+            wrapper    = :li
+          else
+            wrap_attrs = {}
+            wrap_attrs.merge!(:class => "active") if link.active?
+          end
+          return content_tag(wrapper, link_to(link.text, link.href, link.options), )
+        end
         link_to(link.text, link.href, link.options)
       end
       
@@ -161,6 +171,7 @@ module Facades
           return ( (href =~ matcher).to_i >= 1 ) if matcher.is_a?(Regexp)
           match_path = matcher.to_s.sub(/^\//, '')
           href_path  = href.to_s.sub(/^\//, '')
+          return false if href_path.blank? && !match_path.blank?
           (match_path == href_path || match_path.match(/#{href_path}\/\w/i))
         end
         

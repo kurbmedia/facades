@@ -177,6 +177,14 @@ html.lt-ie9{
 	hr{ margin-bottom:.4em; }
 }
 
+
+// useful for using email addresses in text. type the text
+// in reverse and apply this style.
+span.rev, a.rev{
+	unicode-bidi: bidi-override; 
+	direction: rtl
+}
+
 address {
 	display: block;
 	margin-bottom: $line-height;
