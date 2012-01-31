@@ -1,0 +1,97 @@
+@import 'facades/mobile/config';
+@import 'facades/mixins';
+
+@mixin button{
+	@include background-clip(padding-box);
+	@include border-radius($button-border-radius);
+	@include display-box;
+  @include box-align(center);
+  min-height: $button-height !important;
+	padding: .3em .6em;
+	position: relative;
+	overflow: hidden;
+
+	&.icon {
+		width: 2.1em;
+		height: 2.1em;
+		background-repeat: no-repeat;
+		background-position: center;
+		display: block;
+	}
+	
+	&.icon-mask {
+		width: 1.3em;
+		height: 1.3em;
+		-webkit-mask-size: 1.3em;
+	}
+	
+	&.disabled{
+		.label, .icon{
+			opacity:.5;
+		}
+	}
+
+  &.round {
+		@include border-radius($button-height/2);
+		padding: .1em $button-height/2;
+	}
+
+  &.small{
+		@include border-radius(.3em);
+    padding: .2em .4em;
+    min-height: 0;
+
+		.label {
+      font-size: .6em;
+    }
+
+		.icon {
+			width: .75em;
+			height: .75em;
+		}
+	}
+
+  // Aligns icons to either the left or right side
+  &.icon-left, &.icon-right{
+    @include box-orient(horizontal);
+    @include box-direction(reverse);
+  }
+
+  &.icon-top, &.icon-bottom{
+    @include box-orient(vertical);
+  }
+
+  &.icon-bottom, &.icon-right {
+    @include box-direction(normal);
+  }
+  
+	&.icon-bottom {
+    @include box-direction(reverse);
+  }
+
+	&.icon-center {
+		@include box-pack(center);
+	}
+  
+	&.icon-left .label {
+    margin-left: 2em;
+  }
+  
+	&.icon-right .label {
+		margin-right: 2em;
+  }
+
+  // Labels
+	.label {
+		@include box-flex(1);
+		@include box-align(center);
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		text-align: center;
+		font-weight: bold;
+		line-height: 1.2em;
+		display: block;
+		overflow: hidden;
+	}
+  
+}

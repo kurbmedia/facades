@@ -27,6 +27,12 @@ body{
 
 @include establish-baseline($font-size);
 
+// links
+a { color: $link-color; }
+a:visited { color: $link-visited-color; }
+a:hover { color: $link-hover-color; }
+a:focus { outline: thin dotted; }
+
 h1, h2, h3, h4, h5, h6 {	
 	margin:0;
 	font-weight: bold;	

@@ -1,0 +1,21 @@
+// 
+// Panels
+// All "pages" within the application are considered 'panels'.
+// The content within each panel should be dictated by the class
+// .panel-content
+// ----------------------------------------------------------------------------------------
+
+@mixin panel{
+	position:relative;
+	width: 100%;
+  height: 100%;
+
+	& > .panel-content{
+		-webkit-box-flex: 1;
+	  min-width: 100%;
+	  min-height: 100%;
+	  position: relative;
+		-webkit-overflow-scrolling: touch;
+		overflow: auto;
+	}
+}

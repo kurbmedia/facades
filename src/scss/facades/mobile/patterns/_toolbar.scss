@@ -1,0 +1,24 @@
+// 
+// Toolbar
+// Styling for top-docked toolbars
+// ----------------------------------------------------------------------------------------
+
+@import 'facades/mobile/mixins';
+
+@mixin toolbar{
+	height: $row-height;
+	padding: 0 .5em;
+	overflow: hidden;
+	position: relative;
+
+	& > * {
+		z-index: 1;
+	}
+
+	&.docked{
+		@include docked;
+	}
+
+	@include toolbar-title;
+	
+}

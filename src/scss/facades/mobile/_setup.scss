@@ -1,0 +1,29 @@
+@import 'facades/setup';
+@import 'facades/mobile/mixins';
+
+html, body {
+    width: 100%;
+    height: 100%;
+		font-weight: normal;
+	  position: relative;
+		overflow:hidden;
+		-webkit-overflow-scrolling: none;
+	  -webkit-text-size-adjust: none;
+}
+
+
+body.ios {
+  -webkit-backface-visibility: hidden;
+	&.phone{
+		font-size: 114%;
+	}
+}
+
+body.android.phone {
+  font-size: 116%;
+}
+
+
+body.desktop {
+  font-size: 114%;
+}

@@ -1,0 +1,20 @@
+// 
+// Navbar
+// Styling for navigation bars. Generally used as top toolbars
+// ----------------------------------------------------------------------------------------
+
+@import 'facades/mobile/mixins';
+
+@mixin navbar{
+	height: $row-height;
+	padding: 0 .5em;
+	overflow: hidden;
+	position: relative;
+	
+	&.docked{
+		@include docked;
+	}
+	
+	@include toolbar-title;
+	
+}
