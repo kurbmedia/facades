@@ -73,3 +73,7 @@ html.lt-ie8{
 		@include gradient-button;
 	}
 }
+
+.icon-16{ @include icon-rect(16px); }
+.icon-32{ @include icon-rect(32px); }
+.icon-24{ @include icon-rect(24px); }

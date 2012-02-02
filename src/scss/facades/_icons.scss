@@ -1,137 +1,62 @@
 @import 'facades/config';
+@import 'facades/icons/classes';
+@import 'facades/icons/legacy';
 
-$legacy-icon-format: false !default;
+/*
+	CSS Psuedo font-face icons
+	Creates an inline font-face icon using $icon-font-family.
+	------------------------------------------------------------------
+*/
 
-@mixin icon($name, $size: $font-size * 1.75){
-	@if $legacy-icon-format{
-		*background-image:expression(this.runtimeStyle.backgroundImage="none",this.innerHTML = '<i class="ie7-psuedo-icon" style="font-style:normal; font-family:#{$icon-font-family};">#{icon-glyph($name, true)}</i>'+this.innerHTML);
-	}@else{
-		&::before{
+@mixin icon($name, $size: $font-size, $psuedo: before, $adjust-sizing: true){
+	@if unquote($size) == before or unquote($size) == after{
+		$psuedo: $size;
+		$size: $font-size;
+	}
+	
+	$psuedo:unquote($psuedo);
+	
+	@if $legacy-icon-format{ @include icon-expression($name, $size, $psuedo); }
+	@else{
+		&:#{$psuedo}{
 			font-family:$icon-font-family;
-			@include icon-content($name);
-			display:inline;
-			font-size:$size;
+			@include icon-content($name);			
 		}	
+	}
+	
+}
+
+@mixin icon-before($name, $size: $font-size){
+	@include icon($name, $size, before);
+}
+
+@mixin icon-after($name, $size: $font-size){
+	@include icon($name, $size, after);
+}
+
+
+
+// Creates a square sprite-like icon 
+@mixin icon-rect($size: 24px, $name: false){
+	&{
+		overflow:hidden;
+		width:$size;
+		height:$size;
+		text-indent:$size + 5px;
+		@include leading(1, $font-size);
+		white-space:nowrap;
+	}
+	
+	&:before{
+		line-height:$size;
+		font-size:$size;
+		line-height:$size;		
+		position:relative;
+		left:-($size + 5px);
+		@if $name{ @include icon-content($name); }		
 	}
 }
 
 @mixin icon-content($name){
 	content:'#{icon-glyph($name)}';
-}
-
-@mixin legacy-icon-classes($base-class: '.icon'){
-	$o-format: $legacy-icon-format;
-	$legacy-icon-format: true;
-	@include icon-classes($base-class);
-	i.ie7-psuedo-icon{
-		display:inline-block;
-		display:inline;
-	}
-	$legacy-icon-format: $o-format;
-}
-
-@mixin icon-classes($base-class:'.icon'){
-	#{unquote($base-class)}.add-document{ @include icon(add-document); }
-	#{unquote($base-class)}.align-center{ @include icon(align-center); }
-	#{unquote($base-class)}.align-left{ @include icon(align-left); }
-	#{unquote($base-class)}.align-right{ @include icon(align-right); }
-	#{unquote($base-class)}.arrow-down{ @include icon(arrow-down); }
-	#{unquote($base-class)}.arrow-down-dark{ @include icon(arrow-down-dark); }
-	#{unquote($base-class)}.arrow-down-light{ @include icon(arrow-down-light); }
-	#{unquote($base-class)}.arrow-left{ @include icon(arrow-left); }
-	#{unquote($base-class)}.arrow-left-dark{ @include icon(arrow-left-dark); }
-	#{unquote($base-class)}.arrow-left-light{ @include icon(arrow-left-light); }
-	#{unquote($base-class)}.arrow-right{ @include icon(arrow-right); }
-	#{unquote($base-class)}.arrow-right-dark{ @include icon(arrow-right-dark); }
-	#{unquote($base-class)}.arrow-right-light{ @include icon(arrow-right-light); }
-	#{unquote($base-class)}.arrow-up{ @include icon(arrow-up); }
-	#{unquote($base-class)}.arrow-up-dark{ @include icon(arrow-up-dark); }
-	#{unquote($base-class)}.arrow-up-light{ @include icon(arrow-up-light); }
-	#{unquote($base-class)}.battery{ @include icon(battery); }
-	#{unquote($base-class)}.battery-charging{ @include icon(battery-charging); }
-	#{unquote($base-class)}.battery-full-charge{ @include icon(battery-full-charge); }
-	#{unquote($base-class)}.battery-half-charge{ @include icon(battery-half-charge); }
-	#{unquote($base-class)}.binder{ @include icon(binder); }
-	#{unquote($base-class)}.book{ @include icon(book); }
-	#{unquote($base-class)}.calendar{ @include icon(calendar); }
-	#{unquote($base-class)}.camera{ @include icon(camera); }
-	#{unquote($base-class)}.cancel{ @include icon(cancel); }
-	#{unquote($base-class)}.cart{ @include icon(cart); }
-	#{unquote($base-class)}.check{ @include icon(check); }
-	#{unquote($base-class)}.check-dark{ @include icon(check-dark); }
-	#{unquote($base-class)}.check-light{ @include icon(check-light); }
-	#{unquote($base-class)}.clock{ @include icon(clock); }
-	#{unquote($base-class)}.comment{ @include icon(comment); }
-	#{unquote($base-class)}.comment-dark{ @include icon(comment-dark); }
-	#{unquote($base-class)}.delete{ @include icon(delete); }
-	#{unquote($base-class)}.delete-document{ @include icon(delete-document); }
-	#{unquote($base-class)}.delete-round{ @include icon(delete-round); }
-	#{unquote($base-class)}.document{ @include icon(document); }
-	#{unquote($base-class)}.edit-document{ @include icon(edit-document); }
-	#{unquote($base-class)}.eject{ @include icon(eject); }
-	#{unquote($base-class)}.facebook{ @include icon(facebook); }
-	#{unquote($base-class)}.facebook-dark{ @include icon(facebook-dark); }
-	#{unquote($base-class)}.fast-forward{ @include icon(fast-forward); }
-	#{unquote($base-class)}.flag{ @include icon(flag); }
-	#{unquote($base-class)}.folder{ @include icon(folder); }
-	#{unquote($base-class)}.folder-open{ @include icon(folder-open); }
-	#{unquote($base-class)}.gear{ @include icon(gear); }
-	#{unquote($base-class)}.gift{ @include icon(gift); }
-	#{unquote($base-class)}.globe{ @include icon(globe); }
-	#{unquote($base-class)}.headphones{ @include icon(headphones); }
-	#{unquote($base-class)}.heart{ @include icon(heart); }
-	#{unquote($base-class)}.image{ @include icon(image); }
-	#{unquote($base-class)}.info{ @include icon(info); }
-	#{unquote($base-class)}.iphone{ @include icon(iphone); }
-	#{unquote($base-class)}.ipod{ @include icon(ipod); }
-	#{unquote($base-class)}.link{ @include icon(link); }
-	#{unquote($base-class)}.lock{ @include icon(lock); }
-	#{unquote($base-class)}.mail{ @include icon(mail); }
-	#{unquote($base-class)}.mail-open{ @include icon(mail-open); }
-	#{unquote($base-class)}.maximize{ @include icon(maximize); }
-	#{unquote($base-class)}.minimize{ @include icon(minimize); }
-	#{unquote($base-class)}.minus{ @include icon(minus); }
-	#{unquote($base-class)}.minus-round{ @include icon(minus-round); }
-	#{unquote($base-class)}.paperclip{ @include icon(paperclip); }
-	#{unquote($base-class)}.pause{ @include icon(pause); }
-	#{unquote($base-class)}.pencil{ @include icon(pencil); }
-	#{unquote($base-class)}.person{ @include icon(person); }
-	#{unquote($base-class)}.pin{ @include icon(pin); }
-	#{unquote($base-class)}.play{ @include icon(play); }
-	#{unquote($base-class)}.play-button{ @include icon(play-button); }
-	#{unquote($base-class)}.plus{ @include icon(plus); }
-	#{unquote($base-class)}.plus-round{ @include icon(plus-round); }
-	#{unquote($base-class)}.print{ @include icon(print); }
-	#{unquote($base-class)}.push-pin{ @include icon(push-pin); }
-	#{unquote($base-class)}.quote-left{ @include icon(quote-left); }
-	#{unquote($base-class)}.quote-right{ @include icon(quote-right); }
-	#{unquote($base-class)}.refresh{ @include icon(refresh); }
-	#{unquote($base-class)}.reload{ @include icon(reload); }
-	#{unquote($base-class)}.rewind{ @include icon(rewind); }
-	#{unquote($base-class)}.rss{ @include icon(rss); }
-	#{unquote($base-class)}.rss-dark{ @include icon(rss-dark); }
-	#{unquote($base-class)}.scissors{ @include icon(scissors); }
-	#{unquote($base-class)}.search{ @include icon(search); }
-	#{unquote($base-class)}.pie-chart{ @include icon(pie-chart); }
-	#{unquote($base-class)}.spinner{ @include icon(spinner); }
-	#{unquote($base-class)}.star{ @include icon(star); }
-	#{unquote($base-class)}.stop{ @include icon(stop); }
-	#{unquote($base-class)}.tag{ @include icon(tag); }
-	#{unquote($base-class)}.tag-alt{ @include icon(tag-alt); }	
-	#{unquote($base-class)}.tools{ @include icon(tools); }
-	#{unquote($base-class)}.transfer{ @include icon(transfer); }
-	#{unquote($base-class)}.trash{ @include icon(trash); }
-	#{unquote($base-class)}.twitter{ @include icon(twitter); }
-	#{unquote($base-class)}.twitter-dark{ @include icon(twitter-dark); }
-	#{unquote($base-class)}.unlock{ @include icon(unlock); }
-	#{unquote($base-class)}.vcard{ @include icon(vcard); }
-	#{unquote($base-class)}.volume-high{ @include icon(volume-high); }
-	#{unquote($base-class)}.volume-low{ @include icon(volume-low); }
-	#{unquote($base-class)}.volume-off{ @include icon(volume-off); }
-	#{unquote($base-class)}.warning{ @include icon(warning); }
-	#{unquote($base-class)}.wrench{ @include icon(wrench); }
-	#{unquote($base-class)}.zoom-in{ @include icon(zoom-in); }
-	#{unquote($base-class)}.bar-chart{ @include icon(bar-chart); }
-	#{unquote($base-class)}.zoom-out{ @include icon(zoom-out); }
-	#{unquote($base-class)}.ribbon{ @include icon(ribbon); }
 }

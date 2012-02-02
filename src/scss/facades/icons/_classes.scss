@@ -1,0 +1,125 @@
+@import 'facades/config';
+
+@mixin icon-classes($base-class:'.icon', $names: false){
+	#{unquote($base-class)}{
+		
+		&:before{
+			font-family:$icon-font-family;
+		}
+		
+		@if type-of($names) == list{
+			
+			@each $ico in $names{
+				$ico: unquote($ico);
+				&.#{$ico}{ @include icon($ico); }
+			}
+			
+		}@else{
+			
+			&.add-document:before{ @include icon-content(add-document); }
+			&.align-center:before{ @include icon-content(align-center); }
+			&.align-left:before{ @include icon-content(align-left); }
+			&.align-right:before{ @include icon-content(align-right); }
+			&.arrow-down:before{ @include icon-content(arrow-down); }
+			&.arrow-down-dark:before{ @include icon-content(arrow-down-dark); }
+			&.arrow-down-light:before{ @include icon-content(arrow-down-light); }
+			&.arrow-left:before{ @include icon-content(arrow-left); }
+			&.arrow-left-dark:before{ @include icon-content(arrow-left-dark); }
+			&.arrow-left-light:before{ @include icon-content(arrow-left-light); }
+			&.arrow-right:before{ @include icon-content(arrow-right); }
+			&.arrow-right-dark:before{ @include icon-content(arrow-right-dark); }
+			&.arrow-right-light:before{ @include icon-content(arrow-right-light); }
+			&.arrow-up:before{ @include icon-content(arrow-up); }
+			&.arrow-up-dark:before{ @include icon-content(arrow-up-dark); }
+			&.arrow-up-light:before{ @include icon-content(arrow-up-light); }
+			&.battery:before{ @include icon-content(battery); }
+			&.battery-charging:before{ @include icon-content(battery-charging); }
+			&.battery-full-charge:before{ @include icon-content(battery-full-charge); }
+			&.battery-half-charge:before{ @include icon-content(battery-half-charge); }
+			&.binder:before{ @include icon-content(binder); }
+			&.book:before{ @include icon-content(book); }
+			&.calendar:before{ @include icon-content(calendar); }
+			&.camera:before{ @include icon-content(camera); }
+			&.cancel:before{ @include icon-content(cancel); }
+			&.cart:before{ @include icon-content(cart); }
+			&.check:before{ @include icon-content(check); }
+			&.check-dark:before{ @include icon-content(check-dark); }
+			&.check-light:before{ @include icon-content(check-light); }
+			&.clock:before{ @include icon-content(clock); }
+			&.comment:before{ @include icon-content(comment); }
+			&.comment-dark:before{ @include icon-content(comment-dark); }
+			&.delete:before{ @include icon-content(delete); }
+			&.delete-document:before{ @include icon-content(delete-document); }
+			&.delete-round:before{ @include icon-content(delete-round); }
+			&.document:before{ @include icon-content(document); }
+			&.edit-document:before{ @include icon-content(edit-document); }
+			&.eject:before{ @include icon-content(eject); }
+			&.facebook:before{ @include icon-content(facebook); }
+			&.facebook-dark:before{ @include icon-content(facebook-dark); }
+			&.fast-forward:before{ @include icon-content(fast-forward); }
+			&.flag:before{ @include icon-content(flag); }
+			&.folder:before{ @include icon-content(folder); }
+			&.folder-open:before{ @include icon-content(folder-open); }
+			&.gear:before{ @include icon-content(gear); }
+			&.gift:before{ @include icon-content(gift); }
+			&.globe:before{ @include icon-content(globe); }
+			&.headphones:before{ @include icon-content(headphones); }
+			&.heart:before{ @include icon-content(heart); }
+			&.image:before{ @include icon-content(image); }
+			&.info:before{ @include icon-content(info); }
+			&.iphone:before{ @include icon-content(iphone); }
+			&.ipod:before{ @include icon-content(ipod); }
+			&.link:before{ @include icon-content(link); }
+			&.lock:before{ @include icon-content(lock); }
+			&.mail:before{ @include icon-content(mail); }
+			&.mail-open:before{ @include icon-content(mail-open); }
+			&.maximize:before{ @include icon-content(maximize); }
+			&.minimize:before{ @include icon-content(minimize); }
+			&.minus:before{ @include icon-content(minus); }
+			&.minus-round:before{ @include icon-content(minus-round); }
+			&.paperclip:before{ @include icon-content(paperclip); }
+			&.pause:before{ @include icon-content(pause); }
+			&.pencil:before{ @include icon-content(pencil); }
+			&.person:before{ @include icon-content(person); }
+			&.pin:before{ @include icon-content(pin); }
+			&.play:before{ @include icon-content(play); }
+			&.play-button:before{ @include icon-content(play-button); }
+			&.plus:before{ @include icon-content(plus); }
+			&.plus-round:before{ @include icon-content(plus-round); }
+			&.print:before{ @include icon-content(print); }
+			&.push-pin:before{ @include icon-content(push-pin); }
+			&.quote-left:before{ @include icon-content(quote-left); }
+			&.quote-right:before{ @include icon-content(quote-right); }
+			&.refresh:before{ @include icon-content(refresh); }
+			&.reload:before{ @include icon-content(reload); }
+			&.rewind:before{ @include icon-content(rewind); }
+			&.rss:before{ @include icon-content(rss); }
+			&.rss-dark:before{ @include icon-content(rss-dark); }
+			&.scissors:before{ @include icon-content(scissors); }
+			&.search:before{ @include icon-content(search); }
+			&.pie-chart:before{ @include icon-content(pie-chart); }
+			&.spinner:before{ @include icon-content(spinner); }
+			&.star:before{ @include icon-content(star); }
+			&.stop:before{ @include icon-content(stop); }
+			&.tag:before{ @include icon-content(tag); }
+			&.tag-alt:before{ @include icon-content(tag-alt); }	
+			&.tools:before{ @include icon-content(tools); }
+			&.transfer:before{ @include icon-content(transfer); }
+			&.trash:before{ @include icon-content(trash); }
+			&.twitter:before{ @include icon-content(twitter); }
+			&.twitter-dark:before{ @include icon-content(twitter-dark); }
+			&.unlock:before{ @include icon-content(unlock); }
+			&.vcard:before{ @include icon-content(vcard); }
+			&.volume-high:before{ @include icon-content(volume-high); }
+			&.volume-low:before{ @include icon-content(volume-low); }
+			&.volume-off:before{ @include icon-content(volume-off); }
+			&.warning:before{ @include icon-content(warning); }
+			&.wrench:before{ @include icon-content(wrench); }
+			&.zoom-in:before{ @include icon-content(zoom-in); }
+			&.bar-chart:before{ @include icon-content(bar-chart); }
+			&.zoom-out:before{ @include icon-content(zoom-out); }
+			&.ribbon:before{ @include icon-content(ribbon); }
+		}
+	}
+
+}

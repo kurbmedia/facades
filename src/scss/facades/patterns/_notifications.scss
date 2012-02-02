@@ -8,8 +8,7 @@
 @mixin alert($with-color: true){
 	
 	@include margins(1);
-	padding:border-rhythm(1px, .5) rhythm(1.25);
-	padding-left:rhythm(1);
+	padding:border-rhythm(1px, .5) rhythm(1.25) border-rhythm(1px, .5) rhythm(1);
 	@include leading(1);
 	border-width: 1px;
 	border-style: solid;

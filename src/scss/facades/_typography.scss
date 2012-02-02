@@ -13,12 +13,6 @@
 	
 */
 
-*{
-	-webkit-margin-before: 0px;
-	-webkit-margin-after: 0px;
-	-webkit-margin-start: 0px;
-	-webkit-margin-end: 0px;
-}
 
 
 body{ 
@@ -194,7 +188,7 @@ address {
 }
 
 code {
-	@include font-size($font-size * .9);
+	font-size:$font-size * .9;
 	@include leading(1, $font-size + 1px);
 	padding:1px .5em;
 	position:relative;

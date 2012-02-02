@@ -1,6 +1,7 @@
 $legacy-support-for-ie8: true !default;
 $legacy-support-for-ie7: true !default;
-$experimental-support-for-svg: true !default;
+$experimental-support-for-svg: false !default;
+$experimental-support-for-khtml: false !default;
 
 @import 'facades/config';
 @import 'facades/mixins/rhythm';
@@ -26,11 +27,24 @@ $experimental-support-for-svg: true !default;
 	*vertical-align: auto;
 }
 
+//
+// Clip properties
+// Creates a clip rect, including IE specific version.
+//
 @mixin clipped{
-	clip:rect(1px 1px 1px 1px);
-	clip:rect(1px, 1px, 1px, 1px); // Stupid IE
-	position: absolute;	
+	@include clip(1px, 1px, 1px, 1px);
 }
+
+@mixin clip($top: 1px, $right: 1px, $bottom: 1px, $left: 1px, $shape: rect, $abs: true){
+	$shape:unquote($shape);
+	
+	clip: unquote("#{$shape}(#{$top}, #{$right}, #{$bottom}, #{$left})"); 
+	@if $legacy-support-for-ie{
+		clip: unquote("#{$shape}(#{$top} #{$right} #{$bottom} #{$left})"); // Stupid IE
+	}
+	@if $abs{ position: absolute;	}
+}
+
 
 // basic gradient styles based on type, gradient types are: bevel, glossy, recessed, matte
 @mixin gradient-style($color, $type: matte) {
