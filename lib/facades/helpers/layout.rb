@@ -7,6 +7,21 @@ module Facades
     module Layout
       
       ##
+      # Returns a short-hand string identifying the current browser
+      # 
+      def browser_name
+        uastr = request.user_agent.to_s
+        return "webkit"  if uastr =~ /(webkit)[ \/]([\w.]+)/i
+        return "opera"   if uastr =~ /(opera)(?:.*version)?[ \/]([\w.]+)/i
+        if matches = uastr.match(/(msie) ([\w.]+)/i)
+          version = (matches[2]||0).to_i
+          return "ie#{version}"
+        end
+        return "mozilla" if uastr =~ /(mozilla)(?:.*? rv:([\w.]+))?/i    
+        "unknown"
+      end
+      
+      ##
       # 
       # Allows easy assigning of meta tags from templates
       # @param [Symbol] name Name of the meta tag (ie: keywords / description)
