@@ -43,36 +43,44 @@ h1, h2, h3, h4, h5, h6 {
 	}
 }
 
+@function _heading_size($num){
+	$sizes: $heading-font-sizes;
+	$orig: 30px 24px 18px 14px;
+	
+	@if $num > length($sizes){ @return nth($orig, $num); }
+	@return nth($sizes, $num);
+}
+
 h1 {
-	@include font-size(30px, 2);
+	@include font-size(_heading_size(1), 2);
 	&.headline{
-		@include leading(1, 30px);
-		@include margins(1, 30px);
+		@include leading(1, _heading_size(1));
+		@include margins(1, _heading_size(1));
 	}
 }
 
 h2 {
-	@include font-size(24px);
-	@include margins(.5, 24px);
+	@include font-size(_heading_size(2));
+	@include margins(.5, _heading_size(2));
 	&.headline{
-		@include margins(1, 24px);
+		@include margins(1, _heading_size(2));
 	}
 	
 }
 
 h3 {
-	@include font-size(18px);
-	@include margins(.5, 18px);
+	@include font-size(_heading_size(3));
+	@include margins(.5, _heading_size(3));
 	&.headline{
-		@include margins(.5, 18px);
+		@include margins(.5, _heading_size(3));
 	}
 
 }
 
 
 h4 {
-	@include font-size(14px);
-	@include margins(.5, 14px);
+	@include font-size(_heading_size(4));
+	@include margins(.5, _heading_size(4));
 
 }
 

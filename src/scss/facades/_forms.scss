@@ -81,7 +81,7 @@ fieldset legend{
 }
 
 #{input-types(text)},
-select{
+select, textarea{
 	@include box-shadow(#efefef 3px 3px 6px 0px inset);
 	border-style:solid;
 	border-width:1px;
@@ -107,7 +107,7 @@ input[type=file], #{input-types(boolean)}, select{
 	}
 }
 
-#{input-types(text)}{
+#{input-types(text)}, textarea{
 	@include border-radius($input-border-radius);
 	margin:border-rhythm(1px, .25) 0;
 	padding:rhythm(.25) .25em;
