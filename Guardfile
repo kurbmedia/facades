@@ -16,3 +16,4 @@ guard 'rspec', {
   watch(%r{/lib/facades/patterns/(.+)\.rb$})  { |m| "spec/unit/patterns/#{m[1]}_spec.rb" }
 end
 
+guard 'coffeescript', :input => 'src/javascript', :output => 'app/assets/javascripts/', :all_on_start => true

@@ -6,6 +6,7 @@ group :development do
 end
 
 group :test do
+  gem 'guard-coffeescript'
   gem 'growl'
   gem 'guard'
   gem 'guard-rspec'

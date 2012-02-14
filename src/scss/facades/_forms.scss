@@ -82,7 +82,7 @@ fieldset legend{
 
 #{input-types(text)},
 select, textarea{
-	@include box-shadow(#efefef 3px 3px 6px 0px inset);
+	@include optional-box-shadow($input-box-shadow);
 	border-style:solid;
 	border-width:1px;
 	border-color:$input-border-color;
@@ -94,7 +94,7 @@ select, textarea{
 	
 	&:focus{
 		border-color:$input-focus-border-color;
-		@include box-shadow(rgba($input-focus-border-color, .6) 0 0 5px 0);
+		@include optional-box-shadow($input-focus-box-shadow);
 	}
 	
 }
@@ -108,13 +108,13 @@ input[type=file], #{input-types(boolean)}, select{
 }
 
 #{input-types(text)}, textarea{
-	@include border-radius($input-border-radius);
-	margin:border-rhythm(1px, .25) 0;
-	padding:rhythm(.25) .25em;
-	@include leading(1);	
+	@include optional-border-radius($input-border-radius);
+	margin:border-rhythm(1px, .35) 0;
+	padding:rhythm(.15) .25em;
+	@include leading(1);
 }
 
-select{ 
+select{ 	
 	height:rhythm(1.2);
 	margin-top:border-rhythm(1px, .4);
 	margin-bottom:border-rhythm(1px, .5);
@@ -136,8 +136,8 @@ select[size]{
 	}
 }
 
-select{
-	@for $i from 1 through 10{
+select[size]{
+	@for $i from 1 through 8{
 		&[size='#{$i}']{
 			height:($line-height * $i);
 		}

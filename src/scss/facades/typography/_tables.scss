@@ -74,3 +74,22 @@ tbody + tbody {
 		}
 	}
 }
+
+// Compressed tables
+// --------------------------------
+
+@mixin compressed-table{
+	&{ @include margins(0 1.5); }
+	
+	th {
+		padding:rhythm(.25) rhythm(.4, $font-size) rhythm(.25);
+		font-weight: bold;
+		vertical-align: bottom;
+	}
+
+	td {
+		padding:border-rhythm(1px, .25) rhythm(.4, $font-size) rhythm(.25);
+		vertical-align: top;
+	}
+	
+}

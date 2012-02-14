@@ -64,6 +64,10 @@ $input-error-border-color:  	$error-color !default;
 $input-border-radius:					3px !default;
 $input-disabled-color:      	#ccc;
 $input-disabled-border-color: #ddd;
+
+$input-box-shadow:						#efefef 3px 3px 6px 0px inset !default;
+$input-focus-box-shadow:			rgba($input-focus-border-color, .6) 0 0 5px 0 !default;
+
 $field-hint-color: #aaa;
 
 // 

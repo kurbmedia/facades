@@ -19,6 +19,20 @@ $experimental-support-for-khtml: false !default;
 	opacity: $opacity / 100;
 }
 
+// Custom box-shadow mixin to skip false or none values
+@mixin optional-box-shadow($props){
+	@if $props != false and $props != none{
+		@include border-radius($props);
+	}
+}
+
+// Custom border-radius mixin to skip false or none values
+@mixin optional-border-radius($props){
+	@if $props != false and $props != none{
+		@include border-radius($props);
+	}
+}
+
 // Cross browser inline-block implementations
 @mixin inline-block($align: middle){		
 	display: inline-block;

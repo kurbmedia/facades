@@ -36,6 +36,10 @@ table.striped{
 	@include striped-table;
 }
 
+table.compressed{
+	@include compressed-table;
+}
+
 div.tabbed{
 	@include tabbed;
 	.tab-navigation, .pill-navigation{
