@@ -5,6 +5,7 @@
 	display:block;	
 	letter-spacing: -4px;
 	word-spacing:-4px;
+	margin-left:0;
 	
 	li{
 		@include inline-block;
