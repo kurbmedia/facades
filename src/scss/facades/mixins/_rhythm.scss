@@ -23,11 +23,11 @@ $base-line-height: $line-height;
 @mixin spacing($type: margin, $lines: 1, $size: $font-size){
 	$type:unquote($type);
 	@if type-of($lines) == list{
-		@include leader(nth($lines, 1), $size);
-		@include trailer(nth($lines, 2), $size); }
+		@include leader(nth($lines, 1), $size, $type);
+		@include trailer(nth($lines, 2), $size, $type); }
 	@else{
-		@include leader($lines, $size);
-		@include trailer($lines, $size); }
+		@include leader($lines, $size, $type);
+		@include trailer($lines, $size, $type); }
 }
 
 

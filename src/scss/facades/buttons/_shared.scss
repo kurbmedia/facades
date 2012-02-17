@@ -9,20 +9,19 @@
 	@include inline-block;
 	@include box-shadow(none);
 	@include box-sizing(border-box);
-	$button-font-size: $font-size * 0.95;
 	@include font-size($button-font-size);		
 	margin:border-rhythm(1px, .2, $button-font-size) 0;
 	padding:rhythm(.3, $button-font-size) 1em;	
-	@include border-radius($radius);
+	@include optional-border-radius($radius);
 	
 	@include transition-property(all);
 	@include transition-duration(0.15s);
 	@include transition-timing-function(ease-in-out);
 	
 	&.large{
-		$button-font-size: $font-size * 1.1;
-		@include font-size($button-font-size);	
-		padding:border-rhythm(1px, .5, $button-font-size) 1.5em;
+		$bsize: $font-size * 1.1;
+		@include font-size($bsize);	
+		padding:border-rhythm(1px, .5, $bsize) 1.5em;
 		margin-top:0;
 		margin-bottom:0;
 	}

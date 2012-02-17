@@ -1,7 +1,7 @@
 $base-color: #7c92ae;
 $gradient-style: glossy;
 
-@import 'facades/mobile';
+@import 'facades/mobile/global';
 
 .toolbar{
 	@include gradient-style($base-color, $gradient-style);

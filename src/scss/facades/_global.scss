@@ -81,3 +81,29 @@ html.lt-ie8{
 .icon-16{ @include icon-rect(16px); }
 .icon-32{ @include icon-rect(32px); }
 .icon-24{ @include icon-rect(24px); }
+
+form{ 
+	@include form;
+	
+	ul, ol{
+		@include field-list;
+	}
+	
+	ul.columns, ol.columns{
+		@include field-column-list;
+	}
+	
+	li.select-group, fieldset.select-group{
+		@include select-group;
+	}
+}
+
+@include form-fields;
+
+input.invalid, textarea.invalid, select.invalid{
+	@include invalid-field;
+}
+
+fieldset{ 
+	@include fieldset;
+}

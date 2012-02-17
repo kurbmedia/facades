@@ -92,3 +92,12 @@ $experimental-support-for-khtml: false !default;
 	$light-shadow: rgba(255,255,255,.25) 0 .08em 0;
 	text-shadow:if(luminance($color) == light, $dark-shadow, $light-shadow);
 }
+
+// creates an empty psuedo element
+@mixin pseudo-element($width: 0, $height: auto, $content: "", $display: block, $position: absolute){
+    content: $content;
+    @if ($position != default){ position: $position; }
+    @if ($display != default){ display: $display; }
+    @if ($width != auto){ width: $width; }
+    @if ($height != auto){ height: $height; }
+}

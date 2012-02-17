@@ -11,7 +11,7 @@
 			
 			@each $ico in $names{
 				$ico: unquote($ico);
-				&.#{$ico}{ @include icon-content($ico); }
+				&.#{$ico}:before{ @include icon-content($ico); }
 			}
 			
 		}@else{

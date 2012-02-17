@@ -10,9 +10,10 @@
 	padding: 0 .5em;
 	overflow: hidden;
 	position: relative;
-
+	z-index:100;
+	
 	& > * {
-		z-index: 1;
+		z-index: 110;
 	}
 
 	&.docked{

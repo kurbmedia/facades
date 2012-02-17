@@ -1,19 +1,25 @@
 @import 'compass/css3';
 
-@mixin docked{
+@mixin docked($pos: false){
 	position:absolute;
 	left:0px;
 	right:0px;
 	
-	&.top{
-		top:0px;
-		border-bottom: .1em solid;
+	@if $pos != false{
+		@if unquote($pos) == top{ top:0px; border-bottom:.1em solid; }
+		@else { bottom:0px; border-top:.1em solid; }
 	}
+	@else{
+		&.top{
+			top:0px;
+			border-bottom: .1em solid;
+		}
 
-	&.bottom {
-		bottom:0px;
-		border-top: .1em solid;
-	}
+		&.bottom {
+			bottom:0px;
+			border-top: .1em solid;
+		}
+	}	
 }
 
 @mixin toolbar-gradient($color, $style: $gradient-style){
@@ -24,6 +30,12 @@
 
 @mixin toolbar-title{
 	.title {
+		
+		&.landscape{
+			margin-left: -125px;
+			width: 250px;
+		}
+		
 		line-height: $row-height - .5em;
 		font-size: 1.2em;
 		text-align: center;

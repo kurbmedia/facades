@@ -10,8 +10,10 @@
 	@if $facades-global-import-used == false{ 
 		@include button-base($radius);
 	}
+	@include gradient-button-colors($color);
+}
 
-	@include border-radius($radius);
+@mixin gradient-button-colors($color: $notice-color){
 	border-color:darken($color, 10%);
 	border-top:1px solid darken($color, 10%);
 	@include box-shadow(lighten($color, 30%) 0 1px 1px 0 inset);
@@ -30,4 +32,5 @@
 		@include box-shadow($color 0 1px 1px 0 inset);
 		@include background-image(linear-gradient(darken($color, 7%), darken($color, 3%) 25%, darken($color, 10%)));
 	}
+	
 }
