@@ -122,11 +122,20 @@
 		@include optional-border-radius($input-border-radius);
 		margin:border-rhythm(1px, .35) 0;
 		padding:rhythm(.15) .25em;
-		@include leading(1);
+		line-height:normal !important;
+		height:1.7em;
 	}
+	
+	input[type=file]{
+		height:2.2em;
+		vertical-align:middle;
+	}
+	
+	textarea{ height:auto; }
 
 	select{ 	
-		height:rhythm(1.2);
+		height:$line-height * 1.3;
+		padding:4px;
 		margin-top:border-rhythm(1px, .4);
 		margin-bottom:border-rhythm(1px, .5);
 		option{
