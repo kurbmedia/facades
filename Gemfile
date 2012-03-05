@@ -7,9 +7,10 @@ end
 
 group :test do
   gem 'guard-coffeescript'
+  gem 'rake'
   gem 'growl'
-  gem 'guard'
-  gem 'guard-rspec'
+  gem 'guard', '0.8.8'
+  gem "guard-rspec"
 end
 
 # Specify your gem's dependencies in facades.gemspec
