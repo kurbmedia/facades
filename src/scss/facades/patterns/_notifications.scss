@@ -5,7 +5,7 @@
 @import 'facades/config';
 @import 'facades/mixins';
 
-@mixin alert($with-color: true){
+@mixin notification($with-color: true){
 	
 	@include margins(1);
 	padding:border-rhythm(1px, .5) rhythm(1.25) border-rhythm(1px, .5) rhythm(1);
@@ -35,7 +35,7 @@
 			color:white;
 		}
 		
-		&.error{
+		&.error, &.alert{
 			background-color:$error-color;
 			@include background-image(linear-gradient(darken($error-color, 3%) 0%, $error-color 100%));
 			border-color:darken($error-color, 5%);

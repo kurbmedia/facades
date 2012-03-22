@@ -35,7 +35,7 @@ module Facades
         content = ""    
 
         flash.each do |key, value|
-          klasses << "alert"
+          klasses << "notification"
           klasses << "flash-message-#{key.to_s.underscore}"
           msg_attrs = attrs.merge(:class => [key.to_s, klasses].flatten.join(' '))
           content.concat content_tag(wrapper, "#{value} #{closer}".html_safe, msg_attrs).html_safe

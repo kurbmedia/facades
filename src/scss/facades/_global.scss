@@ -24,8 +24,8 @@ $facades-global-import-used: true;
 	@include label;
 }
 
-.alert{
-	@include alert;
+.notification{
+	@include notification;
 }
 
 table.bordered{
