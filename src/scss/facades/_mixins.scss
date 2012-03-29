@@ -37,8 +37,11 @@ $experimental-support-for-khtml: false !default;
 @mixin inline-block($align: middle){		
 	display: inline-block;
 	vertical-align: $align;
-	*display: inline; 
-	*vertical-align: auto;
+	@if $legacy-support-for-ie7{
+		*display: inline; 
+		*vertical-align: auto;
+		*zoom:1;
+	}
 }
 
 //
