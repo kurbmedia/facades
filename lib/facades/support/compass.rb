@@ -5,3 +5,5 @@ require 'compass'
 Compass::Frameworks.register('facades', 
   :stylesheets_directory => Facades.scss_path,
   :templates_directory   => File.join(File.dirname(__FILE__), 'compass'))
+
+require 'facades/sass_extensions'

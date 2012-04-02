@@ -20,7 +20,7 @@
 	@else{
 		&:#{$psuedo}{
 			font-family:$icon-font-family;
-			@include icon-content($name);			
+			@include icon-content($name);
 		}	
 	}
 	
@@ -33,8 +33,6 @@
 @mixin icon-after($name, $size: $font-size){
 	@include icon($name, $size, after);
 }
-
-
 
 // Creates a square sprite-like icon 
 @mixin icon-rect($size: 24px, $name: false){
@@ -50,10 +48,10 @@
 	&:before{
 		line-height:$size;
 		font-size:$size;
-		line-height:$size;		
+		line-height:$size;
 		position:relative;
 		left:-($size + 5px);
-		@if $name{ @include icon-content($name); }		
+		@if $name{ @include icon-content($name); }
 	}
 }
 

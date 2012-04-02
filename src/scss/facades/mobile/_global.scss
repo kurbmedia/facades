@@ -7,7 +7,7 @@
 @import 'facades/mobile/patterns/toolbar';
 @import 'facades/mobile/patterns/navbar';
 
-#stage{	
+#viewport{	
 	@include mobile-stage;
 	
 	> .panel{

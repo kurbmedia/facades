@@ -20,6 +20,11 @@ module Facades
         Sass::Script::String.new(value)
       end
       
+      def icon_names(set = "ui")
+        listing = icon_translations(set)
+        Sass::Script::List.new((listing.keys || []))
+      end
+      
       private
       
       def icon_translations(set = "ui")
