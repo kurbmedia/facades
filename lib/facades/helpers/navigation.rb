@@ -33,7 +33,7 @@ module Facades
             wrap_attrs = {}
             wrap_attrs.merge!(:class => "active") if link.active?
           end
-          return content_tag(wrapper, link_to(link.text, link.href, link.options), )
+          return content_tag(wrapper, link_to(link.text, link.href, link.options), wrap_attrs)
         end
         link_to(link.text, link.href, link.options)
       end
