@@ -86,6 +86,7 @@ module Facades
           wrap_attrs = link_opts.delete(:wrapper) || {}
           link_opts.merge!(:path => path)
           link = NavigationLink.new(text, href, link_opts)
+          links << link
           
           if link.active?
             wrap_attrs   = merge_html_classes("active", wrap_attrs)
@@ -94,8 +95,13 @@ module Facades
           
           if block_given?
             subnav = Navigator.new(view, wrap_attrs, true)
-            output = link_to(link.text, link.href, link.options) << subnav.render(&block) 
-            content_tag(:li, output, wrap_attrs)
+            inner  = subnav.render(&block)
+            unless subnav.links.empty?
+              output = link_to(link.text, link.href, link.options) << inner
+              content_tag(:li, output, wrap_attrs)
+            else
+              content_tag(:li, link_to(link.text, link.href, link.options), wrap_attrs)
+            end
           else
             content_tag(:li, link_to(link.text, link.href, link.options), wrap_attrs)
           end        

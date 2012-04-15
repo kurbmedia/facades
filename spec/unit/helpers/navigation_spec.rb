@@ -65,6 +65,29 @@ describe 'Navigation helpers', :type => :view do
       
     end
     
+    context 'when no links are passed to the sub-navigation' do
+      
+      before do
+        assign(:subnav, [])
+      end
+      
+      it 'does not render the nested list' do
+        render('navigation/multi_option_list')
+        rendered.should_not have_selector("li > ul")
+      end
+    end
+    
+    context 'when links are passed to the sub-navigation' do
+      
+      before do
+        assign(:subnav, ['Sublink'])
+      end
+      
+      it 'renders the nested list' do
+        render('navigation/multi_option_list')
+        rendered.should have_selector("li > ul")
+      end
+    end
   end
     
   describe 'options' do
@@ -85,7 +108,11 @@ describe 'Navigation helpers', :type => :view do
     context 'when setting options to :wrapper' do
       
       before do
-        assign(:options, { :wrapper => { :id => 'main_navigation' }, :id => 'main_nav_list' })
+        assign(:options, { 
+          :wrapper => { 
+            :id => 'main_navigation' }, 
+          :id => 'main_nav_list' 
+        })
         render('navigation/single_list')
       end
       
@@ -127,7 +154,10 @@ describe 'Navigation helpers', :type => :view do
     context 'and the proc is true' do
       
       before do
-        assign(:link_options, { :home => { :proc => lambda{ |x| true } } })
+        assign(:link_options, { 
+          :home => { 
+            :proc => lambda{ |x| true } 
+          }})
         render('navigation/single_list')
       end
       
@@ -140,7 +170,10 @@ describe 'Navigation helpers', :type => :view do
     context 'and the proc is false' do
       
       before do
-        assign(:link_options, { :home => { :proc => lambda{ |x| false } } })
+        assign(:link_options, { 
+          :home => { 
+            :proc => lambda{ |x| false } 
+        }})
         render('navigation/single_list')
       end
       
@@ -157,7 +190,9 @@ describe 'Navigation helpers', :type => :view do
     context 'and the matcher is a match' do
       
       before do
-        assign(:link_options, { :about => { :matcher => /about/ } })
+        assign(:link_options, { 
+          :about => { :matcher => /about/ } 
+        })
         render('navigation/single_list')
       end
       
@@ -171,7 +206,9 @@ describe 'Navigation helpers', :type => :view do
       
       
       before do
-        assign(:link_options, { :home => { :matcher => /^not-home/ } })
+        assign(:link_options, { 
+          :home => { :matcher => /^not-home/ }
+        })
         render('navigation/single_list')
       end
       
