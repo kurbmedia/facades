@@ -38,7 +38,7 @@
 	}
 	
 	&.active a{
-		@include border-radius(20px);
+		@include optional-border-radius($pill-border-radius);
 		background-color:$color;
 		color:white;
 		text-shadow:rgba(black, 0.1);
