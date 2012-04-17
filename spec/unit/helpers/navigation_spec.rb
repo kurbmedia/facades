@@ -2,12 +2,8 @@ require 'spec_helper'
 
 describe 'Navigation helpers', :type => :view do
 
-  class << self
-    def stub_path(path)
-      before do
-        view.controller.request.stub!(:path).and_return(path)
-      end
-    end
+  def stub_path(path)
+    view.controller.request.stub!(:path).and_return(path)
   end
   
   it 'creates a nav method' do
@@ -29,15 +25,21 @@ describe 'Navigation helpers', :type => :view do
     end
   
     it 'should create a single unordered list' do
-      rendered.should have_selector(:ul, :count => 1)
+      rendered.should have_selector(:ul, 
+        :count => 1
+      )
     end
   
     it 'should create list items for each call to .link' do
-      rendered.should have_selector(:li, :count => 2)
+      rendered.should have_selector(:li, 
+        :count => 2
+      )
     end
   
     it 'should create links for each call to .link' do
-      rendered.should have_selector(:a, :count => 2)
+      rendered.should have_selector(:a, 
+        :count => 2
+      )
     end
     
   end
@@ -51,16 +53,23 @@ describe 'Navigation helpers', :type => :view do
     
     describe 'active state' do
       
-      stub_path("/about/sub-path")
+      before do
+        stub_path("/about/sub-path")
+        render('navigation/multi_list')
+      end
       
       it 'adds active to the parent tag' do
-        render('navigation/multi_list')
-        rendered.should have_xpath('//a', :href => '/about', :class => 'active')
+        rendered.should have_xpath('//a', 
+          :href => '/about', 
+          :class => 'active'
+        )
       end
       
       it 'adds active to the matching child tag' do
-        render('navigation/multi_list')
-        rendered.should have_xpath('//a', :href => '/about/sub-path', :class => 'active')
+        rendered.should have_xpath('//a', 
+          :href => '/about/sub-path', 
+          :class => 'active'
+        )
       end
       
     end
@@ -69,10 +78,10 @@ describe 'Navigation helpers', :type => :view do
       
       before do
         assign(:subnav, [])
+        render('navigation/multi_option_list')
       end
       
       it 'does not render the nested list' do
-        render('navigation/multi_option_list')
         rendered.should_not have_selector("li > ul")
       end
     end
@@ -81,10 +90,10 @@ describe 'Navigation helpers', :type => :view do
       
       before do
         assign(:subnav, ['Sublink'])
+        render('navigation/multi_option_list')
       end
       
       it 'renders the nested list' do
-        render('navigation/multi_option_list')
         rendered.should have_selector("li > ul")
       end
     end
@@ -130,94 +139,246 @@ describe 'Navigation helpers', :type => :view do
       
   describe 'links matching request.path' do
     
-    stub_path("/about")
-    
     before do
+      stub_path("/about")
       render('navigation/single_list')
     end
     
-    it 'adds active to the link matching the path' do
-      rendered.should have_selector('a.active', :count => 1)
-      rendered.should have_xpath('//a', :href => '/about', :class => 'active')
-      rendered.should have_xpath('//li', :class => 'active')
-      rendered.should_not have_xpath('//a', :href => '/', :class => 'active')
-    end
+    describe 'by default' do
+      
+      context 'when the link path matches' do
+        
+        it 'adds .active to the link matching the path' do
+          rendered.should have_xpath('//a', 
+            :count  => 1, 
+            :href   => '/about', 
+            :class  => 'active'
+          )
+        end
+      end # path match
+      
+      context 'when the link path does not match' do
+        
+        it 'does not add .active to the link matching the path' do
+          rendered.should_not have_xpath('//a', 
+            :href => '/', 
+            :class => 'active'
+          )
+        end
+      end # mismatch
+    end # default
     
-    it 'does not add active to the link matching the path' do
-      rendered.should_not have_xpath('//a', :href => '/', :class => 'active')
-    end
+    context 'when a proc is passed in the options' do
+
+      context 'and the proc is true' do
+
+        before do
+          assign(:link_options, { 
+            :home => { 
+              :proc => lambda{ |x| true } 
+            }})
+          render('navigation/single_list')
+        end
+
+        it 'adds active to the link' do
+          rendered.should have_xpath('//a', 
+            :href => '/', 
+            :class => 'active'
+          )
+        end
+
+      end # true proc
+
+      context 'and the proc is false' do
+
+        before do
+          assign(:link_options, { 
+            :home => { 
+              :proc => lambda{ |x| false } 
+          }})
+          render('navigation/single_list')
+        end
+
+        it 'does not active to the link' do
+          rendered.should_not have_xpath('//a', 
+            :href => '/', 
+            :class => 'active'
+          )
+        end
+      end # false proc
+    end # proc
     
+    context 'when a matcher is passed in the options' do
+
+      context 'and the matcher is a match' do
+
+        before do
+          assign(:link_options, { 
+            :about => { :matcher => %r{^/about/?} } 
+          })
+          render('navigation/single_list')
+        end
+
+        it 'adds active to the link' do
+          rendered.should have_xpath('//a', 
+            :href => '/about', 
+            :class => 'active'
+          )
+        end
+      end # matches
+
+      context 'and the matcher is not a match' do
+
+        before do
+          assign(:link_options, { 
+            :home => { :matcher => /^not-home/ }
+          })
+          render('navigation/single_list')
+        end
+
+        it 'does not active to the link' do
+          rendered.should_not have_xpath('//a', 
+            :href => '/', 
+            :class => 'active'
+          )
+        end
+      end # does not match
+    end # matcher
   end
   
-  context 'when a proc is passed in the options' do
+  describe 'sub-path matching' do
     
-    context 'and the proc is true' do
+    describe 'by default' do
       
       before do
-        assign(:link_options, { 
-          :home => { 
-            :proc => lambda{ |x| true } 
-          }})
+        stub_path("/about/sub-path")
         render('navigation/single_list')
       end
       
-      it 'adds active to the link' do
-        rendered.should have_xpath('//a', :href => '/', :class => 'active')
+      it 'adds .active to the link' do
+        rendered.should have_xpath('//a', 
+          :href  => '/about', 
+          :class => 'active'
+        )
       end
-      
-    end # true proc
+    end
     
-    context 'and the proc is false' do
+    describe 'when :match => :exact' do
       
       before do
         assign(:link_options, { 
-          :home => { 
-            :proc => lambda{ |x| false } 
-        }})
-        render('navigation/single_list')
-      end
-      
-      it 'does not active to the link' do
-        rendered.should_not have_xpath('//a', :href => '/', :class => 'active')
-      end
-      
-    end # false proc
-    
-  end # proc
-  
-  context 'when a matcher is passed in the options' do
-    
-    context 'and the matcher is a match' do
-      
-      before do
-        assign(:link_options, { 
-          :about => { :matcher => /about/ } 
+          :about => { :match => :exact }
         })
-        render('navigation/single_list')
       end
       
-      it 'adds active to the link' do
-        rendered.should have_xpath('//a', :href => '/about', :class => 'active')
+      context 'and the path exactly matches the url' do
+        
+        before do
+          stub_path("/about")
+          render('navigation/single_list')
+        end
+
+        it 'adds .active to the link' do
+          rendered.should have_xpath('//a', 
+            :href  => '/about', 
+            :class => 'active'
+          )
+        end 
       end
       
-    end # matches
+      context 'and the path does not exactly match the url' do
+        
+        before do
+          stub_path("/about/sub-path")
+          render('navigation/single_list')
+        end
+
+        it 'does not add .active to the link' do
+          rendered.should_not have_xpath('//a', 
+            :href  => '/about', 
+            :class => 'active'
+          )
+        end
+      end
+    end
     
-    context 'and the matcher is not a match' do
-      
+    describe 'when :match => :after' do
       
       before do
         assign(:link_options, { 
-          :home => { :matcher => /^not-home/ }
+          :about => { :match => :after }
         })
-        render('navigation/single_list')
       end
       
-      it 'does not active to the link' do
-        rendered.should_not have_xpath('//a', :href => '/', :class => 'active')
+      context 'and the path matches link + *' do
+        
+        before do
+          stub_path("/prefix/about/sub-path")
+          render('navigation/single_list')
+        end
+        
+        it 'adds .active to the link' do
+          rendered.should have_xpath('//a', 
+            :href  => '/about', 
+            :class => 'active'
+          )
+        end
       end
       
-    end # does not match
+      context 'and the path does not match link + *' do
+        
+        before do
+          stub_path("/prefix/another/sub-path")
+          render('navigation/single_list')
+        end
+        
+        it 'does not add .active to the link' do
+          rendered.should_not have_xpath('//a', 
+            :href  => '/about', 
+            :class => 'active'
+          )
+        end
+      end
+    end
     
-  end # matcher
+    describe 'when :match => :before' do
+      
+      before do
+        assign(:link_options, { 
+          :about => { :match => :before }
+        })
+      end
+      
+      context 'and the path matches * + link$' do
+        
+        before do
+          stub_path("/prefix/about")
+          render('navigation/single_list')
+        end
+        
+        it 'adds .active to the link' do
+          rendered.should have_xpath('//a', 
+            :href  => '/about', 
+            :class => 'active'
+          )
+        end
+      end
+      
+      context 'and the path contains text after the match' do
+        
+        before do
+          stub_path("/prefix/about/sub-path")
+          render('navigation/single_list')
+        end
+        
+        it 'does not add .active to the link' do
+          rendered.should_not have_xpath('//a', 
+            :href  => '/about', 
+            :class => 'active'
+          )
+        end
+      end
+    end
+  end
   
 end

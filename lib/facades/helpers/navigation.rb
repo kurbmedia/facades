@@ -13,11 +13,9 @@ module Facades
       alias :navigation :nav
       
       ##
-      # Similar to link_to, but adds the class 'active' 
-      # if the link's href is in an active state.
-      # If the options :proc, or :matcher is passed, 
-      # they are used to determine active state. If not 
-      # the current request.path is used.
+      # Similar to link_to, but adds the class 'active' if the link's href is in an active state.
+      # If the options :proc, or :matcher is passed, they are used to determine active state. If not the current 
+      # request.path is used.
       # 
       def nav_link(text, href, options = {})
         options.merge!(:path => request.path)
@@ -119,7 +117,7 @@ module Facades
             opts    = args.extract_options!
             klasses = (opts.delete(:class) || "").split(" ")
             klasses = [klasses, args].flatten.compact.reject{ |c| c.to_s.blank? }.join(" ")
-            (klasses.blank? ? opts : opts.merge!(:class => klasses))
+            (klasses.blank? ? opts : opts.merge(:class => klasses))
           end
           
         end
@@ -175,10 +173,28 @@ module Facades
         def active?
           return matcher.call(href) if matcher.is_a?(Proc)
           return ( (href =~ matcher).to_i >= 1 ) if matcher.is_a?(Regexp)
-          match_path = matcher.to_s.sub(/^\//, '')
-          href_path  = href.to_s.sub(/^\//, '')
+          
+          match_path = normalize_path(matcher)
+          href_path  = normalize_path(href)
+          
           return false if href_path.blank? && !match_path.blank?
-          (match_path == href_path || match_path.match(/#{href_path}\/\w/i))
+          
+          if key = options.delete(:match)
+            path_matcher = case key.to_s
+            when 'exact'  then match_path.match(%r{^/?#{href_path}/?$}i)
+            when 'after'  then match_path.match(%r{/?#{href_path}/?(.*)$}i)
+            when 'before' then match_path.match(%r{#{href_path}/?$}i)
+            end
+          else
+            path_matcher = match_path.match(/#{href_path}\/.*/i)
+          end
+          (match_path == href_path || path_matcher)
+        end
+        
+        private
+        
+        def normalize_path(path)
+          path.split("/").reject{ |part| part.blank? }.compact.join("/")
         end
         
       end
