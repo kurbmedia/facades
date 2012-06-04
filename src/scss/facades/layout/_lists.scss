@@ -29,6 +29,7 @@
 @mixin floated-list{
 	list-style:none;
 	display:block;
+	margin-left:0;
 	
 	li{
 		display:block;

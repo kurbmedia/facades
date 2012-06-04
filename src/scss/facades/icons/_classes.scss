@@ -28,4 +28,16 @@
 		  font-size: 1.3333333333333333em;
 	}
 	
+	[class^="#{$prefix}"], [class*=" #{$prefix}"] {
+		display: inline; width: auto; height: auto; line-height: inherit; vertical-align: baseline;
+	}
+
+	
+	
+}
+
+@mixin icon-rect-classes{
+	.icon-16{ @include icon-rect(16px); }
+	.icon-32{ @include icon-rect(32px); }
+	.icon-24{ @include icon-rect(24px); }	
 }

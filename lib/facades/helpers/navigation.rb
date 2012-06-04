@@ -19,11 +19,13 @@ module Facades
       # 
       def nav_link(text, href, options = {})
         options.merge!(:path => request.path)
+        wrapper = options.delete(:wrapper)
+        
         link = NavigationLink.new(text, href, options)
         if link.active?
           link.options = Navigator.merge_html_classes('active', link.options)
         end
-        if wrapper = options.delete(:wrapper)
+        if wrapper
           if wrapper.is_a?(Hash)
             wrap_attrs = wrapper
             wrapper    = :li

@@ -16,7 +16,6 @@
 @import 'facades/patterns/pills';
 @import 'facades/patterns/twipsy';
 @import 'facades/buttons';
-@import 'facades/icons';
 
 $facades-global-import-used: true;
 
@@ -76,16 +75,6 @@ html.lt-ie8{
 	&.gradient{
 		@include gradient-button;
 	}
-}
-
-@include icon-classes;
-
-.icon-16{ @include icon-rect(16px); }
-.icon-32{ @include icon-rect(32px); }
-.icon-24{ @include icon-rect(24px); }
-
-[class^="icon-"], [class*=" icon-"] {
-	display: inline; width: auto; height: auto; line-height: inherit; vertical-align: baseline;
 }
 
 form{ 

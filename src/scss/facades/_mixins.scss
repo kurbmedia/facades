@@ -67,6 +67,11 @@ $experimental-support-for-khtml: false !default;
 	}
 }
 
+@mixin user-select($val: "none"){
+	@include experimental("user-select", unquote($val), -moz, -webkit, -khtml, -ms, official);
+	@include experimental("touch-callout", unquote($val), -webkit, official, not -moz, not -khtml, not -ms);
+}
+
 //
 // Clip properties
 // Creates a clip rect, including IE specific version.
