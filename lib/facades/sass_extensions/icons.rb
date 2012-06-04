@@ -32,7 +32,6 @@ module Facades
       def icon_translations(set = "ui")
         set = set.value if set.respond_to?(:value)
         glyphs = Icons.glyph_sets[set] || YAML::load(File.open(File.join(Facades.image_path, 'icons', set, 'icons.yml')))
-        puts glyphs.inspect
         Icons.glyph_sets[set] ||= Hash[glyphs.map{ |k, v| [k.to_s.gsub("_", "-"), v] }]
         Icons.glyph_sets[set]
       end
