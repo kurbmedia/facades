@@ -8,6 +8,7 @@ $experimental-support-for-khtml: false !default;
 @import 'facades/config';
 @import 'facades/mixins/rhythm';
 @import 'compass/css3';
+@import 'facades/mixins/gradients';
 
 // Custom opacity mixin, uses whole numbers instead of floats.
 @mixin opacity($opacity: 100) {
@@ -88,26 +89,6 @@ $experimental-support-for-khtml: false !default;
 		clip: unquote("#{$shape}(#{$top} #{$right} #{$bottom} #{$left})"); // Stupid IE
 	}
 	@if $abs{ position: absolute;	}
-}
-
-
-// basic gradient styles based on type, gradient types are: bevel, glossy, recessed, matte
-@mixin gradient-style($color, $type: matte) {
-	background-color:$color;
-	$gradient-style:none;
-	@if $type == bevel {
-		$gradient-style: linear-gradient(lighten($color, 30%), lighten($color, 15%) 2%, lighten($color, 8%) 30%, $color 65%, darken($color, 10%));	  
-	} @else if $type == glossy {
-		$gradient-style: linear-gradient(lighten($color, 15%), lighten($color, 5%) 50%, $color 51%, darken($color, 5%));
-	} @else if $type == recessed {
-		$gradient-style: linear-gradient(darken($color, 10%), darken($color, 5%) 10%, $color 65%, lighten($color, .5%));
-	} @else if $type == matte {
-	  $gradient-style: linear-gradient(lighten($color, 30%), lighten($color, 7%) 2%, darken($color, 7%));
-	} @else {
-	  background-image: none;
-	}
-	
-	@include background-image($gradient-style);
 }
 
 
