@@ -12,5 +12,12 @@ module Facades
       app.config.sass.load_paths << Facades.scss_path
     end
     
+    initializer 'configure simple_form' do |app|
+      begin
+        require 'simple_form'
+        require 'facades/support/simple_form'
+      rescue
+      end
+    end
   end
 end

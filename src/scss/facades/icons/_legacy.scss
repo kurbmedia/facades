@@ -9,7 +9,7 @@ $legacy-icon-format: false !default;
 
 
 @mixin icon-expression($name, $size: $font-size * 1.75, $psuedo: before){
-	$expr-node: '<i class="ie7-psuedo-icon" style="font-size:#{$size}; font-style:normal; font-family:#{$icon-font-family};">#{icon-glyph($name, true)}</i>';
+	$expr-node: '<i class="ie7-psuedo-icon" style="font-size:#{$size}; font-style:normal; font-family:#{$icon-font-family};">#{icon-glyph-entity($name, $icon-pack)}</i>';
 	$expr-format:if( $psuedo == before,  "#{$expr-node} + this.innerHtml", "this.innerHtml + #{$expr-node}");
 	*background-image:expression(this.runtimeStyle.backgroundImage="none",this.innerHTML = #{ unquote($expr-format) });
 }

@@ -14,6 +14,10 @@ module Facades
     File.expand_path("../../src", __FILE__) << "/images"
   end
   
+  def icon_path
+    File.expand_path("../../src", __FILE__) << "/icons"
+  end
+  
 end
 
 require 'facades/sass_extensions'

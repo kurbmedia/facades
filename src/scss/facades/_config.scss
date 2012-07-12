@@ -27,7 +27,15 @@ $enable-transitions: true !default;
 $transition-property: all !default;
 $transition-duration: .2s !default;
 
-$icon-font-family:'FacadesRegular' !default; // the font family to use for icons.
+/* 
+// Icon Packs
+// --------------------------
+	 Available packs include 
+			- Facades
+			- FontAwesome
+*/
+$icon-pack:'facades' !default;
+$icon-font-family:icon-font($icon-pack) !default; 
 
 $link-color: #00e !default;
 $link-visited-color: darken($link-color, 5%) !default;

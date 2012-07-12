@@ -10,11 +10,12 @@
 		height: auto; 
 		line-height: inherit; 
 		vertical-align: baseline;
+		font-weight:normal;
 		font-family:$icon-font-family;
 	}
 	
 	@if type-of($names) != list{
-		$names: icon-names('ui');
+		$names: icon-names($icon-pack);
 	}
 	
 	@each $ico in $names{
@@ -26,14 +27,7 @@
 	    vertical-align: top;
 			display:inline-block;
 		  font-size: 1.3333333333333333em;
-	}
-	
-	[class^="#{$prefix}"], [class*=" #{$prefix}"] {
-		display: inline; width: auto; height: auto; line-height: inherit; vertical-align: baseline;
-	}
-
-	
-	
+	}	
 }
 
 @mixin icon-rect-classes{

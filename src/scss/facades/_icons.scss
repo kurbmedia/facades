@@ -40,21 +40,22 @@
 		overflow:hidden;
 		width:$size;
 		height:$size;
-		text-indent:$size + 5px;
-		@include leading(1, $font-size);
+ 		line-height:$size;
+		font-size:ceil($size * 0.8);
 		white-space:nowrap;
+		display:inline-block;
 	}
 	
 	&:before{
-		line-height:$size;
-		font-size:$size;
-		line-height:$size;
-		position:relative;
-		left:-($size + 5px);
+		line-height:1.1;
+		display:inline-block;
+		width:$size;
+		height:$size;
+		text-align:center;
 		@if $name{ @include icon-content($name); }
 	}
 }
 
 @mixin icon-content($name){
-	content:'#{icon-glyph($name)}';
+	content:"#{icon-glyph($name, $icon-pack)}";
 }
