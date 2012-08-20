@@ -16,7 +16,7 @@ module Facades
       begin
         require 'simple_form'
         require 'facades/support/simple_form'
-      rescue
+      rescue Exception => e
       end
     end
   end
