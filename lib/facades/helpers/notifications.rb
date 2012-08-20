@@ -35,6 +35,7 @@ module Facades
         content = ""    
 
         flash.each do |key, value|
+          next if value === true or value.to_s == 'true' # fix awkward devise message
           klasses << "notification"
           klasses << "flash-message-#{key.to_s.underscore}"
           msg_attrs = attrs.merge(:class => [key.to_s, klasses].flatten.join(' '))
