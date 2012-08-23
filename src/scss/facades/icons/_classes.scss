@@ -1,0 +1,37 @@
+@import 'facades/config';
+
+@mixin icon-classes($prefix:'icon-', $names: false){
+	
+	$prefix:unquote($prefix);
+	
+	[class^="#{$prefix}"]:before, [class*=" #{$prefix}"]:before{
+		display: inline; 
+		width: auto; 
+		height: auto; 
+		line-height: inherit; 
+		vertical-align: baseline;
+		font-weight:normal;
+		font-family:$icon-font-family;
+	}
+	
+	@if type-of($names) != list{
+		$names: icon-names($icon-pack);
+	}
+	
+	@each $ico in $names{
+		$ico: unquote($ico);
+		.#{$prefix}#{$ico}:before{ @include icon-content($ico); }
+	}
+	
+	.#{$prefix}large:before {
+	    vertical-align: top;
+			display:inline-block;
+		  font-size: 1.3333333333333333em;
+	}	
+}
+
+@mixin icon-rect-classes{
+	.icon-16{ @include icon-rect(16px); }
+	.icon-32{ @include icon-rect(32px); }
+	.icon-24{ @include icon-rect(24px); }	
+}

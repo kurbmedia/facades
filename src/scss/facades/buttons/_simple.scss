@@ -1,0 +1,28 @@
+// 
+// Simple buttons
+// Basic solid color buttons with active and hover states
+// ----------------------------------------------------------------------------------------
+
+
+@import 'shared';
+
+@mixin simple-button($color: $notice-color, $radius: $button-border-radius){
+	@include button-base($radius);	
+	@include simple-button-colors($color);
+}
+
+@mixin simple-button-colors($color: $notice-color){
+	background:$color;
+	color:white;
+	border:1px solid darken($color, 7%);
+	text-shadow:darken($color, 5%) 0px 1px 0px;
+	@include box-shadow(rgba(255,255,255,0.2) 0 0 3px 0 inset);
+
+	&:hover{
+		background-color:lighten($color, 4%);
+	}
+	
+	&:active{
+		background-color:darken($color, 3%);		
+	}
+}

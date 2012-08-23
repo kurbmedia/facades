@@ -1,0 +1,14 @@
+<% 
+@link_options = @link_options || {} 
+@link_options.reverse_merge!({ :home => {}, :about => {} })	
+@subnav ||= []
+%>
+
+<%= nav((@options || {})) do |n| %>
+	<%= n.link "Home", "/", @link_options[:about] %>
+	<%= n.link "About", "/about" do |subnav| %>
+		<% @subnav.each do |item| %>
+		<%= subnav.link item, "/#{item.to_s.downcase}" %>
+		<% end %>
+	<% end %>
+<% end %>

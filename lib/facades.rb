@@ -1,57 +1,34 @@
-require 'active_support'
-require 'active_support/core_ext/object'
+require 'active_support/all'
 require 'facades/version'
 
 module Facades
+  extend self
+  autoload :Helpers,  'facades/helpers'
+  autoload :Patterns, 'facades/patterns'
   
-  module Support
-    autoload :Serve, 'facades/support/serve'
+  def scss_path
+    File.expand_path("../../src", __FILE__) << "/scss"
   end
   
-  module Debug
-    autoload :Html, 'facades/debug/html'
+  def image_path
+    File.expand_path("../../src", __FILE__) << "/images"
   end
   
-  module Builders
-    autoload :Sprite, 'facades/builders/sprite'
-    autoload :Form, 'facades/builders/form'
-  end
-  
-  # When enabled, HTML5 elements are used within helpers
-  # This includes things like using <nav> within pagination
-  # and the nav helper.
-  #
-  mattr_accessor :enable_html5
-  @@enable_html5 = true
-  
-  # When enabled, a div is added to each HTML page which displays
-  # errors with the resulting html. This includes things like missing page titles,
-  # missing keywords, etc.
-  # 
-  mattr_accessor :debug_html
-  @@debug_html = false
-  
-  def self.helpers
-    Facades::Helpers
-  end
-
-  def setup(&block)
-    yield self
+  def icon_path
+    File.expand_path("../../src", __FILE__) << "/icons"
   end
   
 end
 
-require 'facades/sass_ext'
+require 'facades/sass_extensions'
 
-begin
-  require 'compass'
-rescue LoadError
+##
+# Use the rails pipeline directly unless functioning 
+# in a non-rails environment. Otherwise include the
+# compass extension.
+# 
+if defined?(Rails)
+  require 'facades/support/rails'
+else
+  require 'facades/support/compass'
 end
-
-if defined?(Compass)
-  Compass::Frameworks.register('facades',
-    :stylesheets_directory => File.join(File.dirname(__FILE__), 'facades/stylesheets'),
-    :templates_directory   => File.join(File.dirname(__FILE__), 'facades/templates'))
-end
-
-require 'facades/support/rails' if defined?(Rails)

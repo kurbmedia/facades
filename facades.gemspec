@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Brent Kirby"]
   s.email       = ["brent@kurbmedia.com"]
   s.homepage    = "https://github.com/kurbmedia/facades"
-  s.summary     = %q{Front-end development awesome-ness}
-  s.description = %q{Facades is a front-end development framework which supplies a few helpers, stylesheets and sass extensions for easier front-end development.}
+  s.summary     = %q{Front-end development awesome-ness with Compass and Sass.}
+  s.description = %q{Facades is a collection of front-end patterns and libraries designed to speed up development of web sites and applications.}
 
   s.rubyforge_project = "facades"
 
@@ -19,5 +19,12 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   
   s.add_dependency('sass', ['~> 3.1'])
+  s.add_dependency('compass', ['>= 0.11.7'])
+  
+  s.add_development_dependency('combustion', '~> 0.3.1')
+  s.add_development_dependency("rspec", ">= 2.7.0")
+  s.add_development_dependency("sass-rails", "~> 3.1")
+  s.add_development_dependency("webrat", "~> 0.7")
+  s.add_development_dependency("rspec-rails", ">= 2.11.0")
   
 end

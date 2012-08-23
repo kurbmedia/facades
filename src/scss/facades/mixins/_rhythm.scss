@@ -1,0 +1,37 @@
+@import 'compass/typography/vertical_rhythm';
+
+$base-font-size: $font-size;
+$base-line-height: $line-height;
+
+@mixin font-size($size: $font-size, $lines: 1){
+	@include adjust-font-size-to($size, $lines);
+}
+
+@mixin leading($lines: 1, $size: $font-size){
+	@include adjust-leading-to($lines, $size);
+}
+
+@mixin margins($lines: 1, $size: $font-size){
+	@include spacing(margin, $lines, $size);
+}
+
+@mixin padding($lines: 1, $size: $font-size){
+	@include spacing(padding, $lines, $size);
+}
+
+
+@mixin spacing($type: margin, $lines: 1, $size: $font-size){
+	$type:unquote($type);
+	@if type-of($lines) == list{
+		@include leader(nth($lines, 1), $size, $type);
+		@include trailer(nth($lines, 2), $size, $type); }
+	@else{
+		@include leader($lines, $size, $type);
+		@include trailer($lines, $size, $type); }
+}
+
+
+@function border-rhythm($width: 1px, $lines:1, $size: $font-size, $leading: $line-height){
+	$unit: 1em;
+	@return $unit / $size * ($lines * $leading - $width);
+}

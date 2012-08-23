@@ -1,136 +1,208 @@
 module Facades
   module Helpers
-    ##
-    # 
-    # Convenience helpers for building navigation lists, and defining 'on' states.
-    #
     module Navigation
       
       ##
+      # Constructs a navigation list containing 
+      # a variable number of list items and links.
       # 
-      # Creates a link wrapped in a list item, to be used within a list-based navigation.
-      # 
-      # @param [String] text The text used within the link
-      # @param [String] path The url used as the link's +href+ attribute
-      # @param [Hash] attrs Hash of attributes to be applied to the link. This format is the same as Rail's +link_to+ helper
-      # @option attrs [String] :active_class The class to use if this link is 'active'. Defaults to "on"
-      # @option attrs [Proc] :proc A callback which, when called, determines the active state of the link
-      # @option attrs [Regex] :matcher A regular expression to be matched against +path+
-      # @param [Symbol] wrapper The html tag to be used as the wrapper. Defaults to +:li+
-      # 
-      # @example Create a list item link to any page
-      #   nav_link('Home Page', '/home') #=> <li><a href="/home">Home Page</a>
-      # 
-      # @example 'Active state' functionality for the current page
-      #   nav_link('Current Page', '/current_url') #=> <li class="on"><a href="/current_url" class="on">Current Page</a></li>
-      # 
-      def nav_link(text, path, attrs = {}, wrapper = :li, &block)
-        
-        if block_given?
-          return sub_nav_link(text, path, attrs, wrapper, :ol, &block)
-        end
-        
-        link_attrs    = update_link_attrs(path, attrs)
-        wrapper_attrs = link_attrs.delete(:wrapper)      
-        child_link    = link_to(text, path, link_attrs)
-        built = (wrapper === false ? child_link : content_tag(wrapper, child_link, wrapper_attrs))
-        built = built.html_safe if built.respond_to?(:html_safe)
-        built
+      def nav(options = {}, &block)
+        Navigator.new(self, options).render(&block)
       end
-      alias :nav_link_to :nav_link
       
-      def sub_nav_link(text, path, attrs = {}, wrapper = :li, container = :ol, &block)
-        wrapper_attrs = attrs.delete(:wrapper)
-        link_attrs    = update_link_attrs(path, attrs.merge(:wrapper => (attrs.delete(:item) || {}) ))
-        parent_link   = nav_link_to(text, path, attrs, false)
-        child_links   = content_tag(container, capture(&block), wrapper_attrs)
-        content_tag(wrapper, (parent_link << child_links), wrapper_attrs)
-      end     
-      private :sub_nav_link
+      alias :navigation :nav
       
       ##
+      # Similar to link_to, but adds the class 'active' if the link's href is in an active state.
+      # If the options :proc, or :matcher is passed, they are used to determine active state. If not the current 
+      # request.path is used.
       # 
-      # Creates a navigational list format, including a parent list / wrapper. Useful for nested list navigation
-      # @param [String] text The text used within the link
-      # @param [String] path The url used as the link's +href+ attribute
-      # @param [Hash] attrs Hash of attributes to be applied to the link. This format is the same as Rail's +link_to+ helper
-      # @option attrs [String] :active_class The class to use if this link is 'active'. Defaults to "on"
-      # @option attrs [Proc] :proc A callback which, when called, determines the active state of the link
-      # @option attrs [Regex] :matcher A regular expression to be matched against +path+
-      # @param [Symbol] wrapper The html tag to be used as the wrapper. Defaults to +:li+
-      # @param [Symbol] container The element that will be used as a container for the nested list
-      # @param [Block] &block A block containing the content of the nested items
-      # 
-      # @example Create a nested list navigation
-      #   nav do
-      #     nav_link('About Page', '/about')
-      #   end
-      # @example
-      #   <ol>
-      #     <li><a href="/home">Home Page</a>
-      #       <ol>
-      #           <li><a href="/about">Sub Page</a></li>
-      #       </ol>
-      #     </li>
-      #   </ol>
-      # 
-      def nav(container = :ol, html_attrs = {}, heading = nil, &block)
-        
-        wrapper_attrs = html_attrs.delete(:wrapper) || {}
-        
-        built = if Facades.enable_html5
-          inner = content_tag(container, capture(&block), wrapper_attrs)
-          inner = (content_tag(:h3, heading) << inner) unless heading.nil?
-          content_tag(:nav, html_attrs) do
-            inner
-          end          
-        else
-          content_tag(container, capture(&block), html_attrs)
+      def nav_link(text, href, options = {})
+        options.merge!(:path => request.path)
+        wrapper = options.delete(:wrapper)
+        link    = NavigationLink.new(text, href, options)
+        current = link.active?
+        link.options = Navigator.merge_html_classes('active', link.options) if current
+
+        if wrapper
+          if wrapper.is_a?(Hash)
+            wrap_attrs = wrapper
+            wrapper    = wrap_attrs.delete(:tag) || :li
+          else
+            wrap_attrs = {}
+          end
+          wrap_attrs = Navigator.merge_html_classes('active', wrap_attrs) if current
+          return content_tag(wrapper, link_to(link.text, link.href, link.options), wrap_attrs)
         end
-        built = built.html_safe if built.respond_to?(:html_safe)
-        built
+        
+        link_to(link.text, link.href, link.options)
+      end
+      
+      class Navigator
+        attr_reader :view, :path
+        attr_accessor :options, :nested, :links
+        
+        def initialize(tpl, options = {}, nested = false)
+          @view, @options, @nested, @links = tpl, options, nested, []
+          @path = view.request.path
+        end
+        
+        delegate :content_tag, :concat, :link_to, :to => :view
+        
+        ##
+        # Renders the resulting html list, wrapped in a <nav> tag.
+        # 
+        def render(&block)
+          wrap_attrs = options.delete(:wrapper) || :ul
+          heading    = options.delete(:heading)
+          
+          unless wrap_attrs.is_a?(Hash)
+            wrapper    = wrap_attrs
+            wrap_attrs = {}
+          else
+            wrapper = wrap_attrs.delete(:tag) || :ul
+          end
+          
+          @wrapper_attrs = wrap_attrs
+          @wrapper       = wrapper
+          
+          output = content_tag(wrapper, view.capture(self, &block), options)
+          return output if nested?
+          
+          if heading
+            heading = generate_heading(heading)
+            output  = heading << output
+          end
+          content_tag(:nav, output, wrap_attrs)
+          
+        end
+        
+        ##
+        # Constructs a link wrapped in a list item for use 
+        # within a navigation list.
+        # 
+        def link(text, href, link_opts = {}, &block)          
+          
+          wrap_attrs = link_opts.delete(:wrapper) || {}
+          link_opts.merge!(:path => path)
+          link = NavigationLink.new(text, href, link_opts)
+          links << link
+          
+          if link.active?
+            wrap_attrs   = merge_html_classes("active", wrap_attrs)
+            link.options = merge_html_classes("active", link.options)
+          end
+          
+          if block_given?
+            subnav = Navigator.new(view, wrap_attrs, true)
+            inner  = subnav.render(&block)
+            unless subnav.links.empty?
+              output = link_to(link.text, link.href, link.options) << inner
+              content_tag(:li, output, wrap_attrs)
+            else
+              content_tag(:li, link_to(link.text, link.href, link.options), wrap_attrs)
+            end
+          else
+            content_tag(:li, link_to(link.text, link.href, link.options), wrap_attrs)
+          end        
+        end
+        
+        class << self
+          
+          ##
+          # Takes an options array and adds any additional 
+          # classes passed to args. If a :class key exists, it 
+          # is updated. If not, it is added unless the result is
+          # an empty string. 
+          # 
+          def merge_html_classes(*args)
+            opts    = args.extract_options!
+            klasses = (opts.delete(:class) || "").split(" ")
+            klasses = [klasses, args].flatten.compact.reject{ |c| c.to_s.blank? }.join(" ")
+            (klasses.blank? ? opts : opts.merge(:class => klasses))
+          end
+          
+        end
+        
+        private
+
+        ##
+        # To be valid, a <nav> should have a heading of some sort.
+        # When passed via options, this generates the proper tag
+        # 
+        def generate_heading(opts)
+          if opts.is_a?(Hash)
+            heading_tag  = opts.delete(:tag)
+            heading_text = opts.delete(:text)
+          else 
+            heading_text = opts
+          end
+          heading_tag ||= :h3
+          content_tag(heading_tag, heading_text)
+        end
+        
+        def merge_html_classes(*args) #:nodoc:
+          Navigator.merge_html_classes(*args)
+        end
+        
+        ##
+        # Determines if the current navigation set 
+        # is nested within another.
+        # 
+        def nested?
+          @nested == true
+        end
+
+      end
+      
+      class NavigationLink
+        attr_accessor :href, :text, :options
+        attr_reader :matcher
+        
+        def initialize(text, href, options)
+          @href, @text, @options = href, text, options
+          @matcher  = (options.delete(:proc) || options.delete(:matcher))
+          curr_path = options.delete(:path)
+          @matcher ||= curr_path
+        end
+        
+        ##
+        # Checks the link's href against either a proc,
+        # regexp, or current request.path depending on 
+        # the options provided. Returns true if there is 
+        # a match, false if not.
+        # 
+        def active?
+          return matcher.call(href) if matcher.is_a?(Proc)
+          return ( (href =~ matcher).to_i >= 1 ) if matcher.is_a?(Regexp)
+          
+          match_path = normalize_path(matcher)
+          href_path  = normalize_path(href)
+          
+          return false if href_path.blank? && !match_path.blank?
+          
+          if key = options.delete(:match)
+            path_matcher = case key.to_s
+            when 'exact'  then match_path.match(%r{^/?#{href_path}/?$}i)
+            when 'after'  then match_path.match(%r{/?#{href_path}/?(.*)$}i)
+            when 'before' then match_path.match(%r{#{href_path}/?$}i)
+            end
+          else
+            path_matcher = match_path.match(/#{href_path}\/.*/i)
+          end
+          !!(match_path == href_path || path_matcher)
+        end
+        
+        private
+        
+        def normalize_path(path)
+          path.split("/").reject{ |part| part.blank? }.compact.join("/")
+        end
         
       end
       
-      private
-      
-      # @private
-      def update_link_attrs(path, attrs)
-        
-        proc          = attrs.delete(:proc) || false
-        regex         = attrs.delete(:matcher) || false
-        klasses       = attrs.delete(:class).try(:split, ' ')
-        on_class      = attrs.delete(:active_class) || "on"
-        wrapper_attrs = attrs.delete(:wrapper) || {}
-        wklasses      = wrapper_attrs[:class].try(:split, ' ')
-        
-        klasses  ||= []
-        wklasses ||= []
-        
-        matcher = (proc || regex || request.path.to_s)
-        cpath   = request.path.to_s.sub("/","")
-        lpath   = path.to_s.sub("/","")
-        
-        active = case matcher
-          when Proc then proc.call(path)
-          when Regexp then request.path.match(regex)
-          when String then (cpath == lpath || cpath.match(/#{lpath}\/\w/i))
-          else raise 'Proc, Regexp or String required... passed #{matcher.class}.'
-        end
-        
-        if active === true
-          klasses  << on_class
-          wklasses << on_class
-        end
-
-        attrs.merge!(:class => klasses.join(" ")) unless klasses.compact.empty?
-        wrapper_attrs.merge!(:class => wklasses.join(" ")) unless wklasses.compact.empty?
-
-        attrs.merge!(:wrapper => wrapper_attrs)
-        attrs
-      end
-            
-    end
+    end # Navigation
     
-  end
-end
+  end # Helpers
+  
+end # Facades

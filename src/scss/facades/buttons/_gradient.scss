@@ -1,0 +1,36 @@
+// 
+// Gradient buttons
+// Linear gradient buttons with active and hover states
+// ----------------------------------------------------------------------------------------
+
+
+@import 'shared';
+
+@mixin gradient-button($color: $notice-color, $radius: $button-border-radius){
+	@if $facades-global-import-used == false{ 
+		@include button-base($radius);
+	}
+	@include gradient-button-colors($color);
+}
+
+@mixin gradient-button-colors($color: $notice-color){
+	border-color:darken($color, 10%);
+	border-top:1px solid darken($color, 10%);
+	@include box-shadow(lighten($color, 30%) 0 1px 1px 0 inset);
+	background-color:$color;
+	text-shadow:darken($color, 5%) 0px 1px 0px;
+	@include background-image(linear-gradient(lighten($color, 5%), $color 25%, darken($color, 10%)));
+	
+	&:hover{
+		background-color:lighten($color, 7%);
+		@include box-shadow(lighten($color, 20%) 0 1px 1px 0 inset);
+		@include background-image(linear-gradient(lighten($color, 7%), lighten($color, 3%) 25%, darken($color, 5%)));
+	}
+	
+	&:active{
+		background-color:darken($color, 7%);
+		@include box-shadow($color 0 1px 1px 0 inset);
+		@include background-image(linear-gradient(darken($color, 7%), darken($color, 3%) 25%, darken($color, 10%)));
+	}
+	
+}

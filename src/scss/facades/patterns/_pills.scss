@@ -1,0 +1,50 @@
+// 
+// Pills. Basically tabs but with 'pill' style navigation 
+// Requires the use of tabs.js
+// ----------------------------------------------------------------------------------------
+
+@import 'facades/config';
+@import 'facades/layout/lists';
+
+// Styles a list to function as a pill based navigation
+@mixin pill-navigation{
+	@if $facades-global-import-used == false{ 
+		@include inline-list; 		
+	}
+	
+	margin:0; 
+	padding:0;
+	@include clearfix;
+	
+	li{		
+		@include pill-list-item;
+	}
+}
+
+@mixin pill-list-item($color: $pill-color){
+	margin:0 .25em;			
+	
+	a{
+		@include font-size($font-size * .85);		
+		color:$font-color;
+		padding:rhythm(.25, $font-size * .85) 1em;
+		margin:rhythm(.25, $font-size * .85) 0;
+		text-decoration:none;
+		@include opacity(50);
+		
+		&:hover{
+			@include opacity(75);
+		}
+	}
+	
+	&.active a{
+		@include optional-border-radius($pill-border-radius);
+		background-color:$color;
+		color:white;
+		text-shadow:rgba(black, 0.1);
+		font-weight:bold;
+		&, &:hover{
+			@include opacity(100);
+		}
+	}
+}

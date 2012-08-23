@@ -1,0 +1,37 @@
+// 
+// Panels
+// All "pages" within the application are considered 'panels'.
+// The content within each panel should be dictated by the class
+// .panel-content
+// ----------------------------------------------------------------------------------------
+
+@mixin panel{
+	display: block;
+	left: 0;
+	top: 0;
+	min-height: 100%;
+	width: 100%;
+	overflow-x: hidden;
+	position: absolute;
+	z-index: 0;
+	@include display-box;
+	@include box-orient(vertical);
+	@include box-flex(1);
+	
+	& .current {
+		z-index: 1;
+	}
+
+	&:not(.current) {
+		display: none;
+	}
+}
+
+@mixin panel-content{
+	position: relative;
+	padding:0 .4em;
+	@include box-flex(1);
+	overflow-y: auto;
+	-webkit-margin-collapse: separate;
+	-webkit-overflow-scrolling: touch;
+}

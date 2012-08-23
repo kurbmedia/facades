@@ -1,0 +1,43 @@
+// used as a base for inline-list style navigations
+@mixin inline-list{
+	white-space:nowrap;
+	list-style:none;
+	display:block;	
+	letter-spacing: -4px;
+	word-spacing:-4px;
+	margin-left:0;
+	
+	li{
+		@include inline-block;
+		letter-spacing:normal;
+		word-spacing:normal;		
+		
+		*{ letter-spacing:normal; 
+			 word-spacing:normal;
+			}
+	}
+	
+	li a{ 
+		display:block;
+		white-space:normal;
+		@include inline-block;
+	}
+	
+}
+
+// used as a base for floated-list style navigations
+@mixin floated-list{
+	list-style:none;
+	display:block;
+	margin-left:0;
+	
+	li{
+		display:block;
+		float:left;
+	}
+	
+	li a{ 
+		display:block;
+	}
+	
+}

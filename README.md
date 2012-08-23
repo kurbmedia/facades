@@ -1,83 +1,72 @@
-#Facades
-Facades is a gem designed to assist with front-end development and misc design. It includes a compass plugin / mixins, and various Rails view helpers to help with common development tasks. 
+==================================================================================================================
+Facades
+==================================================================================================================
 
-**Note** With version 1.0 there are a number of changes in functionality setup. Check [here](https://github.com/kurbmedia/facades/tree/1.0) for more info. Currently master 
-tracks the released version. 
+Facades is a framework, written in SASS (.scss) designed to assist with front-end development rapid prototyping. It includes a number of base classes, patterns and mixins, 
+focused on semantic html, and styled around a consistent vertical rhythm. 
 
-##CSS / SASS
-Facades includes several mixins and includes for setting up a few defaults within your css. 
+**Another one? Come on**
+Theres tons of css / rapid dev frameworks around, and some pretty awesome ones including  [Twitter's Bootstrap](http://bootstrap.io) and [foundation](http://foundation.zurb.com). We took inspiration from 
+each of these to create a more standards based solution writtenfor HTML5 and designed around a clean baseline rhythm.
 
-###Reset
-A HTML5-friendly reset is included to ensure elements like `aside`, `section` etc are setup properly. It also sets up a few typography defaults using Compass' vertical-rhythm format.
-To configure, assign the variables to `$font-size` and `$line-height`.  These will default to 12px / 24px. Vertical-rhythm is defaulted to relative font sizes.
+**Why not just use one of the existing frameworks then?**
+We wanted something that was more standards friendly where at all possible, and felt as though a lot of what was out there missed the mark. We've
+utilized the concepts that worked, and scrapped a few that didn't. Keeping a clean vertical rhythm was also important, which 
+wasn't available with anything existing at the time.
 
-	$font-size:12px;
-	$line-height:24px;
-	
-	@import 'facades/reset';  // Will automatically setup the vertical rhythm
+Facades also utilizes the fantastic [Compass](https://github.com/chriseppstein/compass) library to add additional function and flexiblity. 
+This helps increase the functionality and reliability of the framework as a whole.
 
-###Layout
-Mixins are provided for a fixed grid, forms, and grid debugging. 
+Most of the patterns included here are written using sass mixins, with configuration options for fonts, sizes, and colors.
+For instance, the notifications pattern (alerts/flash messages) is implemented as a mixin, allowing the developer to decide their own node and class 
+scheme to use. This makes facades easier to implement in existing projects, without having to change existing classes or html format.
 
-**Grid Setup**
-	
-	$grid-width: 960px; 		// Full width of the container
-	$grid-columns: 24; 			// Total number of columns
-	$grid-gutter-width: 10px;	// Spacing between each column
-	
-	@import 'facades/layout/grid'; /( or include 'facades/layout')
-	#wrapper{ @include container; }
+When implementing patterns color schemes are provided as an option, for those instances where you'd prefer your own class names and design.
 
-To debug grid alignment, a shortcut to the Compass' grid background is provided.
+For those who just want to import and go, theres also a `_globals.scss` which creates all of the defaults, with classes and all. To utilize, import it into your main css file.
 
-	#wrapper{ @include debug-grid; }
+``` scss	
+@import 'facades/global';
+```
 
-### Mixins
-Below is a list of available mixins
-	
-	Interface
-	-----------------------
-	tool-tip
-	flash-message
-	flash-message-colors
-	
-	Forms
-	----------------------
-	form-field-list
-	form-split-field-list
-	form-field
-	form-input
-	form-select
-	form-textarea
-	form-errors
-	form-error-message
-	form-field-hint
-	
-	Grid (based off of the blueprint grid)
-	---------------------
-	column
-	push
-	pull
-	append
-	prepend
-	span (function) // width:span(2);
-	
-	Text
-	----------------------
-	leading (shortcut to Compass adjust-leading-to)
-	font-size (shortcut to Compass adjust-font-size-to)
-	inset-text (text-shadow text insetting)
-	
-	Utility
-	----------------------
-	position (shorthand position relative/fixed/absolute)
-	luminance ( return a colors lightness in terms of 'light' or 'dark' )
-	tint (tint a color with white)
-	shade (darken a color with black)
-	
-##Helpers
+If you'd like to configure any particular variables such as sizes or line heights, do so before importing the global file.
 
-###Layout Helpers
+Reset and Configuration
+------------------------------
+
+Facades implements the awesome [HTML5 Boilerplate](https://github.com/h5bp/html5-boilerplate) reset/normalize stylesheet to establish a 
+grounds for which to expand upon. Common colors, sizes and line-heights are fully configurable using the variables found in `_config.scss`. 
+The more common options you probably want to configure are:
+
+`$font-color`: The body/default font color.
+
+`$font-size`: The base font size, also used when calculating vertical rhythm
+
+`$line-height`: The base line-height, combined with `$font-size` establishes a baseline and sets up the vertical-rhythm
+
+`$font-family`: The base font-family
+
+`$notice-color`: The color used for .notice alerts labels, blue by default
+
+`$success-color`: The color used for .success labels and alerts, green by default
+
+`$error-color`: The color used for :invalid fields, .error labels and alerts, red by default
+
+`$warning-color`: The color used for .warning labels and alerts, yellow by default
+
+`$input-border-color`: The default color used for form elements, grey by default.
+
+`$input-focus-color`: The font color used when an input is focused, defaults to `$font-color`
+
+`$input-focus-border-color`: The border color used for inputs when in a :focus state. Defaults to `$notice-color`
+
+`$input-error-color`: The font color used for inputs in an :invalid or .error state. Defaults to red.
+
+`$input-error-border-color`: The border color used for inputs in an :invalid or .error state. Defaults to `$error-color`.
+
+
+Layout Helpers
+------------------------------
 
 **Variables**
 Setup variables via templates to be used within your layout. 
@@ -90,7 +79,7 @@ Setup variables via templates to be used within your layout.
 To assign variables, pass their value to the method. To display, use the method without any arguments
 	
 	# index.html.erb
-	<%= page_id('home') %>
+	<% page_id('home') %>
 	
 	# In your layout
 	body id="<%= page_id %>"
@@ -109,53 +98,78 @@ To assign variables, pass their value to the method. To display, use the method 
 	# In production
 	<%= robot_meta_tag %> #=> <meta name="robots" content="index, follow" />
 	
-`button_link` Shortcut for creating a link class="button" with an optional icon
+`browser_name` Returns the name of the user's browser (ie webkit, mozilla, ie8, ie9, etc)
 
-	<%= button_link 'Link Text', some_path, icon: 'image.png' %>  #=> <a href='#' class='button'><img src='image.png' /></a>
-	
-###Pagination Helper
+Navigation Helpers
+------------------------------
 
-Any model which responds to current_page and total_pages can utilize the pagination helper. 
+Facades provides a navigation helper for creating nested navigation lists. Syntax is similar to other Rails helpers such as `form_for`
 
-	<%= paginate(collection) %>
-	
-Will render a link based list with the current collection pagination. If `Facades.enable_html5` is set to `true` items will be wrapped in a HTMl5 `<nav>` tag, otherwise a div  will be used. The class 'pagination' is added to that top level element. 
-By default the included partial facades/pagination is rendered. To customize output simply override this in your application. See app/views/facades/_pagination.html.erb for more info.
-
-###Navigation Helper
-
-Facades provides a navigation helper for creating nested navigation lists. 
-
-	<%= nav do %>
-		<%= nav_link 'About Me', about_path %>
-		<%= nav_link 'Top Level', some_path do %>
-			<%= nav_link 'Sub Item', some_sub_path %>
+	<%= nav do |n| %>
+		<%= n.link 'About Me', about_path %>
+		<%= n.link 'Top Level', some_path do |s| %>
+			<%= s.link 'Sub Item', some_sub_path %>
 		<% end %>
 	<% end %>
 	
 Will output
 
 	<nav>
-		<ol>
+		<ul>
 			<li><a href='/about-path'>About Me</a></li>
 			<li><a href='/some-path'>Top Level</a>
-				<ol>
+				<ul>
 					<li><a href="/some-sub-path">Sub Item</a></li>
-				</ol>
+				</ul>
 			</li>
-		</ol>
+		</ul>
 	</nav>
 
 Note: The `<nav>` tag is only included if `Facades.enable_html5` is set to true.
-	
-As a convenience, the class `on` will be added to a link when the current url matches that link. This can be overridden by using the `matcher` or `proc` attributes when calling `nav_link`.
-When using a proc/lambda, returning true will set the `on` class.
+
+As a convenience, the class `active` will be added to a link when the current url matches that link. This can be overridden by using one of three ways:
+1. Assigning a `:proc` attribute. When using a proc/lambda, returning true will set the `active` class.
 
 	# Current path /home
-	<%= nav_link 'Path', some_path, proc: lambda{ |current_path| true } %> #=> <a href='/anything' class='on'>Path</a>
+	<%= n.link 'Path', some_path, proc: lambda{ |current_path| true } %> #=> <a href='/anything' class='active'>Path</a>
 	
-When using `:matcher`, pass a string or regular expression in which the request.path should match to be `on`.
+2. Passing a `:match` attribute as one of `:exact`, `:after`, or `:before` will match all urls based on that formula. `:exact` matches only the exact
+   url defined in the link's href attribute. `:before` matches any path matching a "parent" url, while `:after` matches any url starting with the specified path. 
+   The latter is useful for when you'd like to match sub-pages or paths in nested navigations.  
+   
+3. Assigning a `:matcher` attribute, containing a regular expression in which the request.path should match to be `active`.
 	
-	# Current path /somewhere
-	<%= nav_link 'Path', '/something-else', matcher: /somewhere/ %> #=> <a href='/something-else' class='on'>Path</a>
-	
+  <%= n.link 'Path', '/something-else', matcher: /something/ %> #=> <a href='/something-else' class='active'>Path</a>
+  
+In addition to the `nav` helper, a `nav_link` helper is also provided, for use when creating single links, which should also track 'active' state.
+
+
+Contributing
+------------------------------
+
+Fork and create. When coding styles or ruby libs, adhere to a 2 space indention. Patterns should be written as mixins, with a 
+default class construction in `_global.scss`. Colors should be configurable, either by using one of the colors included in `_config.scss` 
+(preferred) or by 'namespaced' variable (ie: $patternname-border-color). 
+
+Pre-built classes / styles should be as lightweight as possible and avoid css hacks. We encourage support of Paul Irish's class conventions 
+found [here](http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/). CSS overrides for IE should utilize this technique. 
+Styles should confirm to a vertical-rhythm as much as possible (some things seem to always be off a hair in IE (who would have thought)).
+
+Document patterns with html examples, which should utilize HTML5 elements, in an intended/semantic manner. 
+
+Thanks
+------------------------------
+
+Thanks to the fine folks who work on the HTML5 Boilerplate, the Compass library and contributors, and the hundreds of 
+random people who've blogged the tons and tons of google search results we've read in creating this library.
+
+License
+------------------------------
+
+Copyright 2012 kurb media llc. 
+MIT/GPL ( do whatever you want, but check the licenses below )
+
+**Components:**
+
+Compass: MIT (modified)
+HTML5 Boilerplate reset.css: Public Domain

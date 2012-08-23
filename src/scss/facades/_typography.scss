@@ -1,0 +1,220 @@
+@import 'facades/config';
+@import 'facades/mixins';
+
+// 
+// Global typography styles for headings, paragraphs etc.
+// ----------------------------------------------------------------------------------------
+
+/*
+	Headings
+	------------------------------------
+	1. Fixes spacing and optimizes appearance
+	2. Sexier rendering in webkit and ios/android
+	
+*/
+
+
+
+body{ 
+	font-family: $font-family;	
+}
+
+@include establish-baseline($font-size);
+
+// links
+a { color: $link-color; }
+a:visited { color: $link-visited-color; }
+a:hover { color: $link-hover-color; }
+a:focus { outline: thin dotted; }
+
+h1, h2, h3, h4, h5, h6 {	
+	margin:0;
+	font-weight: bold;	
+	text-rendering: optimizelegibility; // 1
+	-webkit-font-smoothing: subpixel-antialiased;
+	&.headline{
+		@include box-sizing(border-box);
+	}
+	// this fixes rhythm breakage introduced by the added tag
+	small{
+		@include inline-block(baseline);
+		margin:-.2em 0;
+		font-size:.75em;
+	}
+}
+
+@function _heading_size($num){
+	$sizes: $heading-font-sizes;
+	$orig: 30px 24px 18px 14px;
+	
+	@if $num > length($sizes){ @return nth($orig, $num); }
+	@return nth($sizes, $num);
+}
+
+h1 {
+	@include font-size(_heading_size(1), 2);
+	&.headline{
+		@include leading(1, _heading_size(1));
+		@include margins(1, _heading_size(1));
+	}
+}
+
+h2 {
+	@include font-size(_heading_size(2));
+	@include margins(.5, _heading_size(2));
+	&.headline{
+		@include margins(1, _heading_size(2));
+	}
+	
+}
+
+h3 {
+	@include font-size(_heading_size(3));
+	@include margins(.5, _heading_size(3));
+	&.headline{
+		@include margins(.5, _heading_size(3));
+	}
+
+}
+
+
+h4 {
+	@include font-size(_heading_size(4));
+	@include margins(.5, _heading_size(4));
+
+}
+
+h5 {
+	@include font-size(12px);
+}
+
+h6 {
+	@include font-size(11px);
+	text-transform:uppercase;
+}
+
+
+/*
+	Headings
+	------------------------------------
+*/
+
+p {
+	font-size:$font-size;
+	line-height:$line-height;
+	@include margins(0 1, $font-size);
+}
+
+
+/*
+	Lists
+	------------------------------------
+*/
+
+ul, ol {
+	@include font-size($font-size, 1);
+	@include margins(0 1, $font-size);
+	line-height:1;
+	margin-left: 1.6em;
+	padding:0;
+	
+	&.block{
+		margin-left:0;
+		list-style:none;
+	}
+	
+	ul, ol{
+		@include margins(.5, $font-size);
+	}
+	
+}
+
+
+
+ul {
+	list-style: disc;
+}
+
+ol {
+	list-style: decimal;
+}
+
+li {
+	@include leading(1);
+}
+
+// for some reason older ie makes list items slightly smaller?
+.lt-ie9 li{
+	@include leading(1.01);
+}
+
+dl{
+	dt{ 
+		font-weight:bold; 
+	}
+	
+	dd{ 
+		margin:rhythm(.5) 0 rhythm(.5) rhythm(.5); 
+	}
+}
+
+/*
+	Misc items.
+	------------------------------------
+*/
+
+hr {
+	border: 0;
+	line-height:$line-height;
+	margin-bottom:.3em;
+	overflow:hidden;
+	height:1.25em;
+	@include box-sizing(content-box);
+	position:relative;
+	padding:0;
+	display:block;
+	border-top: 1px solid $horizontal-rule-color;
+	border-bottom:1px solid rgba(white,0);
+}
+
+html.lt-ie9{
+	hr{ margin-bottom:.4em; }
+}
+
+
+// useful for using email addresses in text. type the text
+// in reverse and apply this style.
+span.rev, a.rev{
+	unicode-bidi: bidi-override; 
+	direction: rtl
+}
+
+address {
+	display: block;
+	margin-bottom: $line-height;
+	line-height: $line-height;
+}
+
+code {
+	font-size:$font-size * .9;
+	@include leading(1, $font-size + 1px);
+	padding:1px .5em;
+	position:relative;
+	top:-1px;
+}
+
+pre {
+	display: block;
+	@include margins(0 1, 12px);
+	@include font-size(12px);
+	white-space: pre;
+	white-space: pre-wrap;
+	word-break: break-all;
+	padding:rhythm(0.5);
+	border-style:solid;
+	
+	code {
+		padding: 0;
+		background-color: transparent;
+	}
+}

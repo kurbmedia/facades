@@ -1,5 +1,0 @@
-@import 'facades/typography/lists';
-
-@mixin tabbed{
-	ul.tab-nav{ @include inline-list; }
-}

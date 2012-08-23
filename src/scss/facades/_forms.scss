@@ -1,0 +1,228 @@
+@import 'facades/config';
+@import 'facades/mixins';
+
+/* 
+	General form styles. By default this creates a 'stacked' forms
+	where the label placement is above each field. 
+	
+	Styles are setup for the use of ordered lists in laying out elements for
+	semantic value.
+	
+// ----------------------------------------------------------------------------------------
+
+
+/*
+	Form field lists
+	------------------------------------------------------------------
+	1. .option-group: used for containing multiple checkbox or radio tags
+	2. .select-group: similar to the option-group, but for selects
+	
+*/
+
+@mixin field-list{
+	margin:0;
+	padding:0;
+	list-style:none;
+	
+	li{ 
+		@include padding(0 1);		
+		display:block;
+	}
+	
+	ul, ol{		
+		@include clearfix;
+		
+		li{ float:left;
+			&.clear{ 
+				clear:both; }			
+		}
+	}
+	
+}
+
+@mixin field-column-list{
+	@include clearfix;		
+	li{ float:left; 
+		margin-right:1.5em;
+		&.clear{ 
+			clear:both; }
+	}
+}
+
+
+@mixin form{
+	@include margins(0 1);	
+	
+	label{ 
+		display:block; 
+		@include leading(1);
+		font-weight:bold;
+	}
+	
+	fieldset{ @include fieldset; }
+	
+}
+
+
+@mixin fieldset{
+	legend{
+		display: block;
+		margin-bottom: $line-height * 1.5;
+		font-size: $font-size * 1.5;
+		line-height: $line-height * 2;
+		-webkit-margin-collapse: separate;
+	}
+}
+
+@mixin form-fields{
+	
+	#{input-types(all)}, select, textarea{
+		&:focus{ 
+			outline:none; 
+		}	
+	}
+
+	#{input-types(button)}{
+		width: auto;
+		height: auto;
+	}
+
+	#{input-types(text)},
+	select, textarea{
+		@if $input-box-shadow != false and $input-box-shadow != none{
+			@include box-shadow($input-box-shadow);
+		}
+		border-style:solid;
+		border-width:1px;
+		border-color:$input-border-color;
+		outline:none;
+		@if $enable-transitions == true{
+			@include transition-property(all);
+			@include transition-duration($transition-duration);
+		}
+
+		&:focus{			
+			border-color:$input-focus-border-color;
+			@if $input-box-shadow != false and $input-box-shadow != none{
+				@include box-shadow($input-focus-box-shadow);
+			}
+		}
+
+	}
+
+	input[type=file], #{input-types(boolean)}, select{
+		&:focus{
+			border-color:$input-focus-border-color;
+			@include box-shadow(none);
+			outline: 1px dotted darken($input-border-color, 3%);
+		}
+	}
+
+	#{input-types(text)}, textarea{
+		@include optional-border-radius($input-border-radius);
+		margin:border-rhythm(1px, .35) 0;
+		padding:rhythm(.15) .25em;
+		line-height:normal !important;
+		height:1.7em;
+	}
+	
+	input[type=file]{
+		height:2.2em;
+		vertical-align:middle;
+	}
+	
+	textarea{ height:auto; }
+
+	select{ 	
+		height:$line-height * 1.3;
+		padding:4px;
+		margin-top:border-rhythm(1px, .4);
+		margin-bottom:border-rhythm(1px, .5);
+		option{
+			padding-right:32px;
+		}
+	}
+
+	select[size]{
+		border-style:solid;
+		display:block;
+		@include box-sizing(content-box);
+		margin-top:border-rhythm(1px, .3);
+		margin-bottom:border-rhythm(1px, .6);
+		padding-top:rhythm(.1);
+		height:auto;
+		option{
+			text-indent:.3em;
+		}
+	}
+
+	select[size]{
+		@for $i from 1 through 8{
+			&[size='#{$i}']{
+				height:($line-height * $i);
+			}
+		}
+	}
+
+
+
+	// boolean inputs are inline-block. 
+	// if labels follow them (instead of wrapped) those are inline-block as well.
+	#{input-types(boolean)}{
+		@include inline-block;	
+		margin-right:.5em;
+
+		& + label{
+			@include inline-block;
+		}
+	}
+
+	input[disabled], textarea[disabled], input.disabled, textarea.disabled{
+		cursor: not-allowed;
+		border-color:$input-disabled-border-color;
+		color: $input-disabled-color;
+		background-color:#eee;
+		@if $input-box-shadow != false and $input-box-shadow != none{
+			@include box-shadow(none);
+		}
+	}
+	
+	
+
+	input, textarea{	
+		& + .hint{
+			display:block;
+			color: $field-hint-color;
+			@include font-size($font-size - 2px);
+		}	
+	}	
+	
+}
+
+@mixin select-group{
+	select{
+		@include inline-block;
+	}
+
+	select[size]{ 
+		vertical-align:top;
+	}	
+}
+
+@mixin invalid-field{
+	&{	
+		@if $input-box-shadow != false and $input-box-shadow != none{
+			@include box-shadow(rgba($input-error-color, .15) 3px 3px 6px 0 inset);
+		}
+		border-color: $input-error-border-color; 
+		color: $input-error-color;
+	}
+	
+	& + .hint{
+		display:none;
+	}
+	
+	& + .error{
+		display:block;
+	}
+}

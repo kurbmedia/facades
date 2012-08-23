@@ -1,12 +1,22 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "..", "lib"))
+require 'rubygems'
+require 'bundler'
+require 'bundler/setup'
 
-require 'facades'
-require 'facades/helpers'
+Bundler.require :default, :development
+
+Combustion.initialize! :action_controller, :action_view, :sprockets
+
+require 'facades/support/rails'
+
+begin
+  require 'growl'
+rescue LoadError
+end
+
 require 'rspec'
-require 'sass'
-require 'compass'
+require 'rspec/rails'
 
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 RSpec.configure do |config|
 end

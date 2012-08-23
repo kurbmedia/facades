@@ -1,0 +1,104 @@
+// 
+// Global styles import. Includes all base styles and
+// formatting, and sets up default classes.
+// ----------------------------------------------------------------------------------------
+
+@import 'facades/config';
+@import 'facades/mixins';
+@import 'facades/setup';
+@import 'facades/typography';
+@import 'facades/typography/tables';
+@import 'facades/forms';
+@import 'facades/patterns/labels';
+@import 'facades/patterns/notifications';
+@import 'facades/patterns/pagination';
+@import 'facades/patterns/tabs';
+@import 'facades/patterns/pills';
+@import 'facades/patterns/twipsy';
+@import 'facades/buttons';
+
+$facades-global-import-used: true;
+
+.label{
+	@include label;
+}
+
+.notification{
+	@include notification;
+}
+
+table.bordered{
+	@include bordered-table;
+}
+
+table.striped{
+	@include striped-table;
+}
+
+table.compressed{
+	@include compressed-table;
+}
+
+div.tabbed{
+	@include tabbed;
+	.tab-navigation, .pill-navigation{
+		@include inline-list;
+	}
+	.tab-navigation{
+		@include tab-navigation;
+	}
+	.pill-navigation{
+		@include pill-navigation;
+	}
+}
+
+ul, ol{
+	&.inline-list{
+		@include inline-list;
+	}
+	
+}
+
+html.lt-ie8{
+	ul, ol{
+		&.inline-list li{
+			display:inline;
+		}
+	}
+}
+
+.button, input[type=button], input[type=submit]{
+	@include simple-button;
+	&.glossy{
+		@include glossy-button;
+	}
+	&.gradient{
+		@include gradient-button;
+	}
+}
+
+form{ 
+	@include form;
+	
+	ul, ol{
+		@include field-list;
+	}
+	
+	ul.columns, ol.columns{
+		@include field-column-list;
+	}
+	
+	li.select-group, fieldset.select-group{
+		@include select-group;
+	}
+}
+
+@include form-fields;
+
+input.invalid, textarea.invalid, select.invalid{
+	@include invalid-field;
+}
+
+fieldset{ 
+	@include fieldset;
+}

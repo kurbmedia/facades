@@ -1,0 +1,50 @@
+@import 'facades/config';
+@import 'facades/mixins';
+
+/*!
+ * Labels, from Bootstrap 2.0
+ *
+ * Copyright 2011 Twitter, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world @twitter by @mdo and @fat.
+ *
+ * Slightly modified from the original to support a vertical rhythm. 
+ * Implemented as a mixin.
+ */
+
+@mixin label($with-color: true){
+	@include inline-block(baseline);
+	font-size: $font-size * .75;
+	font-weight: bold;
+	@include leading(1, $font-size + 2px);
+	padding:1px .5em;
+	text-transform: uppercase;
+	position:relative;
+	top:-1px;
+	@include border-radius(3px);
+	
+	@if $with-color{
+		background-color:lighten($font-color, 4%);
+		text-shadow:rgba(0,0,0,0.1) 0px 1px 0px;
+		color:white;
+		
+		&.notice { 
+			background-color: $notice-color; 
+		}
+		
+		&.success { 
+			background-color: $success-color; 
+		}
+		
+		&.error { 
+			background-color: $error-color; 
+		}
+		
+		&.warning { 
+			background-color: $warning-color; 
+		}
+		
+	}
+}

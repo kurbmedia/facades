@@ -1,26 +1,23 @@
 require 'rails'
+require 'sass/rails'
 
-# Stub engine to integrate asset pipeline.
+##
+# Integrates facades assets into the Rails asset pipeline. 
+# 
 module Facades
   class Engine < Rails::Engine 
     
-    require 'facades/helpers'
-    require 'facades/builders/sprite'
-    require 'sass'
-    require 'sass/rails'
-    
-    config.sass.load_paths << File.expand_path("../../stylesheets", __FILE__)
-    Facades::Builders::Sprite
-    
-    ActiveSupport.on_load(:action_controller) do
-      include Facades::Helpers::MobileController
+    initializer 'load facades assets' do |app|
+      app.config.sass.load_paths ||= []
+      app.config.sass.load_paths << Facades.scss_path
     end
     
-    initializer 'facades assets' do |app|
-      app.config.assets.instance_eval do
-        register_mime_type 'image/png', '.png'
+    initializer 'configure simple_form' do |app|
+      begin
+        require 'simple_form'
+        require 'facades/support/simple_form'
+      rescue Exception => e
       end
     end
-       
   end
 end

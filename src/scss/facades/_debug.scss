@@ -1,0 +1,8 @@
+@import 'compass/layout/grid-background';
+
+$grid-background-baseline-color: #efefef;
+$grid-align: ($line-height / $font-size) * 1em;
+
+@mixin debug-baseline{
+	@include baseline-grid-background($grid-align);
+}

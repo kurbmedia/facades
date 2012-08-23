@@ -1,0 +1,61 @@
+@import 'facades/config';
+@import 'facades/icons/classes';
+@import 'facades/icons/legacy';
+
+/*
+	CSS Psuedo font-face icons
+	Creates an inline font-face icon using $icon-font-family.
+	------------------------------------------------------------------
+*/
+
+@mixin icon($name, $size: $font-size, $psuedo: before, $adjust-sizing: true){
+	@if unquote($size) == before or unquote($size) == after{
+		$psuedo: $size;
+		$size: $font-size;
+	}
+	
+	$psuedo:unquote($psuedo);
+	
+	@if $legacy-icon-format{ @include icon-expression($name, $size, $psuedo); }
+	@else{
+		&:#{$psuedo}{
+			font-family:$icon-font-family;
+			@include icon-content($name);
+		}	
+	}
+	
+}
+
+@mixin icon-before($name, $size: $font-size){
+	@include icon($name, $size, before);
+}
+
+@mixin icon-after($name, $size: $font-size){
+	@include icon($name, $size, after);
+}
+
+// Creates a square sprite-like icon 
+@mixin icon-rect($size: 24px, $name: false){
+	&{
+		overflow:hidden;
+		width:$size;
+		height:$size;
+ 		line-height:$size;
+		font-size:ceil($size * 0.8);
+		white-space:nowrap;
+		display:inline-block;
+	}
+	
+	&:before{
+		line-height:1.1;
+		display:inline-block;
+		width:$size;
+		height:$size;
+		text-align:center;
+		@if $name{ @include icon-content($name); }
+	}
+}
+
+@mixin icon-content($name){
+	content:"#{icon-glyph($name, $icon-pack)}";
+}

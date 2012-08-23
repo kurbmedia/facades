@@ -1,0 +1,49 @@
+@import 'compass/css3';
+
+@mixin docked($pos: false){
+	position:absolute;
+	left:0px;
+	right:0px;
+	
+	@if $pos != false{
+		@if unquote($pos) == top{ top:0px; border-bottom:.1em solid; }
+		@else { bottom:0px; border-top:.1em solid; }
+	}
+	@else{
+		&.top{
+			top:0px;
+			border-bottom: .1em solid;
+		}
+
+		&.bottom {
+			bottom:0px;
+			border-top: .1em solid;
+		}
+	}	
+}
+
+@mixin toolbar-gradient($color, $style: $gradient-style){
+	@include background-gradient($color, $style);
+	border-color:darken($color, 50%);
+}
+
+
+@mixin toolbar-title{
+	.title {
+		
+		&.landscape{
+			margin-left: -125px;
+			width: 250px;
+		}
+		
+		line-height: $row-height - .5em;
+		font-size: 1.2em;
+		text-align: center;
+		font-weight: bold;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		margin: 0 0.3em;
+		max-width: 100%;
+	}
+}

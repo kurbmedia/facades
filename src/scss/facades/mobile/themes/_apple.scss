@@ -1,0 +1,17 @@
+$base-color: #7c92ae;
+$gradient-style: glossy;
+
+@import 'facades/mobile/global';
+
+.toolbar{
+	@include gradient-style($base-color, $gradient-style);
+	.title{
+		color:white;
+    @include bevel-text($base-color);
+	}
+}
+
+.navbar{
+	@include gradient-style($base-color, matte);
+	border-top-color:darken($base-color, 5%);
+}

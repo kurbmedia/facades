@@ -1,0 +1,11 @@
+<% 
+@link_options = @link_options || {} 
+@link_options.reverse_merge!({ :home => {}, :about => {} })	
+%>
+
+<%= nav((@options || {})) do |n| %>
+	<%= n.link "Home", "/", @link_options[:about] %>
+	<%= n.link "About", "/about" do |subnav| %>
+		<%= subnav.link "About Sub Path", "/about/sub-path" %>
+	<% end %>
+<% end %>

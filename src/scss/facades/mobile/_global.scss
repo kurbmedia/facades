@@ -1,0 +1,81 @@
+@import 'facades/mobile/config';
+@import 'facades/mobile/setup';
+@import 'facades/mixins';
+@import 'facades/mobile/mixins';
+@import 'facades/mobile/patterns/stage';
+@import 'facades/mobile/patterns/panel';
+@import 'facades/mobile/patterns/toolbar';
+@import 'facades/mobile/patterns/navbar';
+
+#viewport{	
+	@include mobile-stage;
+	
+	> .panel{
+		@include panel;
+		
+		footer.navbar, header.navbar{
+			@include navbar;
+		}
+		
+		header.toolbar, footer.toolbar{
+			@include toolbar
+		}
+		
+		header.toolbar.docked, header.navbar.docked{
+			@include docked(top);
+			& + .panel-content{
+				padding-top:$row-height;
+			}
+		}
+		
+		footer.toolbar.docked, footer.navbar.docked{
+			@include docked(bottom);
+		}
+		
+	}
+
+	
+	&.touch-scroll:not(.animating3d){
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+
+		> .panel{
+			height: 100%;
+		}
+
+		.panel-content{
+			@include panel-content;
+		}
+		
+	}
+
+	.in, .out {
+		-webkit-animation-duration: 250ms;
+		-webkit-animation-fill-mode: both;
+		-webkit-animation-timing-function: ease-in-out;
+	}
+
+	.in {
+		z-index: 10;
+		&:after {
+			@include pseudo-element(auto);
+			width:auto;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+		}
+	}
+
+	.out {
+		z-index: 0 !important;
+	}
+
+	&.supports3d {
+		-webkit-perspective: 1000;
+
+		> * {
+			-webkit-transform: translate3d(0,0,0) rotate(0) scale(1);
+		}
+	}
+}

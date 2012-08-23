@@ -1,0 +1,33 @@
+// 
+// Shared button styles
+// ----------------------------------------------------------------------------------------
+
+@import 'facades/config';
+@import 'facades/mixins';
+
+@mixin button-base($radius: $button-border-radius){
+	@include inline-block;
+	@include box-shadow(none);
+	@include box-sizing(border-box);
+	@include font-size($button-font-size);		
+	margin:border-rhythm(1px, .2, $button-font-size) 0;
+	padding:rhythm(.3, $button-font-size) 1em;	
+	@include optional-border-radius($radius);
+	
+	@include transition-property(all);
+	@include transition-duration(0.15s);
+	@include transition-timing-function(ease-in-out);
+	
+	&.large{
+		$bsize: $font-size * 1.1;
+		@include font-size($bsize);	
+		padding:border-rhythm(1px, .5, $bsize) 1.5em;
+		margin-top:0;
+		margin-bottom:0;
+	}
+	
+	&:active{
+		@include box-shadow(rgba(0,0,0,0.1) 0 0 3px 0 inset);
+	}
+	
+}

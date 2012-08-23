@@ -1,0 +1,27 @@
+/*
+	Icon support for IE7.
+	Using expressions... deal with it. Its not like IE7 performs
+	well anyways.
+	------------------------------------------------------------------
+*/
+
+$legacy-icon-format: false !default;
+
+
+@mixin icon-expression($name, $size: $font-size * 1.75, $psuedo: before){
+	$expr-node: '<i class="ie7-psuedo-icon" style="font-size:#{$size}; font-style:normal; font-family:#{$icon-font-family};">#{icon-glyph-entity($name, $icon-pack)}</i>';
+	$expr-format:if( $psuedo == before,  "#{$expr-node} + this.innerHtml", "this.innerHtml + #{$expr-node}");
+	*background-image:expression(this.runtimeStyle.backgroundImage="none",this.innerHTML = #{ unquote($expr-format) });
+}
+
+@mixin legacy-icon-classes($base-class: '.icon'){
+	$o-format: $legacy-icon-format;
+	$legacy-icon-format: true;
+	@include icon-classes($base-class);
+	i.ie7-psuedo-icon{
+		speak:none;
+		display:inline-block;
+		display:inline;
+	}
+	$legacy-icon-format: $o-format;
+}

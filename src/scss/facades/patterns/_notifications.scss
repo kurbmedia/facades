@@ -1,0 +1,82 @@
+// 
+// Alert and notifications
+// ----------------------------------------------------------------------------------------
+
+@import 'facades/config';
+@import 'facades/mixins';
+
+@mixin notification($with-color: true){
+	
+	@include margins(1);
+	padding:border-rhythm(1px, .5) rhythm(1.25) border-rhythm(1px, .5) rhythm(1);
+	@include leading(1);
+	border-width: 1px;
+	border-style: solid;
+	@include border-radius(4px);
+	position:relative;
+	
+	@if $with-color{
+		background:#eee;
+		border-color:#dedede;
+		border-color:darken(#eee, 5%);
+		text-shadow:rgba(0,0,0,.05) 1px 1px 0px;		
+		
+		&.notice{
+			background-color:$notice-color;
+			@include background-image(linear-gradient(darken($notice-color, 3%) 0%, $notice-color 100%));
+			border-color:darken($notice-color, 5%);
+			color:white;
+		}
+		
+		&.success{
+			background-color:$success-color;
+			@include background-image(linear-gradient(darken($success-color, 3%) 0%, $success-color 100%));
+			border-color:darken($success-color, 5%);	
+			color:white;
+		}
+		
+		&.error, &.alert{
+			background-color:$error-color;
+			@include background-image(linear-gradient(darken($error-color, 3%) 0%, $error-color 100%));
+			border-color:darken($error-color, 5%);
+			color:white;
+		}
+		
+		&.warning{
+			background-color:$warning-color;
+			@include background-image(linear-gradient(top, darken($warning-color, 3%) 0%, $warning-color 100%));
+			border-color:darken($warning-color, 5%);
+			color:$font-color;
+		}
+		
+	}
+	
+	.close {
+		text-transform:lowercase;
+		font-family: 'Arial Black', 'Gadget', sans-serif;
+		float: right;
+		font-size:$font-size + 2px;
+		display:block;
+		position:absolute;
+		top:50%;
+		right:.5em;
+		height: 24px;
+		margin-top:-14px;
+		line-height:24px;
+		color: #111;
+		text-shadow:rgba(255,255,255,1) 0 1px 0;
+		@include opacity(20);
+
+		&:hover {
+			color: #333;
+			text-decoration: none;
+			@include opacity(40);
+			cursor: pointer;
+		}
+		
+		&.lt-ie8 .close{
+			line-height:0;
+		}
+		
+	}
+}

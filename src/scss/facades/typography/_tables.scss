@@ -1,0 +1,95 @@
+@import 'facades/config';
+@import 'facades/mixins/rhythm';
+
+
+// Table action
+// ----------------------------------------
+table {
+	width: 100%;
+	border-collapse: separate;
+	margin-bottom: rhythm(1);
+}
+
+th, td {	
+  @include leading(1);
+	border-spacing:0;
+	text-align: left;
+	border-top: 1px solid $table-border-color;
+	@include box-sizing(border-box);
+}
+
+tr, tbody{ @include box-sizing(border-box); }
+
+th {
+	padding:border-rhythm(1px, .5) rhythm(.4, $font-size) rhythm(.5);
+	font-weight: bold;
+	vertical-align: bottom;
+}
+
+td {
+	padding:border-rhythm(1px, .5) rhythm(.4, $font-size) rhythm(.5);
+	vertical-align: top;
+}
+
+thead:first-child tr th,
+thead:first-child tr td {
+	border-top: 0;
+}
+
+tbody + tbody {
+	border-top: 2px solid $table-border-color;
+	@include box-sizing(border-box);
+}
+
+
+// Bordered tables
+// --------------------------------
+
+@mixin bordered-table{
+	
+	margin-bottom: border-rhythm(2px, 1);
+	border: 1px solid $table-border-color;	
+	
+	th + th, td + td, th + td, td + th {
+		border-left: 1px solid $table-border-color;
+	}
+	
+	thead:first-child tr:first-child th,
+	tbody:first-child tr:first-child td {
+		border-top: 0;
+	}
+	
+}
+
+
+// Striped tables
+// --------------------------------
+
+
+@mixin striped-table{
+	tbody {
+		tr:nth-child(odd) td,
+		tr:nth-child(odd) th {
+			background-color: $table-stripe-color;
+		}
+	}
+}
+
+// Compressed tables
+// --------------------------------
+
+@mixin compressed-table{
+	&{ @include margins(0 1.5); }
+	
+	th {
+		padding:rhythm(.25) rhythm(.4, $font-size) rhythm(.25);
+		font-weight: bold;
+		vertical-align: bottom;
+	}
+
+	td {
+		padding:border-rhythm(1px, .25) rhythm(.4, $font-size) rhythm(.25);
+		vertical-align: top;
+	}
+	
+}
