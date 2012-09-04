@@ -27,6 +27,12 @@ $enable-transitions: true !default;
 $transition-property: all !default;
 $transition-duration: .2s !default;
 
+//---------------------------------------------------
+// Compass overrides
+//---------------------------------------------------
+
+$support-for-original-webkit-gradients: false;
+
 /* 
 // Icon Packs
 // --------------------------
