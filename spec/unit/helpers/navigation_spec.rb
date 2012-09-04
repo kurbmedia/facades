@@ -132,9 +132,23 @@ describe 'Navigation helpers', :type => :view do
       it 'adds any options passed to the wrapping list' do
         rendered.should have_xpath('//ul', :id => 'main_nav_list')
       end          
-      
-    end # options
+    end
     
+    context 'when setting :wrapper to false' do
+      
+      before do
+        assign(:options, {
+          :wrapper => false
+        })
+        render('navigation/single_list')
+      end
+      
+      it 'does not render the wrapping nav tag' do
+        rendered.should_not(
+          have_selector('nav')
+        )
+      end
+    end
   end
       
   describe 'links matching request.path' do

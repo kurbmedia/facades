@@ -53,11 +53,18 @@ module Facades
         # Renders the resulting html list, wrapped in a <nav> tag.
         # 
         def render(&block)
-          wrap_attrs = options.delete(:wrapper) || :ul
+          wrap_attrs = options.delete(:wrapper)
           heading    = options.delete(:heading)
+          outer      = :nav
           
           unless wrap_attrs.is_a?(Hash)
-            wrapper    = wrap_attrs
+            
+            if wrap_attrs === false
+              wrapper = :ul
+              outer   = false
+            else            
+              wrapper  = wrap_attrs || :ul
+            end
             wrap_attrs = {}
           else
             wrapper = wrap_attrs.delete(:tag) || :ul
@@ -73,8 +80,8 @@ module Facades
             heading = generate_heading(heading)
             output  = heading << output
           end
-          content_tag(:nav, output, wrap_attrs)
-          
+          return output if outer === false        
+          content_tag(outer, output, wrap_attrs)
         end
         
         ##
