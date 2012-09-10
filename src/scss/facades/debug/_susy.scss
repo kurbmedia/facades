@@ -1,0 +1,20 @@
+$grid-background-column-color:rgba(black, 0.075) !default;
+
+@mixin debug-susy-grid($points){
+  #grid{ position:absolute; top:0px; right:$grid-padding; left:$grid-padding; bottom:0px; display:none;
+    @include susy-grid-background; z-index:10000;
+    @for $i from 1 to length($points){
+      @include at-breakpoint(nth($points, $i)){ 
+        @include susy-grid-background; 
+      }
+    }
+  }
+  
+  #grid:after{ position:fixed; top:0px; left:0px; z-index:10000; background:rgba(white, 0.5); display:block; padding:.25em 1em; font-size:11px; 
+    @for $i from 1 to length($points){
+      @include at-breakpoint(nth($points, $i)){ 
+        content:"#{$total-columns} | #{container-outer-width()} | #{columns-width()}"; 
+      }
+    }
+  }
+}
