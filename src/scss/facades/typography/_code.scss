@@ -1,0 +1,27 @@
+//---------------------------------------------------
+// Styles for code elements
+//---------------------------------------------------
+
+code {
+  font-size:$font-size * .9;
+  @include leading(1, $font-size + 1px);
+  padding:1px .5em;
+  position:relative;
+  top:-1px;
+}
+
+pre {
+  display: block;
+  @include margins(0 1, 12px);
+  @include font-size(12px);
+  white-space: pre;
+  white-space: pre-wrap;
+  word-break: break-all;
+  padding:rhythm(0.5);
+  border-style:solid;
+  
+  code {
+    padding: 0;
+    background-color: transparent;
+  }
+}

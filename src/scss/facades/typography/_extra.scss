@@ -1,0 +1,35 @@
+//---------------------------------------------------
+// Extra typography styles
+//---------------------------------------------------
+
+hr {
+  border: 0;
+  line-height:$line-height;
+  margin-bottom:.3em;
+  overflow:hidden;
+  height:1.25em;
+  @include box-sizing(content-box);
+  position:relative;
+  padding:0;
+  display:block;
+  border-top: 1px solid $horizontal-rule-color;
+  border-bottom:1px solid rgba(white,0);
+}
+
+html.lt-ie9{
+  hr{ margin-bottom:.4em; }
+}
+
+
+// useful for using email addresses in text. type the text
+// in reverse and apply this style.
+span.rev, a.rev{
+  unicode-bidi: bidi-override; 
+  direction: rtl
+}
+
+address {
+  display: block;
+  margin-bottom: $line-height;
+  line-height: $line-height;
+}
