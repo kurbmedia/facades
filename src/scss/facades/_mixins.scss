@@ -113,3 +113,8 @@ $experimental-support-for-khtml: false !default;
     @if ($width != auto){ width: $width; }
     @if ($height != auto){ height: $height; }
 }
+
+// helper for webkit smoothing
+@mixin font-smoothing($type: antialised){
+  -webkit-font-smoothing:$type;
+}

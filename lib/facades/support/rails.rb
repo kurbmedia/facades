@@ -7,6 +7,9 @@ require 'sass/rails'
 module Facades
   class Engine < Rails::Engine 
     
+    paths['app/views']       << Facades.view_path
+    paths['app/controllers'] << File.join(Facades.app_path, 'controllers')
+    
     initializer 'load facades assets' do |app|
       app.config.sass.load_paths ||= []
       app.config.sass.load_paths << Facades.scss_path

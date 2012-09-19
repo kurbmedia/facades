@@ -6,16 +6,24 @@ module Facades
   autoload :Helpers,  'facades/helpers'
   autoload :Patterns, 'facades/patterns'
   
+  def app_path
+    File.expand_path("../../app", __FILE__)
+  end
+  
+  def view_path
+    File.join(File.expand_path("../../app", __FILE__), 'views')
+  end
+  
   def scss_path
-    File.expand_path("../../src", __FILE__) << "/scss"
+    File.join(File.expand_path("../../src", __FILE__), 'scss')
   end
   
   def image_path
-    File.expand_path("../../src", __FILE__) << "/images"
+    File.join(File.expand_path("../../src", __FILE__), 'images')
   end
   
   def icon_path
-    File.expand_path("../../src", __FILE__) << "/icons"
+    File.join(File.expand_path("../../src", __FILE__), 'icons')
   end
   
 end
