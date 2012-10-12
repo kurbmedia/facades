@@ -118,3 +118,8 @@ $experimental-support-for-khtml: false !default;
 @mixin font-smoothing($type: antialised){
   -webkit-font-smoothing:$type;
 }
+
+// reversing text
+@mixin reverse-text{
+  unicode-bidi: bidi-override; direction: rtl
+}

@@ -28,7 +28,7 @@ module Facades
         wrapper = attrs.delete(:wrapper) || :div
         closer  = attrs.delete(:closer)
         unless closer === false
-          closer ||= "<span class='close'>x</span>"
+          closer ||= "<span class='close'>&times;</span>"
         end
         klasses = (attrs.delete(:class) || "").split(" ")
         klasses << "flash-message"  

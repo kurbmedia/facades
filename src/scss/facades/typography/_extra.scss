@@ -24,8 +24,7 @@ html.lt-ie9{
 // useful for using email addresses in text. type the text
 // in reverse and apply this style.
 span.rev, a.rev{
-  unicode-bidi: bidi-override; 
-  direction: rtl
+  @include reverse-text;
 }
 
 address {

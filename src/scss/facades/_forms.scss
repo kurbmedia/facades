@@ -1,6 +1,8 @@
 @import 'facades/config';
 @import 'facades/mixins';
 
+$input-padding:rhythm(.15) .25em !default;
+
 /* 
 	General form styles. By default this creates a 'stacked' forms
 	where the label placement is above each field. 
@@ -121,9 +123,9 @@
 	#{input-types(text)}, textarea{
 		@include optional-border-radius($input-border-radius);
 		margin:border-rhythm(1px, .35) 0;
-		padding:rhythm(.15) .25em;
+		@if $input-padding != false{ padding:$input-padding; }
 		line-height:normal !important;
-		height:1.7em;
+		@if $input-height != false{ height:$input-height; }
 	}
 	
 	input[type=file]{
