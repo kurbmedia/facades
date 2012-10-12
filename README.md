@@ -148,6 +148,14 @@ Styles should confirm to a vertical-rhythm as much as possible (some things seem
 
 Document patterns with html examples, which should utilize HTML5 elements, in an intended/semantic manner. 
 
+## Changelog
+
+**1.0.1 - October 12, 2012**
+
+*   Add additional configuration options for input padding
+*   Add configuration option for transitions specifically on inputs
+*   misc style cleanup, modifications to html output of notifications
+
 ## Thanks
 
 Thanks to the fine folks who work on the HTML5 Boilerplate, the Compass library and contributors, and the hundreds of 
