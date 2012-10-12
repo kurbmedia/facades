@@ -73,6 +73,7 @@ $warning-color: #EED74F !default;
 // Forms and inputs
 // ----------------------------------------------------------------------------------------
 
+$enable-input-transitions:     $enable-transitions !default;
 $input-height:                 1.7em !default;
 $input-border-color:           #ccc !default;
 $input-focus-color:            $font-color !default;
