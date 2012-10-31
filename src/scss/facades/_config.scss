@@ -28,6 +28,7 @@ $transition-property: all !default;
 $transition-duration: .2s !default;
 
 $include-headline-styles: true !default;
+$support-for-original-webkit-gradients: false !default;
 
 //---------------------------------------------------
 // Compass overrides
@@ -38,11 +39,11 @@ $support-for-original-webkit-gradients: false;
 // ----------------------------------------------------------------------------------------
 // Icon Packs
 // ---------------------------------------------------------------------------------------- 
-/*
-   Available packs include 
-      - Facades
-      - FontAwesome
-*/
+//
+//  Available packs include 
+//    - Facades
+//    - FontAwesome
+
 $icon-pack:'facades' !default;
 $icon-font-family:icon-font($icon-pack) !default; 
 
