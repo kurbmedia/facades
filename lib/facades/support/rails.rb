@@ -13,6 +13,7 @@ module Facades
     initializer 'load facades assets' do |app|
       app.config.sass.load_paths ||= []
       app.config.sass.load_paths << Facades.scss_path
+      app.config.assets.paths << File.join(Facades.app_path, 'assets')
     end
     
     initializer 'configure simple_form' do |app|
