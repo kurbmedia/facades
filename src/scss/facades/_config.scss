@@ -28,13 +28,14 @@ $transition-property: all !default;
 $transition-duration: .2s !default;
 
 $include-headline-styles: true !default;
-$support-for-original-webkit-gradients: false !default;
 
 //---------------------------------------------------
 // Compass overrides
 //---------------------------------------------------
 
 $support-for-original-webkit-gradients: false;
+$legacy-support-for-ie6:false;
+$legacy-support-for-ie7:false;
 
 // ----------------------------------------------------------------------------------------
 // Icon Packs
