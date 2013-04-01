@@ -8,7 +8,7 @@ if SimpleForm::VERSION.to_i >= 2
     config.country_priority = 'United States'
     config.default_input_size = 30
   
-    config.wrappers tag: :li, class: 'field', error_class: 'invalid-field' do |b|
+    config.wrappers :facades, tag: :li, class: 'field', error_class: 'invalid-field' do |b|
       b.use :html5
       b.use :placeholder
     
@@ -21,12 +21,13 @@ if SimpleForm::VERSION.to_i >= 2
       b.use :hint,        wrap_with: { tag: :span, class: :hint }
       b.use :error,       wrap_with: { tag: :span, class: :error }
     end
-  end
-  
-  SimpleForm.html5 = true
-  SimpleForm.error_method           = :first
-  SimpleForm.error_notification_id  = nil
-  SimpleForm.browser_validations    = false
-  SimpleForm.collection_wrapper_tag = nil  
+    
+    config.html5 = true
+    config.error_method = :first
+    config.error_notification_id  = nil
+    config.browser_validations    = false
+    config.collection_wrapper_tag = nil 
+    
+  end 
 end
 

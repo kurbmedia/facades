@@ -19,7 +19,7 @@ module Facades
     initializer 'configure simple_form' do |app|
       begin
         require 'simple_form'
-        require 'facades/support/simple_form'
+        ActiveSupport::Deprecation.warn("If you are upgrading Facades > 1.0.3, and rely on the simple form wrappers, please require facades/support/simple_form in an initializer.")
       rescue Exception => e
       end
     end
