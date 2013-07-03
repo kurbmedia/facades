@@ -6,6 +6,7 @@ require 'sass/rails'
 # 
 module Facades
   class Engine < Rails::Engine 
+    config.facades = Facades::Config
     
     paths['app/views']       << Facades.view_path
     paths['app/controllers'] << File.join(Facades.app_path, 'controllers')

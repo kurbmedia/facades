@@ -5,7 +5,7 @@ module Facades
   extend self
   autoload :Helpers,  'facades/helpers'
   autoload :Patterns, 'facades/patterns'
-  
+
   def app_path
     File.expand_path("../../app", __FILE__)
   end
@@ -25,10 +25,11 @@ module Facades
   def icon_path
     File.join(File.expand_path("../../src", __FILE__), 'icons')
   end
-  
 end
 
+require 'facades/config'
 require 'facades/sass_extensions'
+
 
 ##
 # Use the rails pipeline directly unless functioning 
