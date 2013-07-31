@@ -66,7 +66,7 @@ module Facades
       # 
       # 
       def page_id(content = nil)
-        return (@view_flow.get(:page_id) || default_page_title_for_view) unless content
+        return (@view_flow.get(:page_id).present? ? @view_flow.get(:page_id) : default_page_title_for_view) unless content
         provide(:page_id, content) if content
       end
       
@@ -110,8 +110,10 @@ module Facades
       def default_page_title_for_view
         if defined?(controller)
           cname = controller.class.to_s.gsub(/controller$/i,'').underscore.split("/").join('_')
-          aname = controller.action_name          
-          "#{cname}_#{aname}"
+          aname = controller.action_name
+          return "#{cname}_#{aname}"
+        elsif defined?(params) && (params || {})[:controller].present?
+          return [params[:controller].split("/").join("_"), params[:action]].compact.join("_")
         elsif defined?(request) && request.respond_to?(:path_info)
           ::File.basename(request.path_info).to_s
         end
