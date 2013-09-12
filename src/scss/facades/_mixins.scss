@@ -9,68 +9,69 @@ $experimental-support-for-khtml: false !default;
 @import 'facades/mixins/rhythm';
 @import 'compass/css3';
 @import 'facades/mixins/gradients';
+@import 'facades/mixins/media';
 
 // Custom opacity mixin, uses whole numbers instead of floats.
 @mixin opacity($opacity: 100) {
-	@if $legacy-support-for-ie7{
-		filter: alpha(opacity=#{$opacity});
-	}
-	@if $legacy-support-for-ie8{
-		-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$opacity})";
-	}	
-	opacity: $opacity / 100;
+  @if $legacy-support-for-ie7{
+    filter: alpha(opacity=#{$opacity});
+  }
+  @if $legacy-support-for-ie8{
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$opacity})";
+  }  
+  opacity: $opacity / 100;
 }
 
 // override compass's version because we don't need prefixing
 @mixin border-radius($radians){
-	border-radius:$radians;
+  border-radius:$radians;
 }
 
 // compass uses the overflow style clearfix which can be rather annoying when you
 // dont want overflow:hidden on things.
 @mixin clearfix{
-	&:before, &:after{
-		content:"";
-		display:table;
-	}
-	
-	&:after{
-		clear:both;
-	}
+  &:before, &:after{
+    content:"";
+    display:table;
+  }
+  
+  &:after{
+    clear:both;
+  }
 
-	@if $legacy-support-for-ie8 or $legacy-support-for-ie7{
-		&{ zoom:1; }
-	}
+  @if $legacy-support-for-ie8 or $legacy-support-for-ie7{
+    &{ zoom:1; }
+  }
 }
 
 // Custom box-shadow mixin to skip false or none values
 @mixin optional-box-shadow($props){
-	@if $props != false and $props != none{
-		@include border-radius($props);
-	}
+  @if $props != false and $props != none{
+    @include border-radius($props);
+  }
 }
 
 // Custom border-radius mixin to skip false or none values
 @mixin optional-border-radius($props){
-	@if $props != false and $props != none{
-		@include border-radius($props);
-	}
+  @if $props != false and $props != none{
+    @include border-radius($props);
+  }
 }
 
 // Cross browser inline-block implementations
-@mixin inline-block($align: middle){		
-	display: inline-block;
-	vertical-align: $align;
-	@if $legacy-support-for-ie7{
-		*display: inline; 
-		*vertical-align: auto;
-		*zoom:1;
-	}
+@mixin inline-block($align: middle){    
+  display: inline-block;
+  vertical-align: $align;
+  @if $legacy-support-for-ie7{
+    *display: inline; 
+    *vertical-align: auto;
+    *zoom:1;
+  }
 }
 
 @mixin user-select($val: "none"){
-	@include experimental("user-select", unquote($val), -moz, -webkit, -khtml, -ms, official);
-	@include experimental("touch-callout", unquote($val), -webkit, official, not -moz, not -khtml, not -ms);
+  @include experimental("user-select", unquote($val), -moz, -webkit, -khtml, -ms, official);
+  @include experimental("touch-callout", unquote($val), -webkit, official, not -moz, not -khtml, not -ms);
 }
 
 //
@@ -78,31 +79,31 @@ $experimental-support-for-khtml: false !default;
 // Creates a clip rect, including IE specific version.
 //
 @mixin clipped{
-	@include clip(1px, 1px, 1px, 1px);
+  @include clip(1px, 1px, 1px, 1px);
 }
 
 @mixin clip($top: 1px, $right: 1px, $bottom: 1px, $left: 1px, $shape: rect, $abs: true){
-	$shape:unquote($shape);
-	
-	clip: unquote("#{$shape}(#{$top}, #{$right}, #{$bottom}, #{$left})"); 
-	@if $legacy-support-for-ie{
-		clip: unquote("#{$shape}(#{$top} #{$right} #{$bottom} #{$left})"); // Stupid IE
-	}
-	@if $abs{ position: absolute;	}
+  $shape:unquote($shape);
+  
+  clip: unquote("#{$shape}(#{$top}, #{$right}, #{$bottom}, #{$left})"); 
+  @if $legacy-support-for-ie{
+    clip: unquote("#{$shape}(#{$top} #{$right} #{$bottom} #{$left})"); // Stupid IE
+  }
+  @if $abs{ position: absolute;  }
 }
 
 
 // returns a contrasting version of a color based on luminance
 @function contrasting-color($color, $contrast: 100%) {
-	@return if(lightness($color) > 50, darken($color, $contrast), lighten($color, $contrast));
+  @return if(lightness($color) > 50, darken($color, $contrast), lighten($color, $contrast));
 }
 
 
 // sets a contrasting text shadow based on $color
 @mixin bevel-text($color){
-	$dark-shadow:  rgba(0,0,0,.5) 0 -.08em 0;
-	$light-shadow: rgba(255,255,255,.25) 0 .08em 0;
-	text-shadow:if(luminance($color) == light, $dark-shadow, $light-shadow);
+  $dark-shadow:  rgba(0,0,0,.5) 0 -.08em 0;
+  $light-shadow: rgba(255,255,255,.25) 0 .08em 0;
+  text-shadow:if(luminance($color) == light, $dark-shadow, $light-shadow);
 }
 
 // creates an empty psuedo element

@@ -4,5 +4,5 @@ $grid-background-baseline-color: #efefef !default;
 $grid-align: ($line-height / $font-size) * 1em;
 
 @mixin debug-baseline{
-	@include baseline-grid-background($grid-align);
+  @include baseline-grid-background($grid-align);
 }

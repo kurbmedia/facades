@@ -1,0 +1,11 @@
+@mixin larger-than($size:600px){
+  @media (min-width:$size){
+    @content;
+  }
+}
+
+@mixin smaller-than($size:590px){
+  @media (max-width:$size){
+    @content;
+  }
+}
