@@ -45,8 +45,9 @@ $legacy-support-for-ie7:false;
 //    - Facades
 //    - FontAwesome
 
-$icon-pack:'facades' !default;
-$icon-font-family:icon-font($icon-pack) !default; 
+$icon-pack:'font-awesome' !default;
+$icon-font-family:icon-font-name($icon-pack) !default; 
+$icon-pack-version:icon-version($icon-pack) !default;
 
 $link-color: #00e !default;
 $link-visited-color: darken($link-color, 5%) !default;

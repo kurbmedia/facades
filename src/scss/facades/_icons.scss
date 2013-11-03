@@ -59,3 +59,17 @@
 @mixin icon-content($name){
   content:"#{icon-glyph($name, $icon-pack)}";
 }
+
+
+@mixin icon-font{
+  @font-face {
+    font-family: $icon-font-family;
+    src: url(icon-font-url($icon-pack, 'eot'));
+    src: url(icon-font-url($icon-pack, 'eot2')) format('embedded-opentype'),    
+         url(icon-font-url($icon-pack, 'woff')) format('woff'), 
+         url(icon-font-url($icon-pack, 'ttf')) format('truetype'), 
+         url(icon-font-url($icon-pack, 'svg')) format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+}
