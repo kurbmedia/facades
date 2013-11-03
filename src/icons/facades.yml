@@ -1,5 +1,6 @@
 name: "facades"
 version: "1.0.0"
+
 icons:
   spinner: 'e001'
   transfer: 'e002'
