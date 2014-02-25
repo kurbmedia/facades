@@ -5,7 +5,7 @@ module Facades
   extend self
   autoload :Helpers,  'facades/helpers'
   autoload :Patterns, 'facades/patterns'
-  
+  autoload :Debug,    'facades/debug'
   
   ##
   # Path to the app dir for the Rails Engine

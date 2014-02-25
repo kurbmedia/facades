@@ -1,4 +1,5 @@
 require 'sass'
+require 'sass/tree/mixin_def_node'
 
 module Facades
   module SassExtensions 
@@ -10,6 +11,8 @@ module Facades
     
   end
 end
+
+require 'facades/sass_extensions/debugging'
 
 ['color', 'conversions', 'functions', 'icons'].each do |extension|
   require "facades/sass_extensions/#{extension}"

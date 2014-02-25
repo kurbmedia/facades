@@ -19,6 +19,7 @@
   @if $legacy-icon-format{ @include icon-expression($name, $size, $psuedo); }
   @else{
     &:#{$psuedo}{
+      -webkit-font-smoothing:antialiased;
       font-family:$icon-font-family;
       @include icon-content($name);
     }  
